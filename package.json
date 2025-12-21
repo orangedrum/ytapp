@@ -14,7 +14,13 @@
     "react-dom": "19.2.3",
     "@builder.io/react": "^3.2.0",
     "@builder.io/sdk": "^2.2.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "@supabase/supabase-js": "^2.39.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.0",
+    "lucide-react": "^0.344.0",
+    "tailwindcss-animate": "^1.0.7",
+    "@radix-ui/react-slot": "^1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
