@@ -1,5 +1,4 @@
-// Hook for toast notifications
-import * as React from "react"
+import * as React from "react" // Hook for toast notifications
 
 import type {
   ToastActionElement,

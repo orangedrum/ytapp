@@ -1,7 +1,6 @@
 import * as React from "react"
 
-// Mobile breakpoint constant
-const MOBILE_BREAKPOINT = 768
+const MOBILE_BREAKPOINT = 768 // Tablet breakpoint
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
