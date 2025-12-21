@@ -13,7 +13,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "@builder.io/react": "^3.2.0",
-    "@builder.io/sdk": "^2.2.0",
+    "@builder.io/sdk": "^2.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
