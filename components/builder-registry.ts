@@ -1,6 +1,12 @@
 "use client";
 import { Builder } from "@builder.io/react";
 import { AuthForm } from "@/components/AuthForm";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -105,3 +111,37 @@ Builder.registerComponent(CarouselItem, {
 });
 Builder.registerComponent(CarouselNext, { name: "Carousel Next" });
 Builder.registerComponent(CarouselPrevious, { name: "Carousel Previous" });
+
+// 7. Register Shadcn Accordion
+Builder.registerComponent(Accordion, {
+  name: "Shadcn Accordion",
+  canHaveChildren: true,
+  inputs: [
+    {
+      name: "type",
+      type: "string",
+      enum: ["single", "multiple"],
+      defaultValue: "single",
+    },
+    {
+      name: "collapsible",
+      type: "boolean",
+      defaultValue: true,
+    },
+  ],
+});
+Builder.registerComponent(AccordionItem, {
+  name: "Accordion Item",
+  canHaveChildren: true,
+  inputs: [{ name: "value", type: "string", defaultValue: "item-1" }],
+});
+Builder.registerComponent(AccordionTrigger, {
+  name: "Accordion Trigger",
+  canHaveChildren: true,
+  inputs: [{ name: "children", type: "string", defaultValue: "Trigger Text" }],
+});
+Builder.registerComponent(AccordionContent, {
+  name: "Accordion Content",
+  canHaveChildren: true,
+  inputs: [{ name: "children", type: "string", defaultValue: "Content Text" }],
+});
