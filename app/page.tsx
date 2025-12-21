@@ -1,20 +1,31 @@
-import { builder } from "@builder.io/sdk";
-import { RenderBuilderContent } from "@/components/builder";
+import { builder } from '@builder.io/sdk';
+import { RenderBuilderContent } from '@/components/builder';
 
 // Initialize Builder with your API Key
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-export default async function Page() {
+interface PageProps {
+  params: {
+    page: string[];
+  };
+}
+
+export default async function Page(props: PageProps) {
   const content = await builder
     // Get the page content from Builder with the specified URL
-    .get("page", {
+    .get('page', {
       userAttributes: {
-        // Explicitly set the path to "/" for the homepage
-        urlPath: "/",
+        // Combine the array of path segments into a single URL string
+        // e.g. ['tango', 'boleos'] becomes '/tango/boleos'
+        urlPath: '/' + (props.params?.page?.join('/') || ''),
       },
     })
     // Convert the result to a promise
     .toPromise();
+
+  // --- DIAGNOSTIC LOG ---
+  // This will print to the Vercel logs so we can see exactly what Builder is sending back
+  console.log('Builder content for', props.params?.page?.join('/'), ':', content);
 
   return (
     <>
