@@ -1,4 +1,5 @@
 "use client";
+import "@/components/builder-registry";
 import { BuilderComponent, useIsPreviewing } from "@builder.io/react";
 import { builder } from "@builder.io/sdk";
 
