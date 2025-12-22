@@ -2,6 +2,10 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Builder } from "@builder.io/react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 export const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -20,38 +24,29 @@ export const AuthForm = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "20px auto", padding: 20, border: "1px solid #ccc", borderRadius: 8, textAlign: "center" }}>
-      <h3 style={{ marginBottom: 15 }}>Sign In to Tango App</h3>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ 
-            display: "block", 
-            width: "100%", 
-            padding: 10, 
-            marginBottom: 10, 
-            borderRadius: 4, 
-            border: "1px solid #ddd" 
-          }}
-        />
-        <button 
-          disabled={loading} 
-          style={{ 
-            padding: "10px 20px", 
-            background: loading ? "#ccc" : "black", 
-            color: "white", 
-            border: "none", 
-            borderRadius: 4, 
-            cursor: loading ? "not-allowed" : "pointer" 
-          }}
-        >
-          {loading ? "Sending..." : "Send Magic Link"}
-        </button>
-      </form>
-    </div>
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>Sign In to Tango App</CardTitle>
+        <CardDescription>Enter your email to receive a magic link</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? "Sending..." : "Send Magic Link"}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 
