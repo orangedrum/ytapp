@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
-// Initialize the Montserrat font
-const montserrat = Montserrat({ subsets: ["latin"] });
+// Initialize the font
+// We use Inter as a close alternative to General Sans (which isn't on Google Fonts)
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Tango App",
@@ -17,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+        {children}
+      </body>
     </html>
   );
 }
