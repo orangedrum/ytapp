@@ -1,3 +1,5 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +35,8 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    /* Define the font variable here so Tailwind picks it up */
+    --font-sans: 'General Sans';
   }
 
   .dark {
