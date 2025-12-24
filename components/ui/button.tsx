@@ -18,9 +18,9 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        tango: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-minimal border border-primary",
-        elegant: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-minimal clean-border",
-        gold: "bg-accent text-accent-foreground hover:bg-accent/80 shadow-minimal clean-border",
+        tango: "bg-tango text-tango-foreground hover:bg-tango/90 shadow-md border-none",
+        elegant: "bg-elegant text-elegant-foreground hover:bg-elegant/90 shadow-md border-none",
+        gold: "bg-gold text-gold-foreground hover:bg-gold/90 shadow-md border-none",
       },
       size: {
         default: "h-10 px-4 py-2",
