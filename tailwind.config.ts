@@ -34,6 +34,15 @@ const config = {
           DEFAULT: "hsl(var(--elegant))",
           foreground: "hsl(var(--elegant-foreground))",
         },
+        success: "hsl(var(--success))",
+        gray: {
+          1: "hsl(var(--gray-1))",
+          2: "hsl(var(--gray-2))",
+          3: "hsl(var(--gray-3))",
+          4: "hsl(var(--gray-4))",
+          5: "hsl(var(--gray-5))",
+          6: "hsl(var(--gray-6))",
+        },
       },
       fontSize: {
         // We extend the default scale with your specific semantic names
