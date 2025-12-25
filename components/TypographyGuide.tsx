@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 
+// Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
   name,
   className,
@@ -13,6 +14,22 @@ const TextStyleRow = ({
   <div className="flex w-full items-center justify-between border-b py-3">
     <p className={className}>{name}</p>
     <p className="text-muted-foreground">{weight}</p>
+  </div>
+);
+
+// Helper component for displaying a color swatch
+const ColorSwatch = ({
+  name,
+  hex,
+  className,
+}: {
+  name: string;
+  hex: string;
+  className: string;
+}) => (
+  <div className="flex flex-col gap-4 w-36">
+    <div className={cn("h-24 w-full rounded-lg", className)} />
+    <p className="text-sm text-muted-foreground text-center">{hex}</p>
   </div>
 );
 
@@ -48,6 +65,22 @@ export default function TypographyGuide() {
             className="text-body-2-medium"
             weight="500"
           />
+          <TextStyleRow
+            name="Body 2 SemiBold"
+            className="text-body-2-semibold"
+            weight="600"
+          />
+          <TextStyleRow name="Body 3" className="text-body-3" weight="400" />
+          <TextStyleRow
+            name="Body 3 Medium"
+            className="text-body-3-medium"
+            weight="500"
+          />
+          <TextStyleRow
+            name="Body 3 SemiBold"
+            className="text-body-3-semibold"
+            weight="600"
+          />
         </div>
       </section>
 
@@ -57,6 +90,22 @@ export default function TypographyGuide() {
           <Button variant="tango">Tango Action</Button>
           <Button variant="gold">Gold Accent</Button>
           <Button variant="elegant">Elegant Dark</Button>
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold border-b pb-2">Color Palette</h2>
+        <div className="flex flex-wrap gap-8 justify-center">
+          <ColorSwatch name="Black" hex="#1A1A1A" className="bg-foreground" />
+          <ColorSwatch name="Gray 4" hex="#333333" className="bg-gray-1" />
+          <ColorSwatch name="Gray 3" hex="#4D4D4D" className="bg-gray-2" />
+          <ColorSwatch name="Gray 2" hex="#666666" className="bg-gray-3" />
+          <ColorSwatch name="Gray 1" hex="#808080" className="bg-muted-foreground" />
+          <ColorSwatch name="Gray 5" hex="#999999" className="bg-gray-4" />
+          <ColorSwatch name="Gray 6" hex="#B3B3B3" className="bg-gray-5" />
+          <ColorSwatch name="Gray 7" hex="#CCCCCC" className="bg-gray-6" />
+          <ColorSwatch name="Gray 8" hex="#E6E6E6" className="bg-border" />
+          <ColorSwatch name="White" hex="#FFFFFF" className="bg-background border" />
         </div>
       </section>
     </div>

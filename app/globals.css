@@ -24,10 +24,10 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 0 0% 50%; /* #808080 from Figma */
 
-    --accent: 210 40% 96.1%;
+    --accent: 0 0% 96.1%; /* A slightly off-white for hover */
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 87% 50%; /* #ED1010 */
     --destructive-foreground: 210 40% 98%;
 
     --border: 0 0% 90%; /* #E6E6E6 from Figma */
@@ -35,18 +35,26 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-    /* Define the font variable here so Tailwind picks it up */
     --font-sans: 'General Sans';
 
-    /* TANGO BRAND COLORS - Placeholders, provide Hex codes to update */
-    --tango: 356 95% 46%; /* Approx #E30613 */
+    /* === BRAND COLORS === */
+    --tango: 0 95% 46%; /* Placeholder - #E30613 */
     --tango-foreground: 0 0% 100%;
     
-    --gold: 45 65% 52%; /* Approx #D4AF37 */
+    --gold: 44 65% 52%; /* Placeholder - #D4AF37 */
     --gold-foreground: 0 0% 0%;
     
-    --elegant: 0 0% 7%; /* Approx #121212 */
+    --elegant: 0 0% 7%; /* #121212 */
     --elegant-foreground: 0 0% 100%;
+
+    /* === SYSTEM & GRAYSCALE COLORS === */
+    --success: 118 88% 31%; /* #0C9409 */
+    --gray-1: 0 0% 20%; /* #333333 */
+    --gray-2: 0 0% 30%; /* #4D4D4D */
+    --gray-3: 0 0% 40%; /* #666666 */
+    --gray-4: 0 0% 60%; /* #999999 */
+    --gray-5: 0 0% 70%; /* #B3B3B3 */
+    --gray-6: 0 0% 80%; /* #CCCCCC */
   }
 
   .dark {
