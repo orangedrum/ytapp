@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
