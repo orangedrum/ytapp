@@ -37,6 +37,16 @@
     --radius: 0.5rem;
     /* Define the font variable here so Tailwind picks it up */
     --font-sans: 'General Sans';
+
+    /* TANGO BRAND COLORS - Waiting for values from Builder Styleguide */
+    --tango: 346 84% 49%; /* Deep Red - Replace with your exact Hex if needed */
+    --tango-foreground: 0 0% 100%;
+    
+    --gold: 45 93% 47%; /* Gold - Replace with your exact Hex if needed */
+    --gold-foreground: 0 0% 0%;
+    
+    --elegant: 222.2 47.4% 11.2%; /* Dark Elegant - Replace with your exact Hex if needed */
+    --elegant-foreground: 0 0% 100%;
   }
 
   .dark {
