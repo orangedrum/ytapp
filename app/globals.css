@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 10%; /* #1A1A1A from Figma */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 10%;
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
@@ -22,7 +22,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 0 0% 50%; /* #808080 from Figma */
 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -30,22 +30,22 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 0 0% 90%; /* #E6E6E6 from Figma */
+    --input: 0 0% 90%;
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
     /* Define the font variable here so Tailwind picks it up */
     --font-sans: 'General Sans';
 
-    /* TANGO BRAND COLORS - Waiting for values from Builder Styleguide */
-    --tango: 346 84% 49%; /* Deep Red - Replace with your exact Hex if needed */
+    /* TANGO BRAND COLORS - Placeholders, provide Hex codes to update */
+    --tango: 356 95% 46%; /* Approx #E30613 */
     --tango-foreground: 0 0% 100%;
     
-    --gold: 45 93% 47%; /* Gold - Replace with your exact Hex if needed */
+    --gold: 45 65% 52%; /* Approx #D4AF37 */
     --gold-foreground: 0 0% 0%;
     
-    --elegant: 222.2 47.4% 11.2%; /* Dark Elegant - Replace with your exact Hex if needed */
+    --elegant: 0 0% 7%; /* Approx #121212 */
     --elegant-foreground: 0 0% 100%;
   }
 

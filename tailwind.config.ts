@@ -37,9 +37,20 @@ const config = {
       },
       fontSize: {
         // We extend the default scale with your specific semantic names
-        h1: ["48px", { lineHeight: "1.2", fontWeight: "700" }],
-        h2: ["32px", { lineHeight: "1.3", fontWeight: "600" }],
-        body: ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        h1: ["64px", { lineHeight: "1.2", fontWeight: "600" }],
+        h2: ["32px", { lineHeight: "1.2", fontWeight: "600" }],
+        h3: ["24px", { lineHeight: "1.2", fontWeight: "600" }],
+        h4: ["20px", { lineHeight: "1.2", fontWeight: "600" }],
+        "h4-medium": ["20px", { lineHeight: "1.2", fontWeight: "500" }],
+        "body-1": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-1-medium": ["16px", { lineHeight: "1.5", fontWeight: "500" }],
+        "body-1-semibold": ["16px", { lineHeight: "1.5", fontWeight: "600" }],
+        "body-2": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-2-medium": ["14px", { lineHeight: "1.5", fontWeight: "500" }],
+        "body-2-semibold": ["14px", { lineHeight: "1.5", fontWeight: "600" }],
+        "body-3": ["12px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-3-medium": ["12px", { lineHeight: "1.5", fontWeight: "500" }],
+        "body-3-semibold": ["12px", { lineHeight: "1.5", fontWeight: "600" }],
       },
       keyframes: {
         "accordion-down": {
