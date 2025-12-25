@@ -22,8 +22,9 @@ export function RenderBuilderContent({ content, model }: { content: any; model?:
   // If content is missing, show a success message so Builder can connect
   return (
     <div style={{ padding: 50, textAlign: "center" }}>
-      <h1>App Connected!</h1>
-      <p>Go back to Builder.io and create your page.</p>
+      <h1>404 - Page Not Found in Builder</h1>
+      <p>We could not find any content in Builder.io for this URL.</p>
+      <p>Please create a page in Builder targeting this URL path.</p>
     </div>
   );
 }
