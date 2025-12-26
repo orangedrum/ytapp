@@ -2,10 +2,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GoogleLogo, FacebookLogo } from "@/components/ui/icons";
+import { GoogleLogo, FacebookIcon, StarIcon } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
   Mail,
+  MoveRight,
   ArrowRight,
   Loader2,
   User,
@@ -17,6 +18,11 @@ import {
   LogOut,
   PlusCircle,
 } from "lucide-react";
+import {
+  SelectableCard,
+  SelectableCardIcon,
+  SelectableCardLabel,
+} from "./ui/selectable-card";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -110,27 +116,49 @@ export default function TypographyGuide() {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Buttons</h2>
-          <div className="flex items-center gap-4 flex-wrap">
-            <Button>Primary</Button>
-            <Button variant="outline">Secondary</Button>
-            <Button disabled>Disabled</Button>
+          <div className="flex flex-col items-start gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex flex-col items-start gap-2">
+                <Label className="text-sm text-muted-foreground px-1">Primary</Label>
+                <Button>Button</Button>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Label className="text-sm text-muted-foreground px-1">Secondary</Label>
+                <Button variant="outline">Button</Button>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Label className="text-sm text-muted-foreground px-1">Disabled</Label>
+                <Button disabled>Button</Button>
+              </div>
+            </div>
           </div>
         </section>
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Buttons with Icons</h2>
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4 flex-wrap">
-              <Button>
-                <Mail className="mr-2 h-4 w-4" /> Login with Email
-              </Button>
-              <Button variant="outline">
-                Next Step <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
+            <div className="flex flex-col items-start gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex flex-col items-start gap-2">
+                  <Label className="text-sm text-muted-foreground px-1">Icon Left</Label>
+                  <Button>
+                    <Mail className="mr-2 h-4 w-4" /> Login with Email
+                  </Button>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <Label className="text-sm text-muted-foreground px-1">Icon Right</Label>
+                  <Button variant="outline">
+                    Next Step <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <Label className="text-sm text-muted-foreground px-1">Loading State</Label>
+                  <Button disabled>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col items-start gap-4 pt-4">
               <div className="flex flex-col items-start gap-2">
@@ -141,13 +169,42 @@ export default function TypographyGuide() {
                 </Button>
               </div>
               <div className="flex flex-col items-start gap-2">
-                <Label className="text-sm text-muted-foreground px-1">Facebook Button</Label>
-                <Button variant="facebook" size="xl" className="w-full max-w-[453px] justify-center">
-                  <FacebookLogo className="mr-2 h-6 w-6" />
-                  Sign Up with Facebook
+                <Label className="text-sm text-muted-foreground px-1">Blue Button</Label>
+                <Button variant="blue" size="xl" className="w-full max-w-[453px] justify-center">
+                  <FacebookIcon className="mr-2 h-6 w-6" />
+                  Sign Up with Blue
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Default</Label>
+              <SelectableCard>
+                <SelectableCardIcon><StarIcon /></SelectableCardIcon>
+                <SelectableCardLabel>Musicality</SelectableCardLabel>
+              </SelectableCard>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Selected</Label>
+              <SelectableCard pressed>
+                <SelectableCardIcon><StarIcon /></SelectableCardIcon>
+                <SelectableCardLabel>Musicality</SelectableCardLabel>
+              </SelectableCard>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Custom Brand Icons</h2>
+          <div className="flex items-center gap-6 flex-wrap text-muted-foreground">
+            <div className="flex items-center gap-2"><GoogleLogo className="size-5" /> GoogleLogo</div>
+            <div className="flex items-center gap-2"><FacebookIcon className="size-5" /> FacebookIcon</div>
+            <div className="flex items-center gap-2"><StarIcon className="size-5 stroke-foreground" /> StarIcon</div>
           </div>
         </section>
 
@@ -163,6 +220,7 @@ export default function TypographyGuide() {
             <div className="flex items-center gap-2"><User /> User</div>
             <div className="flex items-center gap-2"><Settings /> Settings</div>
             <div className="flex items-center gap-2"><CreditCard /> Billing</div>
+            <div className="flex items-center gap-2"><MoveRight /> MoveRight</div>
             <div className="flex items-center gap-2"><Facebook /> Facebook</div>
             <div className="flex items-center gap-2"><Twitter /> Twitter</div>
             <div className="flex items-center gap-2"><Apple /> Apple</div>

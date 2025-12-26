@@ -36,7 +36,7 @@ export const GoogleLogo = ({ className, ...props }: React.SVGProps<SVGSVGElement
   </svg>
 );
 
-export const FacebookLogo = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+export const FacebookIcon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"
@@ -52,5 +52,25 @@ export const FacebookLogo = ({ className, ...props }: React.SVGProps<SVGSVGEleme
         fill="white"
       />
     </g>
+  </svg>
+);
+
+export const StarIcon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    width="28"
+    height="26"
+    viewBox="0 0 28 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path
+      d="M13.7191 2.16663L17.2518 8.94829L25.1517 10.0425L19.4354 15.3183L20.7845 22.7716L13.7191 19.2508L6.65376 22.7716L8.00281 15.3183L2.2865 10.0425L10.1864 8.94829L13.7191 2.16663Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
