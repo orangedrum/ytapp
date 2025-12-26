@@ -17,7 +17,7 @@ interface ChartProps {
 
 export const TangoBarChart = ({ data, title, className }: ChartProps) => {
   return (
-    <Card className={`tango-glow ${className}`}>
+    <Card className={className}> {/* Removed tango-glow as it's not defined */}
       <CardHeader>
         <CardTitle className="text-white">{title}</CardTitle>
       </CardHeader>
@@ -37,7 +37,7 @@ export const TangoBarChart = ({ data, title, className }: ChartProps) => {
 
 export const TangoPieChart = ({ data, title, className }: ChartProps) => {
   return (
-    <Card className={`tango-glow ${className}`}>
+    <Card className={className}> {/* Removed tango-glow as it's not defined */}
       <CardHeader>
         <CardTitle className="text-white">{title}</CardTitle>
       </CardHeader>
@@ -66,7 +66,7 @@ export const TangoPieChart = ({ data, title, className }: ChartProps) => {
 
 export const TangoLineChart = ({ data, title, className }: ChartProps) => {
   return (
-    <Card className={`tango-glow ${className}`}>
+    <Card className={className}> {/* Removed tango-glow as it's not defined */}
       <CardHeader>
         <CardTitle className="text-white">{title}</CardTitle>
       </CardHeader>

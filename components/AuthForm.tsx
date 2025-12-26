@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { Builder } from "@builder.io/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,8 +48,3 @@ export const AuthForm = () => {
     </Card>
   );
 };
-
-// This tells Builder.io: "Hey, let the user drag this component!"
-Builder.registerComponent(AuthForm, {
-  name: "Auth Form",
-});
