@@ -1,12 +1,14 @@
-import TypographyGuide from "@/components/TypographyGuide";
-
-export default function StyleguidePage() {
+export default function HomePage() {
   return (
-    // Added a min-h-screen to ensure it takes full height and justify-center for centering
-    // Also added a background to make it distinct
-    <main className="flex min-h-screen flex-col items-center justify-center py-12 bg-gray-50">
-      <div className="container mx-auto">
-        <TypographyGuide />
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold tracking-tight lg:text-6xl">
+          Welcome to Tango App
+        </h1>
+        <p className="mt-4 text-lg text-muted-foreground">
+          This is your new, locally-controlled homepage. You can navigate to{" "}
+          <a href="/styleguide" className="text-primary underline">/styleguide</a> to see the design system.
+        </p>
       </div>
     </main>
   );
