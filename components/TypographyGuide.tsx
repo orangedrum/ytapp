@@ -7,7 +7,6 @@ import {
   FacebookIcon,
   StarIcon,
   EyeIcon,
-  CircleIcon,
   ChatIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
@@ -19,6 +18,7 @@ import {
   User,
   Settings,
   CreditCard,
+  Music,
   Facebook,
   Twitter,
   Apple,
@@ -220,11 +220,11 @@ export default function TypographyGuide() {
             </div>
             <div className="flex flex-col items-start gap-2">
               <Label className="text-sm text-muted-foreground px-1">Dance Along</Label>
-              <Tag variant="dance"><CircleIcon className="size-4" /> Dance Along</Tag>
+              <Tag variant="dance"><Music className="size-4" /> Dance Along</Tag>
             </div>
             <div className="flex flex-col items-start gap-2">
               <Label className="text-sm text-muted-foreground px-1">Condensed</Label>
-              <Tag variant="dance" size="condensed"><CircleIcon className="size-4" /></Tag>
+              <Tag variant="dance" size="condensed"><Music className="size-4" /></Tag>
             </div>
             <div className="flex flex-col items-start gap-2">
               <Label className="text-sm text-muted-foreground px-1">Explanation</Label>
@@ -233,7 +233,6 @@ export default function TypographyGuide() {
             <div className="flex flex-col items-start gap-2">
               <Label className="text-sm text-muted-foreground px-1">Condensed</Label>
               <Tag variant="explanation" size="condensed"><ChatIcon className="size-4" /></Tag>
-              </SelectableCard>
             </div>
           </div>
         </section>
@@ -245,7 +244,7 @@ export default function TypographyGuide() {
             <div className="flex items-center gap-2"><FacebookIcon className="size-5" /> FacebookIcon</div>
             <div className="flex items-center gap-2"><StarIcon className="size-5 stroke-foreground" /> StarIcon</div>
             <div className="flex items-center gap-2"><EyeIcon className="size-5" /> EyeIcon</div>
-            <div className="flex items-center gap-2"><CircleIcon className="size-5" /> CircleIcon</div>
+            <div className="flex items-center gap-2"><Music className="size-5" /> Music</div>
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
           </div>
         </section>
