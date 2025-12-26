@@ -75,6 +75,10 @@ const config = {
           DEFAULT: "hsl(var(--elegant))",
           foreground: "hsl(var(--elegant-foreground))",
         },
+        facebook: {
+          DEFAULT: "hsl(var(--facebook))",
+          foreground: "hsl(var(--facebook-foreground))",
+        },
         success: "hsl(var(--success))",
         gray: {
           1: "hsl(var(--gray-1))",

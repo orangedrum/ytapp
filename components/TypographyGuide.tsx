@@ -2,7 +2,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GoogleLogo } from "@/components/ui/icons";
+import { GoogleLogo, FacebookLogo } from "@/components/ui/icons";
+import { Label } from "@/components/ui/label";
 import {
   Mail,
   ArrowRight,
@@ -10,6 +11,9 @@ import {
   User,
   Settings,
   CreditCard,
+  Facebook,
+  Twitter,
+  Apple,
   LogOut,
   PlusCircle,
 } from "lucide-react";
@@ -128,11 +132,21 @@ export default function TypographyGuide() {
                 Please wait
               </Button>
             </div>
-            <div className="flex items-center gap-4 flex-wrap">
-              <Button variant="outline" size="xl" className="w-full max-w-[453px] justify-center border-gray-6">
-                <GoogleLogo className="mr-2 h-6 w-6" />
-                Sign Up with Google
-              </Button>
+            <div className="flex flex-col items-start gap-4 pt-4">
+              <div className="flex flex-col items-start gap-2">
+                <Label className="text-sm text-muted-foreground px-1">Google Button</Label>
+                <Button variant="outline" size="xl" className="w-full max-w-[453px] justify-center border-gray-6">
+                  <GoogleLogo className="mr-2 h-6 w-6" />
+                  Sign Up with Google
+                </Button>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Label className="text-sm text-muted-foreground px-1">Facebook Button</Label>
+                <Button variant="facebook" size="xl" className="w-full max-w-[453px] justify-center">
+                  <FacebookLogo className="mr-2 h-6 w-6" />
+                  Sign Up with Facebook
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -149,6 +163,9 @@ export default function TypographyGuide() {
             <div className="flex items-center gap-2"><User /> User</div>
             <div className="flex items-center gap-2"><Settings /> Settings</div>
             <div className="flex items-center gap-2"><CreditCard /> Billing</div>
+            <div className="flex items-center gap-2"><Facebook /> Facebook</div>
+            <div className="flex items-center gap-2"><Twitter /> Twitter</div>
+            <div className="flex items-center gap-2"><Apple /> Apple</div>
             <div className="flex items-center gap-2"><LogOut /> Log Out</div>
             <div className="flex items-center gap-2"><PlusCircle /> Add New</div>
           </div>

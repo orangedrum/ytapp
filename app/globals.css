@@ -47,6 +47,9 @@
     --elegant: 0 0% 7%; /* #121212 */
     --elegant-foreground: 0 0% 100%;
 
+    --facebook: 217 89% 52%; /* #1877F2 */
+    --facebook-foreground: 0 0% 100%;
+
     /* === SYSTEM & GRAYSCALE COLORS === */
     --success: 118 88% 31%; /* #0C9409 */
     --gray-1: 0 0% 20%; /* #333333 */

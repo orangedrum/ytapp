@@ -21,6 +21,7 @@ const buttonVariants = cva(
         tango: "bg-tango text-tango-foreground hover:bg-tango/90 shadow-md border-none",
         elegant: "bg-elegant text-elegant-foreground hover:bg-elegant/90 shadow-md border-none",
         gold: "bg-gold text-gold-foreground hover:bg-gold/90 shadow-md border-none",
+        facebook: "bg-facebook text-facebook-foreground hover:bg-facebook/90 shadow-md border-none",
       },
       size: {
         default: "h-10 px-4 py-2",
