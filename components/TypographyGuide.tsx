@@ -54,40 +54,40 @@ export default function TypographyGuide() {
             <TextStyleRow
               as="h4"
               name="Header 4 Medium"
-              className="text-h4-medium"
+              className="text-h4Medium"
               weight="500"
             />
-            <TextStyleRow name="Body 1" className="text-body-1" weight="400" />
+            <TextStyleRow name="Body 1" className="text-body1" weight="400" />
             <TextStyleRow
               name="Body 1 Medium"
-              className="text-body-1-medium"
+              className="text-body1Medium"
               weight="500"
             />
             <TextStyleRow
               name="Body 1 SemiBold"
-              className="text-body-1-semibold"
+              className="text-body1Semibold"
               weight="600"
             />
-            <TextStyleRow name="Body 2" className="text-body-2" weight="400" />
+            <TextStyleRow name="Body 2" className="text-body2" weight="400" />
             <TextStyleRow
               name="Body 2 Medium"
-              className="text-body-2-medium"
+              className="text-body2Medium"
               weight="500"
             />
             <TextStyleRow
               name="Body 2 SemiBold"
-              className="text-body-2-semibold"
+              className="text-body2Semibold"
               weight="600"
             />
-            <TextStyleRow name="Body 3" className="text-body-3" weight="400" />
+            <TextStyleRow name="Body 3" className="text-body3" weight="400" />
             <TextStyleRow
               name="Body 3 Medium"
-              className="text-body-3-medium"
+              className="text-body3Medium"
               weight="500"
             />
             <TextStyleRow
               name="Body 3 SemiBold"
-              className="text-body-3-semibold"
+              className="text-body3Semibold"
               weight="600"
             />
           </div>

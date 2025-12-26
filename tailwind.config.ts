@@ -17,6 +17,15 @@ const config = {
       },
     },
     extend: {
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        minimal: "0 1px 3px 0 rgb(0 0 0 / 0.05)",
+        md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
       },
@@ -82,16 +91,16 @@ const config = {
         h2: ["32px", { lineHeight: "1.2", fontWeight: "600" }],
         h3: ["24px", { lineHeight: "1.2", fontWeight: "600" }],
         h4: ["20px", { lineHeight: "1.2", fontWeight: "600" }],
-        "h4-medium": ["20px", { lineHeight: "1.2", fontWeight: "500" }],
-        "body-1": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
-        "body-1-medium": ["16px", { lineHeight: "1.5", fontWeight: "500" }],
-        "body-1-semibold": ["16px", { lineHeight: "1.5", fontWeight: "600" }],
-        "body-2": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
-        "body-2-medium": ["14px", { lineHeight: "1.5", fontWeight: "500" }],
-        "body-2-semibold": ["14px", { lineHeight: "1.5", fontWeight: "600" }],
-        "body-3": ["12px", { lineHeight: "1.5", fontWeight: "400" }],
-        "body-3-medium": ["12px", { lineHeight: "1.5", fontWeight: "500" }],
-        "body-3-semibold": ["12px", { lineHeight: "1.5", fontWeight: "600" }],
+        h4Medium: ["20px", { lineHeight: "1.2", fontWeight: "500" }],
+        body1: ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        body1Medium: ["16px", { lineHeight: "1.5", fontWeight: "500" }],
+        body1Semibold: ["16px", { lineHeight: "1.5", fontWeight: "600" }],
+        body2: ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+        body2Medium: ["14px", { lineHeight: "1.5", fontWeight: "500" }],
+        body2Semibold: ["14px", { lineHeight: "1.5", fontWeight: "600" }],
+        body3: ["12px", { lineHeight: "1.5", fontWeight: "400" }],
+        body3Medium: ["12px", { lineHeight: "1.5", fontWeight: "500" }],
+        body3Semibold: ["12px", { lineHeight: "1.5", fontWeight: "600" }],
       },
       keyframes: {
         "accordion-down": {
