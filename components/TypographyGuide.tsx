@@ -5,16 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
+  as: Tag = "p",
   name,
   className,
   weight,
 }: {
+  as?: React.ElementType;
   name: string;
   className: string;
   weight: string;
 }) => (
   <div className="flex w-full items-center justify-between border-b py-3">
-    <p className={className}>{name}</p>
+    <Tag className={className}>{name}</Tag>
     <p className="text-muted-foreground">{weight}</p>
   </div>
 );
@@ -45,11 +47,12 @@ export default function TypographyGuide() {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Typography Scale</h2>
           <div className="space-y-4">
-            <TextStyleRow name="Header 1" className="text-h1" weight="600" />
-            <TextStyleRow name="Header 2" className="text-h2" weight="600" />
-            <TextStyleRow name="Header 3" className="text-h3" weight="600" />
-            <TextStyleRow name="Header 4" className="text-h4" weight="600" />
+            <TextStyleRow as="h1" name="Header 1" className="text-h1" weight="600" />
+            <TextStyleRow as="h2" name="Header 2" className="text-h2" weight="600" />
+            <TextStyleRow as="h3" name="Header 3" className="text-h3" weight="600" />
+            <TextStyleRow as="h4" name="Header 4" className="text-h4" weight="600" />
             <TextStyleRow
+              as="h4"
               name="Header 4 Medium"
               className="text-h4-medium"
               weight="500"
