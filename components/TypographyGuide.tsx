@@ -94,6 +94,15 @@ export default function TypographyGuide() {
         </section>
 
         <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Buttons</h2>
+          <div className="flex items-center gap-4 flex-wrap">
+            <Button>Primary</Button>
+            <Button variant="outline">Secondary</Button>
+            <Button disabled>Disabled</Button>
+          </div>
+        </section>
+
+        <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Brand Colors & Buttons</h2>
           <div className="flex gap-4 flex-wrap">
             <Button variant="tango">Tango Action</Button>
