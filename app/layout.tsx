@@ -13,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet" />
+      </head>
+      <body className={cn("min-h-screen bg-background font-sans antialiased border-4 border-red-500")}>
         {children}
       </body>
     </html>
