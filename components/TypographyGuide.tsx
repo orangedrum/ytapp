@@ -2,7 +2,14 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GoogleLogo, FacebookIcon, StarIcon } from "@/components/ui/icons";
+import {
+  GoogleLogo,
+  FacebookIcon,
+  StarIcon,
+  EyeIcon,
+  CircleIcon,
+  ChatIcon,
+} from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
   Mail,
@@ -18,6 +25,7 @@ import {
   LogOut,
   PlusCircle,
 } from "lucide-react";
+import { Tag } from "./ui/tag";
 import {
   SelectableCard,
   SelectableCardIcon,
@@ -170,8 +178,8 @@ export default function TypographyGuide() {
               </div>
               <div className="flex flex-col items-start gap-2">
                 <Label className="text-sm text-muted-foreground px-1">Blue Button</Label>
-                <Button variant="blue" size="xl" className="w-full max-w-[453px] justify-center">
-                  <FacebookIcon className="mr-2 h-6 w-6" />
+                <Button variant="blue" size="xl" className="w-full max-w-[453px] justify-center" aria-label="Sign Up with Facebook">
+                  <FacebookIcon className="mr-2 h-6 w-6" aria-hidden="true" />
                   Sign Up with Blue
                 </Button>
               </div>
@@ -182,18 +190,49 @@ export default function TypographyGuide() {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
           <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Default</Label>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Default State</Label>
               <SelectableCard>
-                <SelectableCardIcon><StarIcon /></SelectableCardIcon>
+                <SelectableCardIcon><StarIcon className="size-5" /></SelectableCardIcon>
                 <SelectableCardLabel>Musicality</SelectableCardLabel>
               </SelectableCard>
             </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Selected</Label>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Selected State</Label>
               <SelectableCard pressed>
-                <SelectableCardIcon><StarIcon /></SelectableCardIcon>
+                <SelectableCardIcon><StarIcon className="size-5" /></SelectableCardIcon>
                 <SelectableCardLabel>Musicality</SelectableCardLabel>
+              </SelectableCard>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Tags / Pills</h2>
+          <div className="flex items-end gap-8 flex-wrap">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Watch & Study</Label>
+              <Tag variant="watch"><EyeIcon className="size-4" /> Watch & study</Tag>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Condensed</Label>
+              <Tag variant="watch" size="condensed"><EyeIcon className="size-4" /></Tag>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Dance Along</Label>
+              <Tag variant="dance"><CircleIcon className="size-4" /> Dance Along</Tag>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Condensed</Label>
+              <Tag variant="dance" size="condensed"><CircleIcon className="size-4" /></Tag>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Explanation</Label>
+              <Tag variant="explanation"><ChatIcon className="size-4" /> Explanation</Tag>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Condensed</Label>
+              <Tag variant="explanation" size="condensed"><ChatIcon className="size-4" /></Tag>
               </SelectableCard>
             </div>
           </div>
@@ -205,6 +244,9 @@ export default function TypographyGuide() {
             <div className="flex items-center gap-2"><GoogleLogo className="size-5" /> GoogleLogo</div>
             <div className="flex items-center gap-2"><FacebookIcon className="size-5" /> FacebookIcon</div>
             <div className="flex items-center gap-2"><StarIcon className="size-5 stroke-foreground" /> StarIcon</div>
+            <div className="flex items-center gap-2"><EyeIcon className="size-5" /> EyeIcon</div>
+            <div className="flex items-center gap-2"><CircleIcon className="size-5" /> CircleIcon</div>
+            <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
           </div>
         </section>
 

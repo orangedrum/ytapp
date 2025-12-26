@@ -79,6 +79,12 @@ const config = {
           DEFAULT: "hsl(var(--blue))",
           foreground: "hsl(var(--blue-foreground))",
         },
+        tag: {
+          watch: "hsl(var(--tag-watch))",
+          dance: "hsl(var(--tag-dance))",
+          explanation: "hsl(var(--tag-explanation))",
+          foreground: "hsl(var(--tag-foreground))",
+        },
         success: "hsl(var(--success))",
         gray: {
           1: "hsl(var(--gray-1))",
