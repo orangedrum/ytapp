@@ -1,7 +1,18 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Import Card components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GoogleLogo } from "@/components/ui/icons";
+import {
+  Mail,
+  ArrowRight,
+  Loader2,
+  User,
+  Settings,
+  CreditCard,
+  LogOut,
+  PlusCircle,
+} from "lucide-react";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -99,6 +110,47 @@ export default function TypographyGuide() {
             <Button>Primary</Button>
             <Button variant="outline">Secondary</Button>
             <Button disabled>Disabled</Button>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Buttons with Icons</h2>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
+              <Button>
+                <Mail className="mr-2 h-4 w-4" /> Login with Email
+              </Button>
+              <Button variant="outline">
+                Next Step <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            </div>
+            <div className="flex items-center gap-4 flex-wrap">
+              <Button variant="outline" size="xl" className="w-full max-w-[453px] justify-center border-gray-6">
+                <GoogleLogo className="mr-2 h-6 w-6" />
+                Sign Up with Google
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Icon Library (Curated)</h2>
+          <p className="text-muted-foreground">
+            A curated list of common icons. For the full set, please refer to the{" "}
+            <a href="https://lucide.dev/icons/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              Lucide Icon Library
+            </a>.
+          </p>
+          <div className="flex items-center gap-6 flex-wrap text-muted-foreground">
+            <div className="flex items-center gap-2"><User /> User</div>
+            <div className="flex items-center gap-2"><Settings /> Settings</div>
+            <div className="flex items-center gap-2"><CreditCard /> Billing</div>
+            <div className="flex items-center gap-2"><LogOut /> Log Out</div>
+            <div className="flex items-center gap-2"><PlusCircle /> Add New</div>
           </div>
         </section>
 
