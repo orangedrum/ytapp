@@ -10,6 +10,7 @@ import {
   ChatIcon,
   CheckIcon,
   WarningCircleIcon,
+  XIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
@@ -19,6 +20,7 @@ import {
   Loader2,
   User,
   Settings,
+  ChevronLeft,
   CreditCard,
   Music,
   Facebook,
@@ -43,6 +45,11 @@ import { Checkbox } from "./ui/checkbox";
 import { Slider } from "./ui/slider";
 import { Progress } from "./ui/progress";
 import { FilterGroup, FilterGroupItem } from "./ui/filter-group";
+import {
+  PageHeader,
+  PageHeaderAction,
+  PageHeaderTitle,
+} from "./ui/page-header";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -405,6 +412,7 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
             <div className="flex items-center gap-2"><CheckIcon className="size-5 text-success" /> CheckIcon</div>
             <div className="flex items-center gap-2"><WarningCircleIcon className="size-5 text-destructive" /> WarningCircleIcon</div>
+            <div className="flex items-center gap-2"><XIcon className="size-5" /> XIcon</div>
           </div>
         </section>
 
