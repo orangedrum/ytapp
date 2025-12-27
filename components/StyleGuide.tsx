@@ -38,6 +38,8 @@ import {
   SelectableCardLabel,
 } from "./ui/selectable-card";
 import { Input } from "./ui/input";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Checkbox } from "./ui/checkbox";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -257,6 +259,33 @@ export default function StyleGuide() {
           </div>
         </section>
 
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Selection Controls</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-start gap-4">
+              <Label className="text-sm text-muted-foreground px-1">Radio Group</Label>
+              <RadioGroup defaultValue="comfortable">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="default" id="r1" />
+                  <Label htmlFor="r1">Default</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="comfortable" id="r2" />
+                  <Label htmlFor="r2">Comfortable</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="compact" id="r3" />
+                  <Label htmlFor="r3">Compact</Label>
+                </div>
+              </RadioGroup>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="terms" />
+              <Label htmlFor="terms">Accept terms and conditions</Label>
+            </div>
+          </div>
+        </section>
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
