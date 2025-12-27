@@ -10,7 +10,6 @@ import {
   ChatIcon,
   CheckIcon,
   WarningCircleIcon,
-  XIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
@@ -20,7 +19,6 @@ import {
   Loader2,
   User,
   Settings,
-  ChevronLeft,
   CreditCard,
   Music,
   Facebook,
@@ -45,11 +43,6 @@ import { Checkbox } from "./ui/checkbox";
 import { Slider } from "./ui/slider";
 import { Progress } from "./ui/progress";
 import { FilterGroup, FilterGroupItem } from "./ui/filter-group";
-import {
-  PageHeader,
-  PageHeaderAction,
-  PageHeaderTitle,
-} from "./ui/page-header";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -340,6 +333,30 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Page Headers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <PageHeader className="border rounded-lg">
+              <PageHeaderAction>
+                <Button variant="ghost" size="icon">
+                  <ChevronLeft />
+                </Button>
+              </PageHeaderAction>
+              <PageHeaderTitle>Sub Page Title</PageHeaderTitle>
+              <PageHeaderAction />
+            </PageHeader>
+            <PageHeader className="border rounded-lg">
+              <PageHeaderAction />
+              <PageHeaderTitle>Filters</PageHeaderTitle>
+              <PageHeaderAction>
+                <Button variant="ghost" size="icon">
+                  <XIcon />
+                </Button>
+              </PageHeaderAction>
+            </PageHeader>
+          </div>
+        </section>
+
+        <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex flex-col items-center gap-2">
@@ -411,7 +428,10 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><Music className="size-5" /> Music</div>
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
             <div className="flex items-center gap-2"><CheckIcon className="size-5 text-success" /> CheckIcon</div>
-            <div className="flex items-center gap-2"><WarningCircleIcon className="size-5 text-destructive" /> WarningCircleIcon</div>
+            <div className="flex items-center gap-2">
+              <WarningCircleIcon className="size-5 text-destructive" />{" "}
+              WarningCircleIcon
+            </div>
             <div className="flex items-center gap-2"><XIcon className="size-5" /> XIcon</div>
           </div>
         </section>
