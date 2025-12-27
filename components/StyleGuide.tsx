@@ -302,6 +302,8 @@ export default function StyleGuide() {
           <h2 className="text-2xl font-bold border-b pb-2">Filter Controls</h2>
           <div className="space-y-2">
             <Label>Sort By</Label>
+            {/* This container enables horizontal scrolling on small screens */}
+            {/* The inner div uses w-max to prevent wrapping */}
             <div className="w-full overflow-x-auto pb-2">
               <div className="flex w-max space-x-2">
                 <FilterGroup type="single" defaultValue="relevance">
@@ -309,6 +311,21 @@ export default function StyleGuide() {
                   <FilterGroupItem value="low-high">Price: Low - High</FilterGroupItem>
                   <FilterGroupItem value="high-low">Price: High - Low</FilterGroupItem>
                   <FilterGroupItem value="newest">Newest</FilterGroupItem>
+                </FilterGroup>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Filter by Category (with horizontal scroll)</Label>
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="flex w-max space-x-2">
+                <FilterGroup type="single" defaultValue="leaders">
+                  <FilterGroupItem value="all">All</FilterGroupItem>
+                  <FilterGroupItem value="leaders">Leaders</FilterGroupItem>
+                  <FilterGroupItem value="followers">Followers</FilterGroupItem>
+                  <FilterGroupItem value="technique">Technique</FilterGroupItem>
+                  <FilterGroupItem value="musicality">Musicality</FilterGroupItem>
+                  <FilterGroupItem value="history">History</FilterGroupItem>
                 </FilterGroup>
               </div>
             </div>
