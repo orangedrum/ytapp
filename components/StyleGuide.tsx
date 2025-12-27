@@ -35,6 +35,7 @@ import {
   SelectableCardIcon,
   SelectableCardLabel,
 } from "./ui/selectable-card";
+import { Input } from "./ui/input";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -205,6 +206,38 @@ export default function StyleGuide() {
             </div>
           </div>
         </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Input Fields</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Default</Label>
+              <Input type="email" placeholder="placeholder" />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Filled</Label>
+              <Input type="email" defaultValue="user.name@email.com" />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">With Icon</Label>
+              <div className="relative w-full">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-gray-4" />
+                <Input type="email" placeholder="placeholder" className="pl-12" />
+              </div>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Disabled</Label>
+              <Input type="email" placeholder="placeholder" disabled />
+            </div>
+            <div className="flex flex-col items-start gap-2 md:col-span-2">
+              <Label className="text-sm text-muted-foreground px-1">Focus State</Label>
+              <p className="text-sm text-muted-foreground">
+                The input field will show a blue ring and the border will darken when it is focused (selected), as shown in the "Hover" state from your design.
+              </p>
+            </div>
+          </div>
+        </section>
+
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
