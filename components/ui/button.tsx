@@ -23,7 +23,7 @@ const buttonVariants = cva(
         blue: "bg-blue text-blue-foreground hover:bg-blue/90 shadow-md border-none",
       },
       size: {
-        default: "h-10 px-4 py-2",
+        default: "h-11 px-5",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         xl: "h-14 rounded-md px-8 text-base",

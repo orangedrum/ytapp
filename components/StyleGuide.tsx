@@ -8,8 +8,6 @@ import {
   StarIcon,
   EyeIcon,
   ChatIcon,
-  CheckIcon,
-  WarningCircleIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
@@ -37,9 +35,6 @@ import {
   SelectableCardIcon,
   SelectableCardLabel,
 } from "./ui/selectable-card";
-import { Input } from "./ui/input";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Checkbox } from "./ui/checkbox";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -212,77 +207,34 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Input Fields</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Default</Label>
-              <Input type="email" placeholder="placeholder" />
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Filled</Label>
-              <Input type="email" defaultValue="user.name@email.com" />
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">With Icon</Label>
-              <div className="relative w-full max-w-sm">
-                <Input type="email" placeholder="placeholder" className="pr-12" />
-                <Mail className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-gray-4" />
-              </div>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Success</Label>
-              <div className="relative w-full max-w-sm">
-                <Input variant="success" type="email" defaultValue="valid.email@tango.app" className="pr-12" />
-                <CheckIcon className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-success" />
-              </div>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Error</Label>
-              <div className="w-full max-w-sm space-y-1">
-                <div className="relative">
-                  <Input variant="error" type="email" defaultValue="invalid-email" className="pr-12" />
-                  <WarningCircleIcon className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-destructive" />
-                </div>
-                <p className="text-sm text-destructive">Please enter a valid email address.</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label className="text-sm text-muted-foreground px-1">Disabled</Label>
-              <Input type="email" placeholder="placeholder" disabled />
-            </div>
-            <div className="flex flex-col items-start gap-2 md:col-span-2">
-              <Label className="text-sm text-muted-foreground px-1">Focus State</Label>
-              <p className="text-sm text-muted-foreground">
-                The input field will show a blue ring and the border will darken when it is focused (selected), as shown in the "Hover" state from your design.
-              </p>
+          <h2 className="text-2xl font-bold border-b pb-2">Button Groups</h2>
+          <div className="flex flex-col items-start gap-2">
+            <Label className="text-sm text-muted-foreground px-1">Full-Width Button Group</Label>
+            <div className="flex w-full max-w-sm gap-2">
+              <Button variant="outline" className="flex-1">
+                Cancel
+              </Button>
+              <Button className="flex-1">
+                Confirm
+              </Button>
             </div>
           </div>
         </section>
 
-
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Selection Controls</h2>
+          <h2 className="text-2xl font-bold border-b pb-2">Sliders & Progress Bars</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col items-start gap-4">
-              <Label className="text-sm text-muted-foreground px-1">Radio Group</Label>
-              <RadioGroup defaultValue="comfortable">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="default" id="r1" />
-                  <Label htmlFor="r1">Default</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="comfortable" id="r2" />
-                  <Label htmlFor="r2">Comfortable</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="compact" id="r3" />
-                  <Label htmlFor="r3">Compact</Label>
-                </div>
-              </RadioGroup>
+            <div className="space-y-4">
+              <Label>Slider (Single)</Label>
+              <Slider defaultValue={[50]} max={100} step={1} />
             </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
-              <Label htmlFor="terms">Accept terms and conditions</Label>
+            <div className="space-y-4">
+              <Label>Slider (Range)</Label>
+              <Slider defaultValue={[25, 75]} max={100} step={1} />
+            </div>
+            <div className="space-y-4 md:col-span-2">
+              <Label>Progress Bar</Label>
+              <Progress value={33} />
             </div>
           </div>
         </section>
@@ -358,8 +310,6 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><EyeIcon className="size-5" /> EyeIcon</div>
             <div className="flex items-center gap-2"><Music className="size-5" /> Music</div>
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
-            <div className="flex items-center gap-2"><CheckIcon className="size-5 text-success" /> CheckIcon</div>
-            <div className="flex items-center gap-2"><WarningCircleIcon className="size-5 text-destructive" /> WarningCircleIcon</div>
           </div>
         </section>
 
