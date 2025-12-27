@@ -8,6 +8,8 @@ import {
   StarIcon,
   EyeIcon,
   ChatIcon,
+  CheckIcon,
+  WarningCircleIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
@@ -220,9 +222,26 @@ export default function StyleGuide() {
             </div>
             <div className="flex flex-col items-start gap-2">
               <Label className="text-sm text-muted-foreground px-1">With Icon</Label>
-              <div className="relative w-full">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-gray-4" />
-                <Input type="email" placeholder="placeholder" className="pl-12" />
+              <div className="relative w-full max-w-sm">
+                <Input type="email" placeholder="placeholder" className="pr-12" />
+                <Mail className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-gray-4" />
+              </div>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Success</Label>
+              <div className="relative w-full max-w-sm">
+                <Input variant="success" type="email" defaultValue="valid.email@tango.app" className="pr-12" />
+                <CheckIcon className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-success" />
+              </div>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Error</Label>
+              <div className="w-full max-w-sm space-y-1">
+                <div className="relative">
+                  <Input variant="error" type="email" defaultValue="invalid-email" className="pr-12" />
+                  <WarningCircleIcon className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-destructive" />
+                </div>
+                <p className="text-sm text-destructive">Please enter a valid email address.</p>
               </div>
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -310,6 +329,8 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><EyeIcon className="size-5" /> EyeIcon</div>
             <div className="flex items-center gap-2"><Music className="size-5" /> Music</div>
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
+            <div className="flex items-center gap-2"><CheckIcon className="size-5 text-success" /> CheckIcon</div>
+            <div className="flex items-center gap-2"><WarningCircleIcon className="size-5 text-destructive" /> WarningCircleIcon</div>
           </div>
         </section>
 
