@@ -207,21 +207,6 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Button Groups</h2>
-          <div className="flex flex-col items-start gap-2">
-            <Label className="text-sm text-muted-foreground px-1">Full-Width Button Group</Label>
-            <div className="flex w-full max-w-sm gap-2">
-              <Button variant="outline" className="flex-1">
-                Cancel
-              </Button>
-              <Button className="flex-1">
-                Confirm
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex flex-col items-center gap-2">
@@ -238,18 +223,6 @@ export default function StyleGuide() {
                 <SelectableCardLabel>Musicality</SelectableCardLabel>
               </SelectableCard>
             </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Segmented Controls</h2>
-          <div className="flex flex-col items-start gap-2">
-            <Label className="text-sm text-muted-foreground px-1">Planner View</Label>
-            <ToggleGroup type="single" defaultValue="day" className="w-full max-w-md">
-              <ToggleGroupItem value="day">Day</ToggleGroupItem>
-              <ToggleGroupItem value="week">Week</ToggleGroupItem>
-              <ToggleGroupItem value="month">Month</ToggleGroupItem>
-            </ToggleGroup>
           </div>
         </section>
 

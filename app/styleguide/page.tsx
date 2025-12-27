@@ -1,4 +1,4 @@
-import TypographyGuide from "@/components/TypographyGuide";
+import StyleGuide from "@/components/StyleGuide";
 
 export default function StyleguidePage() {
   return (
@@ -6,7 +6,7 @@ export default function StyleguidePage() {
     // Also added a background to make it distinct
     <main className="flex min-h-screen flex-col items-center justify-center py-12 bg-gray-50">
       <div className="container mx-auto">
-        <TypographyGuide />
+        <StyleGuide />
       </div>
     </main>
   );
