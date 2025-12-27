@@ -42,6 +42,7 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Checkbox } from "./ui/checkbox";
 import { Slider } from "./ui/slider";
 import { Progress } from "./ui/progress";
+import { FilterGroup, FilterGroupItem } from "./ui/filter-group";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -286,11 +287,47 @@ export default function StyleGuide() {
             </div>
             <div className="space-y-4">
               <Label>Slider (Range)</Label>
-              <Slider defaultValue={[25, 75]} max={100} step={1} />
+              {/* To render a range slider, we pass an array to defaultValue */}
+              {/* The Slider component will automatically render a thumb for each value */}
+              <Slider defaultValue={[25, 75]} max={100} step={1} className="w-[60%]" />
             </div>
             <div className="space-y-4 md:col-span-2">
               <Label>Progress Bar</Label>
               <Progress value={33} />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Filter Controls</h2>
+          <div className="space-y-2">
+            <Label>Sort By</Label>
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="flex w-max space-x-2">
+                <FilterGroup type="single" defaultValue="relevance">
+                  <FilterGroupItem value="relevance">Relevance</FilterGroupItem>
+                  <FilterGroupItem value="low-high">Price: Low - High</FilterGroupItem>
+                  <FilterGroupItem value="high-low">Price: High - Low</FilterGroupItem>
+                  <FilterGroupItem value="newest">Newest</FilterGroupItem>
+                </FilterGroup>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Filter Controls</h2>
+          <div className="space-y-2">
+            <Label>Sort By</Label>
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="flex w-max space-x-2">
+                <FilterGroup type="single" defaultValue="relevance">
+                  <FilterGroupItem value="relevance">Relevance</FilterGroupItem>
+                  <FilterGroupItem value="low-high">Price: Low - High</FilterGroupItem>
+                  <FilterGroupItem value="high-low">Price: High - Low</FilterGroupItem>
+                  <FilterGroupItem value="newest">Newest</FilterGroupItem>
+                </FilterGroup>
+              </div>
             </div>
           </div>
         </section>
