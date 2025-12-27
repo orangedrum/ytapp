@@ -316,23 +316,6 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Filter Controls</h2>
-          <div className="space-y-2">
-            <Label>Sort By</Label>
-            <div className="w-full overflow-x-auto pb-2">
-              <div className="flex w-max space-x-2">
-                <FilterGroup type="single" defaultValue="relevance">
-                  <FilterGroupItem value="relevance">Relevance</FilterGroupItem>
-                  <FilterGroupItem value="low-high">Price: Low - High</FilterGroupItem>
-                  <FilterGroupItem value="high-low">Price: High - Low</FilterGroupItem>
-                  <FilterGroupItem value="newest">Newest</FilterGroupItem>
-                </FilterGroup>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Selectable Cards</h2>
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex flex-col items-center gap-2">
