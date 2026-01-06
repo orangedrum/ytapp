@@ -619,7 +619,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Default
               </Label>
               <VideoPlate
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/341x369/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/341x369/e2e8f0/e2e8f0"}
                 category={sampleVideo?.category || "Technique"}
                 tagVariant={sampleVideo?.tag_variant || "watch"}
                 tagLabel={sampleVideo?.tag_label || "Watch & study"}
@@ -631,7 +631,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Favorited
               </Label>
               <VideoPlate
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/341x369/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/341x369/e2e8f0/e2e8f0"}
                 category={sampleVideo?.category || "Technique"}
                 tagVariant={sampleVideo?.tag_variant || "watch"}
                 tagLabel={sampleVideo?.tag_label || "Watch & study"}
@@ -656,7 +656,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Main Card
               </Label>
               <VideoCard
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/235x158/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/235x158/e2e8f0/e2e8f0"}
                 category={sampleVideo?.category || "Technique"}
                 tagVariant={sampleVideo?.tag_variant || "watch"}
                 tagLabel={sampleVideo?.tag_label || "Watch & study"}
@@ -671,7 +671,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Favorited
               </Label>
               <VideoCard
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/235x158/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/235x158/e2e8f0/e2e8f0"}
                 category={sampleVideo?.category || "Technique"}
                 tagVariant={sampleVideo?.tag_variant || "watch"}
                 tagLabel={sampleVideo?.tag_label || "Watch & study"}
@@ -699,7 +699,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Horizontal Card (5-star)
               </Label>
               <VideoCardHorizontal
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/83x79/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/83x79/e2e8f0/e2e8f0"}
                 title={sampleVideo?.title || "Tango Video Title"}
                 rating={sampleVideo?.rating || 5}
                 duration={sampleVideo?.duration || "04:33"}
@@ -711,7 +711,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Horizontal Card (3-star)
               </Label>
               <VideoCardHorizontal
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/83x79/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/83x79/e2e8f0/e2e8f0"}
                 title={sampleVideo?.title || "Another Tango Video"}
                 rating={sampleVideo?.rating || 3}
                 duration={sampleVideo?.duration || "02:15"}
@@ -735,7 +735,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Rating Card (4.5 stars)
               </Label>
               <VideoCardRating
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/91x70/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/91x70/e2e8f0/e2e8f0"}
                 rating={sampleVideo?.rating || 4.5}
                 views={sampleVideo?.views || 1234}
                 alt={sampleVideo?.title || "Video thumbnail"}
@@ -746,7 +746,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Rating Card (2.1 stars)
               </Label>
               <VideoCardRating
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/91x70/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/91x70/e2e8f0/e2e8f0"}
                 rating={sampleVideo?.rating || 2.1}
                 views={sampleVideo?.views || 567}
                 alt={sampleVideo?.title || "Video thumbnail"}
@@ -769,7 +769,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Default
               </Label>
               <VideoCardHalf
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/161x174/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/161x174/e2e8f0/e2e8f0"}
                 title={sampleVideo?.title || "Tango Video"}
                 category={sampleVideo?.category || "Technique"}
                 duration={sampleVideo?.duration || "02:34"}
@@ -780,7 +780,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 Favorited
               </Label>
               <VideoCardHalf
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/161x174/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/161x174/e2e8f0/e2e8f0"}
                 title={sampleVideo?.title || "Tango Video"}
                 category={sampleVideo?.category || "Technique"}
                 duration={sampleVideo?.duration || "02:34"}
@@ -809,7 +809,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 title={sampleVideo?.title || "Tango Video Title"}
                 duration={sampleVideo?.duration || "10:22"}
                 category={sampleVideo?.category || "adorn"}
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
               />
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -820,7 +820,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
                 title={sampleVideo?.title || "Ochos Forward"}
                 duration={sampleVideo?.duration || "05:15"}
                 category={"technique"}
-                imageUrl={sampleVideo?.image_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
+                imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
               />
             </div>
             <div className="flex flex-col items-start gap-2">

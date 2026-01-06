@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.builder.io",
       },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
     ],
   },
 };
