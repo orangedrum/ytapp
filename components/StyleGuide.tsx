@@ -11,6 +11,48 @@ import {
   CheckIcon,
   WarningCircleIcon,
   XIcon,
+  CircleIcon,
+  HeartIcon,
+  HeartFilledIcon,
+  HeartDuotoneIcon,
+  BellIcon,
+  BellDuotoneIcon,
+  EyeOffIcon,
+  SearchIcon,
+  SearchDuotoneIcon,
+  FilterIcon,
+  MinusIcon,
+  TrashIcon,
+  PlusIcon,
+  CancelCircleIcon,
+  ChevronIcon,
+  UserIcon,
+  UserDuotoneIcon,
+  BoxIcon,
+  BoxDuotoneIcon,
+  WarehouseFilledIcon,
+  TruckFilledIcon,
+  ReturnIcon,
+  DetailsIcon,
+  AddressIcon,
+  CardIcon,
+  CardDuotoneIcon,
+  UsersIcon,
+  CheckDuotoneIcon,
+  LogoutIcon,
+  PhoneIcon,
+  PhoneFilledIcon,
+  EditIcon,
+  QuestionIcon,
+  CartIcon,
+  CartDuotoneIcon,
+  CashIcon,
+  LocationIcon,
+  LocationDuotoneIcon,
+  LocationFilledIcon,
+  HeadphonesIcon,
+  ImageIcon,
+  DiscountDuotoneIcon,
 } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import {
@@ -427,19 +469,57 @@ export default function StyleGuide() {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Custom Brand Icons</h2>
-          <div className="flex items-center gap-6 flex-wrap text-muted-foreground">
+          <div className="flex items-center gap-x-6 gap-y-4 flex-wrap text-muted-foreground">
             <div className="flex items-center gap-2"><GoogleLogo className="size-5" /> GoogleLogo</div>
             <div className="flex items-center gap-2"><FacebookIcon className="size-5" /> FacebookIcon</div>
             <div className="flex items-center gap-2"><StarIcon className="size-5 stroke-foreground" /> StarIcon</div>
             <div className="flex items-center gap-2"><EyeIcon className="size-5" /> EyeIcon</div>
-            <div className="flex items-center gap-2"><Music className="size-5" /> Music</div>
             <div className="flex items-center gap-2"><ChatIcon className="size-5" /> ChatIcon</div>
             <div className="flex items-center gap-2"><CheckIcon className="size-5 text-success" /> CheckIcon</div>
-            <div className="flex items-center gap-2">
-              <WarningCircleIcon className="size-5 text-destructive" />{" "}
-              WarningCircleIcon
-            </div>
+            <div className="flex items-center gap-2"><WarningCircleIcon className="size-5 text-destructive" /> WarningCircleIcon</div>
             <div className="flex items-center gap-2"><XIcon className="size-5" /> XIcon</div>
+            <div className="flex items-center gap-2"><CircleIcon className="size-5" /> CircleIcon</div>
+            <div className="flex items-center gap-2"><HeartIcon className="size-5" /> HeartIcon</div>
+            <div className="flex items-center gap-2"><HeartFilledIcon className="size-5" /> HeartFilledIcon</div>
+            <div className="flex items-center gap-2"><HeartDuotoneIcon className="size-5" /> HeartDuotoneIcon</div>
+            <div className="flex items-center gap-2"><BellIcon className="size-5" /> BellIcon</div>
+            <div className="flex items-center gap-2"><BellDuotoneIcon className="size-5" /> BellDuotoneIcon</div>
+            <div className="flex items-center gap-2"><EyeOffIcon className="size-5" /> EyeOffIcon</div>
+            <div className="flex items-center gap-2"><SearchIcon className="size-5" /> SearchIcon</div>
+            <div className="flex items-center gap-2"><SearchDuotoneIcon className="size-5" /> SearchDuotoneIcon</div>
+            <div className="flex items-center gap-2"><FilterIcon className="size-5" /> FilterIcon</div>
+            <div className="flex items-center gap-2"><MinusIcon className="size-5" /> MinusIcon</div>
+            <div className="flex items-center gap-2"><TrashIcon className="size-5" /> TrashIcon</div>
+            <div className="flex items-center gap-2"><PlusIcon className="size-5" /> PlusIcon</div>
+            <div className="flex items-center gap-2"><CancelCircleIcon className="size-5" /> CancelCircleIcon</div>
+            <div className="flex items-center gap-2"><ChevronIcon className="size-5" /> ChevronIcon</div>
+            <div className="flex items-center gap-2"><UserIcon className="size-5" /> UserIcon</div>
+            <div className="flex items-center gap-2"><UserDuotoneIcon className="size-5" /> UserDuotoneIcon</div>
+            <div className="flex items-center gap-2"><BoxIcon className="size-5" /> BoxIcon</div>
+            <div className="flex items-center gap-2"><BoxDuotoneIcon className="size-5" /> BoxDuotoneIcon</div>
+            <div className="flex items-center gap-2"><WarehouseFilledIcon className="size-5" /> WarehouseFilledIcon</div>
+            <div className="flex items-center gap-2"><TruckFilledIcon className="size-5" /> TruckFilledIcon</div>
+            <div className="flex items-center gap-2"><ReturnIcon className="size-5" /> ReturnIcon</div>
+            <div className="flex items-center gap-2"><DetailsIcon className="size-5" /> DetailsIcon</div>
+            <div className="flex items-center gap-2"><AddressIcon className="size-5" /> AddressIcon</div>
+            <div className="flex items-center gap-2"><CardIcon className="size-5" /> CardIcon</div>
+            <div className="flex items-center gap-2"><CardDuotoneIcon className="size-5" /> CardDuotoneIcon</div>
+            <div className="flex items-center gap-2"><UsersIcon className="size-5" /> UsersIcon</div>
+            <div className="flex items-center gap-2"><CheckDuotoneIcon className="size-5" /> CheckDuotoneIcon</div>
+            <div className="flex items-center gap-2"><LogoutIcon className="size-5" /> LogoutIcon</div>
+            <div className="flex items-center gap-2"><PhoneIcon className="size-5" /> PhoneIcon</div>
+            <div className="flex items-center gap-2"><PhoneFilledIcon className="size-5" /> PhoneFilledIcon</div>
+            <div className="flex items-center gap-2"><EditIcon className="size-5" /> EditIcon</div>
+            <div className="flex items-center gap-2"><QuestionIcon className="size-5" /> QuestionIcon</div>
+            <div className="flex items-center gap-2"><CartIcon className="size-5" /> CartIcon</div>
+            <div className="flex items-center gap-2"><CartDuotoneIcon className="size-5" /> CartDuotoneIcon</div>
+            <div className="flex items-center gap-2"><CashIcon className="size-5" /> CashIcon</div>
+            <div className="flex items-center gap-2"><LocationIcon className="size-5" /> LocationIcon</div>
+            <div className="flex items-center gap-2"><LocationDuotoneIcon className="size-5" /> LocationDuotoneIcon</div>
+            <div className="flex items-center gap-2"><LocationFilledIcon className="size-5" /> LocationFilledIcon</div>
+            <div className="flex items-center gap-2"><HeadphonesIcon className="size-5" /> HeadphonesIcon</div>
+            <div className="flex items-center gap-2"><ImageIcon className="size-5" /> ImageIcon</div>
+            <div className="flex items-center gap-2"><DiscountDuotoneIcon className="size-5" /> DiscountDuotoneIcon</div>
           </div>
         </section>
 
