@@ -17,6 +17,7 @@ import {
   HeartIcon,
   HeartFilledIcon,
   HeartDuotoneIcon,
+  StarFilledIcon,
   BellIcon,
   BellDuotoneIcon,
   EyeOffIcon,
@@ -98,6 +99,7 @@ import { BottomNavigation } from "./ui/bottom-nav";
 import { VideoPlate } from "./ui/video-plate";
 import { VideoCard } from "./ui/video-card";
 import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
+import { VideoCardHorizontal } from "./ui/video-card-horizontal";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -639,6 +641,38 @@ export default function StyleGuide() {
                 description="Description of the micro tango class so you know what you're getting into."
                 isFavorited={true}
                 alt="Video of a couple dancing tango"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">
+            Video Cards (Horizontal)
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Horizontal Card (5-star)
+              </Label>
+              <VideoCardHorizontal
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/ae53e7e36fa5a04736a8a4ef2d2ad1ff885e7d95?width=166"
+                title="Tango Video Title"
+                rating={5}
+                duration="04:33"
+                alt="Thumbnail for a tango video"
+              />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Horizontal Card (3-star)
+              </Label>
+              <VideoCardHorizontal
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/ae53e7e36fa5a04736a8a4ef2d2ad1ff885e7d95?width=166"
+                title="Another Tango Video"
+                rating={3}
+                duration="02:15"
+                alt="Thumbnail for another tango video"
               />
             </div>
           </div>
