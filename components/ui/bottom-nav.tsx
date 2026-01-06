@@ -40,7 +40,7 @@ export function BottomNavigation({ className, activePath, onNavigate, ...props }
   return (
     <nav
       className={cn(
-        "fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around border-t border-border bg-background md:hidden",
+        "flex h-16 items-center justify-around border-t border-border bg-background",
         className
       )}
       {...props}
