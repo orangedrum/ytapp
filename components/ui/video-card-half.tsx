@@ -8,6 +8,7 @@ import {
   EyeIcon,
 } from "@/components/ui/icons";
 import { Tag } from "@/components/ui/tag";
+import { getCategoryData } from "@/lib/categories";
 
 interface VideoCardHalfProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl: string;
@@ -36,6 +37,8 @@ const VideoCardHalf = React.forwardRef<HTMLDivElement, VideoCardHalfProps>(
     },
     ref
   ) => {
+    const { color: bgColorClass } = getCategoryData(category);
+
     return (
       <div
         ref={ref}
@@ -53,7 +56,7 @@ const VideoCardHalf = React.forwardRef<HTMLDivElement, VideoCardHalfProps>(
         >
           <Image src={imageUrl} alt={alt} fill className="object-cover rounded-t-[10px]" />
           
-          <div className="absolute top-0 left-0 w-full h-[18px] bg-[#F49524] rounded-t-[10px] flex items-center justify-center z-10">
+          <div className={cn("absolute top-0 left-0 w-full h-[18px] rounded-t-[10px] flex items-center justify-center z-10", bgColorClass)}>
             <p className="text-white text-xs sm:text-sm font-semibold tracking-[0.15px]">{category}</p>
           </div>
 

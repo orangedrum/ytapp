@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/icons";
 import { Tag } from "@/components/ui/tag";
 import { Music } from "lucide-react";
+import { getCategoryData } from "@/lib/categories";
 
 const PlayCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -43,15 +44,6 @@ const tagIconMap = {
   explanation: ChatIcon,
 };
 
-const categoryStyles: Record<string, { color: string }> = {
-  adorn: { color: "bg-[#F42495]" },
-  technique: { color: "bg-[#F49524]" },
-  posture: { color: "bg-[#18C2CD]" },
-  lead: { color: "bg-[#1873CD]" },
-  musicality: { color: "bg-[#9747FF]" },
-  connection: { color: "bg-purple-500" },
-};
-
 interface VideoPlateProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl: string;
   category: string;
@@ -80,8 +72,7 @@ const VideoPlate = React.forwardRef<HTMLDivElement, VideoPlateProps>(
     ref
   ) => {
     const TagIcon = tagIconMap[tagVariant];
-    const categoryStyle = categoryStyles[category.toLowerCase()];
-    const bgColorClass = categoryStyle ? categoryStyle.color : "bg-gray-500";
+    const { color: bgColorClass } = getCategoryData(category);
 
     return (
       <div

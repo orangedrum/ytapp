@@ -104,6 +104,14 @@ import { VideoListItem } from "./ui/video-list-item";
 import { VideoCardHalf } from "./ui/video-card-half";
 import { VideoCardRating } from "./ui/video-card-rating";
 import { VerticalCategoryTag } from "./ui/vertical-category-tag";
+import { CATEGORIES } from "@/lib/categories";
+import {
+  VideoCardSkeleton,
+  VideoCardHorizontalSkeleton,
+  VideoCardHalfSkeleton,
+  VideoListItemSkeleton,
+  VideoCardRatingSkeleton,
+} from "./ui/video-skeletons";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -138,14 +146,6 @@ const ColorSwatch = ({
     <p className="text-sm text-muted-foreground text-center">{hex}</p>
   </div>
 );
-
-const horizontalCategoryMap: Record<string, { color: string; icon: React.ElementType; label: string }> = {
-  adorn: { color: "bg-[#F42495]", icon: StarIcon, label: "Adorn" },
-  technique: { color: "bg-[#F49524]", icon: Settings, label: "Technique" },
-  posture: { color: "bg-[#18C2CD]", icon: User, label: "Posture" },
-  lead: { color: "bg-[#1873CD]", icon: UsersIcon, label: "Lead" },
-  musicality: { color: "bg-[#9747FF]", icon: Music, label: "Musicality" },
-};
 
 export default function StyleGuide() {
   const [activeNav, setActiveNav] = React.useState("/dance");
@@ -471,10 +471,11 @@ export default function StyleGuide() {
           </div>
           <h3 className="text-lg font-semibold pt-4">Horizontal</h3>
           <div className="flex items-center gap-4 flex-wrap">
-            {Object.entries(horizontalCategoryMap).map(([key, { color, icon: Icon, label }]) => (
-              <div key={key} className={cn("flex items-center gap-2 rounded-lg p-2 text-white", color)}>
-                <Icon className="size-5" />
-                <span className="text-body2 font-medium">{label}</span>
+            {Object.entries(CATEGORIES).map(([key, { color, label }]) => (
+              <div key={key} className="w-32">
+                <div className={cn("w-full h-7 flex items-center justify-center rounded-t-[10px] text-white text-base font-semibold", color)}>
+                  {label}
+                </div>
               </div>
             ))}
           </div>
@@ -676,6 +677,10 @@ export default function StyleGuide() {
                 alt="Video of a couple dancing tango"
               />
             </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Loading</Label>
+              <VideoCardSkeleton />
+            </div>
           </div>
         </section>
 
@@ -708,6 +713,10 @@ export default function StyleGuide() {
                 alt="Thumbnail for another tango video"
               />
             </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Loading</Label>
+              <VideoCardHorizontalSkeleton />
+            </div>
           </div>
         </section>
 
@@ -737,6 +746,10 @@ export default function StyleGuide() {
                 views={567}
                 alt="Thumbnail for another rated tango video"
               />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">Loading</Label>
+              <VideoCardRatingSkeleton />
             </div>
           </div>
         </section>
@@ -769,6 +782,12 @@ export default function StyleGuide() {
                 isFavorited
               />
             </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Loading
+              </Label>
+              <VideoCardHalfSkeleton />
+            </div>
           </div>
         </section>
 
@@ -798,6 +817,12 @@ export default function StyleGuide() {
                 category="technique"
                 imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3fb8b3f36a4363081bfefe4ca601e0ba8c1f9e9b?width=112"
               />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Loading
+              </Label>
+              <VideoListItemSkeleton />
             </div>
           </div>
         </section>
