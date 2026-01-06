@@ -54,7 +54,7 @@ const VideoCardHalf = React.forwardRef<HTMLDivElement, VideoCardHalfProps>(
           role="button"
           aria-label="Play video"
         >
-          <Image src={imageUrl} alt={alt} fill className="object-cover rounded-t-[10px]" />
+          <Image src={imageUrl} alt={alt} fill className="object-fill rounded-t-[10px]" />
           
           <div className={cn("absolute top-0 left-0 w-full h-[18px] rounded-t-[10px] flex items-center justify-center z-10", bgColorClass)}>
             <p className="text-white text-xs sm:text-sm font-semibold tracking-[0.15px]">{category}</p>

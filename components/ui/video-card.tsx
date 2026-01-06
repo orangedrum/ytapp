@@ -66,7 +66,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
             src={imageUrl}
             alt={alt}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-fill transition-transform duration-300 group-hover:scale-105"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
             <PlayIcon className="size-12 text-white" />

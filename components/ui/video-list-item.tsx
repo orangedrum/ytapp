@@ -46,7 +46,7 @@ const VideoListItem = React.forwardRef<HTMLDivElement, VideoListItemProps>(
           <VerticalCategoryTag category={category} />
           
           <div className="relative w-[48px] h-full sm:w-[56px] flex-shrink-0">
-            <Image src={imageUrl} alt={alt} fill className="object-cover" />
+            <Image src={imageUrl} alt={alt} fill className="object-fill" />
           </div>
 
           <div className="flex flex-col items-start justify-center px-2 sm:px-3 gap-0.5 sm:gap-1 overflow-hidden">

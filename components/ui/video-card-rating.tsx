@@ -81,7 +81,7 @@ const VideoCardRating = React.forwardRef<HTMLDivElement, VideoCardRatingProps>(
           role="button"
           aria-label="Play video"
         >
-          <Image src={imageUrl} alt={alt} fill className="object-cover rounded-[4px] md:rounded-lg" />
+          <Image src={imageUrl} alt={alt} fill className="object-fill rounded-[4px] md:rounded-lg" />
           <PlayCircleIconRating className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[33px]" />
         </div>
       </div>
