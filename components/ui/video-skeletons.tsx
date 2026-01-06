@@ -4,6 +4,12 @@ const SkeletonBase = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   <div className={cn("animate-pulse bg-gray-300/50 rounded-md", className)} {...props} />
 );
 
+export const VideoPlateSkeleton = () => (
+  <div className="relative w-full max-w-[341px] aspect-[341/369] rounded-[10px] overflow-hidden border bg-card">
+    <SkeletonBase className="w-full h-full rounded-none" />
+  </div>
+);
+
 export const VideoCardSkeleton = () => (
   <div className="flex w-full max-w-[235px] flex-col gap-2.5 rounded-[10px] border bg-card p-2.5 shadow-sm">
     <SkeletonBase className="h-[158px] w-full rounded-md" />

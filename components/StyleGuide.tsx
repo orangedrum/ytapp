@@ -98,7 +98,6 @@ import {
 import { BottomNavigation } from "./ui/bottom-nav";
 import { VideoPlate } from "./ui/video-plate";
 import { VideoCard } from "./ui/video-card";
-import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
 import { VideoCardHorizontal } from "./ui/video-card-horizontal";
 import { VideoListItem } from "./ui/video-list-item";
 import { VideoCardHalf } from "./ui/video-card-half";
@@ -107,6 +106,7 @@ import { VerticalCategoryTag } from "./ui/vertical-category-tag";
 import { CATEGORIES } from "@/lib/categories";
 import { Video } from "@/lib/types";
 import {
+  VideoPlateSkeleton,
   VideoCardSkeleton,
   VideoCardHorizontalSkeleton,
   VideoCardHalfSkeleton,
