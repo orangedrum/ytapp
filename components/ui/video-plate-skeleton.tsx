@@ -9,7 +9,7 @@ const VideoPlateSkeleton = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "relative w-[341px] h-[369px] rounded-[10px] overflow-hidden bg-muted",
+        "relative w-full max-w-[341px] aspect-[341/369] rounded-[10px] overflow-hidden bg-muted",
         className
       )}
       {...props}

@@ -80,11 +80,11 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
     const TagIcon = tagIconMap[tagVariant];
 
     return (
-      <div ref={ref} className={cn("flex w-[267px] h-[434px] p-4 flex-col items-start gap-4 rounded-lg border border-border bg-background shadow-[0_4px_12.1px_0_rgba(0,0,0,0.25)]", className)} {...props} >
-        <div className="relative self-stretch h-[241px] group" role="button" onClick={onPlay} aria-label="Play video" >
-          <Image src={imageUrl} alt={alt} width={235} height={241} className="w-full h-full object-cover rounded-[10px]" />
-          <div className="absolute top-0 left-0 w-full h-[18px] bg-[#F49524] rounded-t-[10px] flex items-center justify-center" >
-            <p className="text-white text-sm font-semibold tracking-[0.15px]">{category}</p>
+      <div ref={ref} className={cn("flex w-full max-w-[267px] h-auto p-4 flex-col items-start gap-4 rounded-lg border border-border bg-background shadow-[0_4px_12.1px_0_rgba(0,0,0,0.25)]", className)} {...props} >
+        <div className="relative w-full aspect-[235/241] group" role="button" onClick={onPlay} aria-label="Play video" >
+          <Image src={imageUrl} alt={alt} fill className="object-cover rounded-[10px]" />
+          <div className="absolute top-0 left-0 w-full h-[18px] bg-[#F49524] rounded-t-[10px] flex items-center justify-center z-10" >
+            <p className="text-white text-[10px] font-bold tracking-[0.5px] uppercase leading-none">{category}</p>
           </div>
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-[10px]" >
             <PlayCircleIcon className="w-[55px] h-[52px]" />
