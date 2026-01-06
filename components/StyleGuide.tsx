@@ -129,6 +129,8 @@ const ColorSwatch = ({
 );
 
 export default function StyleGuide() {
+  const [activeNav, setActiveNav] = React.useState("/dance");
+
   return (
     <Card className="w-full max-w-4xl">
       <CardHeader>
@@ -532,7 +534,7 @@ export default function StyleGuide() {
           <div className="space-y-4">
             <Label>Light Theme (Default)</Label>
             <div className="relative h-20 w-full rounded-lg border p-2">
-              <BottomNavigation className="relative border-none" />
+              <BottomNavigation className="relative border-none" activePath={activeNav} onNavigate={setActiveNav} />
             </div>
           </div>
           <div className="space-y-4">

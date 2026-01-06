@@ -28,8 +28,14 @@ const navItems: NavItem[] = [
   { href: "/account", label: "Account", icon: UserIcon },
 ];
 
-export function BottomNavigation({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
+interface BottomNavigationProps extends React.HTMLAttributes<HTMLElement> {
+  activePath?: string;
+  onNavigate?: (path: string) => void;
+}
+
+export function BottomNavigation({ className, activePath, onNavigate, ...props }: BottomNavigationProps) {
   const pathname = usePathname();
+  const currentPath = activePath ?? pathname;
 
   return (
     <nav
@@ -40,11 +46,17 @@ export function BottomNavigation({ className, ...props }: React.HTMLAttributes<H
       {...props}
     >
       {navItems.map((item) => {
-        const isActive = pathname === item.href;
+        const isActive = currentPath === item.href;
         return (
           <Link
             key={item.href}
             href={item.href}
+            onClick={(e) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate(item.href);
+              }
+            }}
             className="flex flex-1 flex-col items-center justify-center gap-1 p-1 text-center"
           >
             <item.icon className={cn("size-6", isActive ? "text-foreground" : "text-muted-foreground")} aria-hidden="true" />
