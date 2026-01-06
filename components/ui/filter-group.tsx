@@ -58,9 +58,17 @@ const FilterGroupItem = React.forwardRef<
   return (
     <ToggleGroupPrimitive.Item
       ref={ref}
-      className={cn(filterGroupItemVariants({ variant, size: context.size || size, className }))}
+      className={cn(
+        filterGroupItemVariants({
+          variant,
+          size: context.size || size,
+          className,
+        })
+      )}
       {...props}
-    />
+    >
+      {children}
+    </ToggleGroupPrimitive.Item>
   );
 });
 
