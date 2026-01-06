@@ -80,7 +80,7 @@ const VideoPlate = React.forwardRef<HTMLDivElement, VideoPlateProps>(
         className={cn("relative w-full max-w-[341px] aspect-[341/369] rounded-[10px] overflow-hidden group", className)}
         {...props}
       >
-        <Image src={imageUrl} alt={alt} fill className="object-fill" />
+        <Image src={imageUrl} alt={alt} fill className="object-cover object-top" />
         <div className={cn("absolute top-0 left-0 w-full h-7 flex items-center justify-center", bgColorClass)}>
           <p className="text-white text-base font-semibold tracking-[0.15px]">{category}</p>
         </div>
