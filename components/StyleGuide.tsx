@@ -395,48 +395,6 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">
-            Half Vertical Video Cards
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            <div className="flex flex-col items-center gap-2">
-              <Label className="text-sm text-muted-foreground px-1">
-                Default
-              </Label>
-              <VideoCardHalf
-                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
-                title="Tango Video"
-                category="Technique"
-                duration="02:34"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <Label className="text-sm text-muted-foreground px-1">
-                Favorited
-              </Label>
-              <VideoCardHalf
-                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
-                title="Tango Video"
-                category="Technique"
-                duration="02:34"
-                isFavorited
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Vertical Category Tags</h2>
-          <div className="flex items-center gap-4 h-24">
-            <VerticalCategoryTag category="adorn" />
-            <VerticalCategoryTag category="technique" />
-            <VerticalCategoryTag category="posture" />
-            <VerticalCategoryTag category="lead" />
-            <VerticalCategoryTag category="musicality" />
-          </div>
-        </section>
-
-        <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Page Headers</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <PageHeader className="border rounded-lg">
@@ -489,6 +447,41 @@ export default function StyleGuide() {
               <ToggleGroupItem value="week">Week</ToggleGroupItem>
               <ToggleGroupItem value="month">Month</ToggleGroupItem>
             </ToggleGroup>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Category Tags</h2>
+          <h3 className="text-lg font-semibold pt-2">Vertical</h3>
+          <div className="flex items-center gap-4 h-24">
+            <VerticalCategoryTag category="adorn" />
+            <VerticalCategoryTag category="technique" />
+            <VerticalCategoryTag category="posture" />
+            <VerticalCategoryTag category="lead" />
+            <VerticalCategoryTag category="musicality" />
+          </div>
+          <h3 className="text-lg font-semibold pt-4">Horizontal</h3>
+          <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-2 rounded-lg border p-2">
+                  <StarIcon className="size-5" />
+                  <span className="text-body2">Adorn</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-2">
+                  <Settings className="size-5" />
+                  <span className="text-body2">Technique</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-2">
+                  <User className="size-5" />
+                  <span className="text-body2">Posture</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-2">
+                  <UsersIcon className="size-5" />
+                  <span className="text-body2">Lead</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-2">
+                  <Music className="size-5" />
+                  <span className="text-body2">Musicality</span>
+              </div>
           </div>
         </section>
 
@@ -718,6 +711,37 @@ export default function StyleGuide() {
                 rating={3}
                 duration="02:15"
                 alt="Thumbnail for another tango video"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">
+            Half Vertical Video Cards
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Default
+              </Label>
+              <VideoCardHalf
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
+                title="Tango Video"
+                category="Technique"
+                duration="02:34"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Favorited
+              </Label>
+              <VideoCardHalf
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
+                title="Tango Video"
+                category="Technique"
+                duration="02:34"
+                isFavorited
               />
             </div>
           </div>
