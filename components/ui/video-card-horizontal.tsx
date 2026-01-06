@@ -82,7 +82,7 @@ const VideoCardHorizontal = React.forwardRef<HTMLDivElement, VideoCardHorizontal
           aria-label="Play video"
         >
           <Image src={imageUrl} alt={alt} fill className="object-cover rounded-[4px]" />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-[4px]">
+          <div className="absolute top-[calc(50%-15.5px)] left-[calc(50%-15.5px)] cursor-pointer">
             <PlayCircleIcon className="w-[31px] h-[31px]" />
           </div>
         </div>

@@ -101,6 +101,8 @@ import { VideoCard } from "./ui/video-card";
 import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
 import { VideoCardHorizontal } from "./ui/video-card-horizontal";
 import { VideoListItem } from "./ui/video-list-item";
+import { VideoCardHalf } from "./ui/video-card-half";
+import { VerticalCategoryTag } from "./ui/vertical-category-tag";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -389,6 +391,48 @@ export default function StyleGuide() {
                 </FilterGroup>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">
+            Half Vertical Video Cards
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Default
+              </Label>
+              <VideoCardHalf
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
+                title="Tango Video"
+                category="Technique"
+                duration="02:34"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Favorited
+              </Label>
+              <VideoCardHalf
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
+                title="Tango Video"
+                category="Technique"
+                duration="02:34"
+                isFavorited
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Vertical Category Tags</h2>
+          <div className="flex items-center gap-4 h-24">
+            <VerticalCategoryTag category="adorn" />
+            <VerticalCategoryTag category="technique" />
+            <VerticalCategoryTag category="posture" />
+            <VerticalCategoryTag category="lead" />
+            <VerticalCategoryTag category="musicality" />
           </div>
         </section>
 
@@ -692,7 +736,6 @@ export default function StyleGuide() {
                 title="Tango Video Title"
                 duration="10:22"
                 category="adorn"
-                categoryLabel="Adorn"
                 imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3fb8b3f36a4363081bfefe4ca601e0ba8c1f9e9b?width=112"
               />
             </div>
@@ -704,7 +747,6 @@ export default function StyleGuide() {
                 title="Ochos Forward"
                 duration="05:15"
                 category="technique"
-                categoryLabel="Technique"
                 imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3fb8b3f36a4363081bfefe4ca601e0ba8c1f9e9b?width=112"
               />
             </div>
