@@ -96,6 +96,8 @@ import {
 } from "./ui/page-header";
 import { BottomNavigation } from "./ui/bottom-nav";
 import { VideoPlate } from "./ui/video-plate";
+import { VideoCard } from "./ui/video-card";
+import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -570,7 +572,7 @@ export default function StyleGuide() {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold border-b pb-2">Video Plates</h2>
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap items-end gap-8">
             <div className="flex flex-col items-center gap-2">
               <Label className="text-sm text-muted-foreground px-1">
                 Default
@@ -592,6 +594,49 @@ export default function StyleGuide() {
                 category="Technique"
                 tagVariant="watch"
                 tagLabel="Watch & study"
+                isFavorited={true}
+                alt="Video of a couple dancing tango"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Loading
+              </Label>
+              <VideoPlateSkeleton />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Video Cards</h2>
+          <div className="flex flex-wrap gap-8">
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Main Card
+              </Label>
+              <VideoCard
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/87d08b76c0f6a1dfa7417e0bfca9cbbcf2e081f6?width=470"
+                category="Technique"
+                tagVariant="watch"
+                tagLabel="Watch & study"
+                title="Tango Video"
+                duration="04:37"
+                description="Description of the micro tango class so you know what you're getting into."
+                alt="Video of a couple dancing tango"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Favorited
+              </Label>
+              <VideoCard
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/87d08b76c0f6a1dfa7417e0bfca9cbbcf2e081f6?width=470"
+                category="Technique"
+                tagVariant="watch"
+                tagLabel="Watch & study"
+                title="Tango Video"
+                duration="04:37"
+                description="Description of the micro tango class so you know what you're getting into."
                 isFavorited={true}
                 alt="Video of a couple dancing tango"
               />
