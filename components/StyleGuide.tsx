@@ -473,7 +473,33 @@ export default function StyleGuide() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Custom Brand Icons</h2>
+          <h2 className="text-2xl font-bold border-b pb-2">Bottom Navigation</h2>
+          <p className="text-muted-foreground">
+            This is a client component that is fixed to the bottom on mobile screens (`md:hidden`). It dynamically highlights the active link based on the current URL path. Below is an interactive representation of its appearance in both light and dark themes.
+          </p>
+          <div className="space-y-4">
+            <Label>Light Theme (Default)</Label>
+            <div className="relative h-20 w-full rounded-lg border p-2">
+              <BottomNavigation className="relative border-none" activePath={activeNav} onNavigate={setActiveNav} />
+            </div>
+          </div>
+          <div className="space-y-4">
+            <Label>Dark Theme (As per design)</Label>
+            <div className="dark relative h-20 w-full rounded-lg border bg-background p-2">
+              <BottomNavigation className="relative border-none" activePath={activeNav} onNavigate={setActiveNav} />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Icon Library</h2>
+          <p className="text-muted-foreground">
+            A combination of custom-built brand icons and curated icons from the{" "}
+            <a href="https://lucide.dev/icons/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              Lucide Icon Library
+            </a>.
+          </p>
+          <h3 className="text-lg font-semibold pt-2">Custom Brand Icons</h3>
           <div className="flex items-center gap-x-6 gap-y-4 flex-wrap text-muted-foreground">
             <div className="flex items-center gap-2"><GoogleLogo className="size-5" /> GoogleLogo</div>
             <div className="flex items-center gap-2"><FacebookIcon className="size-5" /> FacebookIcon</div>
@@ -526,57 +552,7 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><ImageIcon className="size-5" /> ImageIcon</div>
             <div className="flex items-center gap-2"><DiscountDuotoneIcon className="size-5" /> DiscountDuotoneIcon</div>
           </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Bottom Navigation</h2>
-          <p className="text-muted-foreground">
-            This is a client component that is fixed to the bottom on mobile screens (`md:hidden`). It dynamically highlights the active link based on the current URL path. Below is a static representation of its appearance in both light and dark themes.
-          </p>
-          <div className="space-y-4">
-            <Label>Light Theme (Default)</Label>
-            <div className="relative h-20 w-full rounded-lg border p-2">
-              <BottomNavigation className="relative border-none" activePath={activeNav} onNavigate={setActiveNav} />
-            </div>
-          </div>
-          <div className="space-y-4">
-            <Label>Dark Theme (As per design)</Label>
-            <div className="relative h-20 w-full rounded-lg border bg-foreground p-2">
-              {/* Static version for demonstration */}
-              <div className="flex h-full items-center justify-around">
-                <div className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-                  <Music className="size-6 text-background" />
-                  <span className="text-xs font-medium text-background">Dance</span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-                  <BoxIcon className="size-6 text-gray-4" />
-                  <span className="text-xs font-medium text-gray-4">Library</span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-                  <UsersIcon className="size-6 text-gray-4" />
-                  <span className="text-xs font-medium text-gray-4">Community</span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-                  <EditIcon className="size-6 text-gray-4" />
-                  <span className="text-xs font-medium text-gray-4">Journal</span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center gap-1 text-center">
-                  <UserIcon className="size-6 text-gray-4" />
-                  <span className="text-xs font-medium text-gray-4">Account</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold border-b pb-2">Icon Library (Curated)</h2>
-          <p className="text-muted-foreground">
-            A curated list of common icons. For the full set, please refer to the{" "}
-            <a href="https://lucide.dev/icons/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-              Lucide Icon Library
-            </a>.
-          </p>
+          <h3 className="text-lg font-semibold pt-2">Curated Lucide Icons</h3>
           <div className="flex items-center gap-6 flex-wrap text-muted-foreground">
             <div className="flex items-center gap-2"><User /> User</div>
             <div className="flex items-center gap-2"><Settings /> Settings</div>
@@ -587,6 +563,7 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><Apple /> Apple</div>
             <div className="flex items-center gap-2"><LogOut /> Log Out</div>
             <div className="flex items-center gap-2"><PlusCircle /> Add New</div>
+            <div className="flex items-center gap-2"><Music /> Music</div>
           </div>
         </section>
 
