@@ -1,39 +1,112 @@
-import * as React from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { StarFilledIcon, CalendarIcon, PlayIcon, PlayCircleIconRating } from "@/components/ui/icons";
+// /Users/orangedrum/Dropbox/ProductShift/jobs/yankeetango/ytapp/components/ui/video-card.tsx
+import * as React from "react"
+import Image from "next/image"
+import { Music } from "lucide-react"
+import { VariantProps } from "class-variance-authority"
 
-interface RatingProps {
-  rating: number;
-  maxRating?: number;
-  className?: string;
+import { cn } from "@/lib/utils"
+import { Tag, tagVariants } from "@/components/ui/tag"
+import { HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon } from "@/components/ui/icons"
+
+const tagIcons = {
+  watch: EyeIcon,
+  dance: Music,
+  explanation: ChatIcon,
 }
 
-const Rating: React.FC<RatingProps> = ({ rating, maxRating = 5, className }) => {
-  return (
-    <div className={cn("flex items-end justify-between w-[89px]", className)}>
-      {Array.from({ length: maxRating }, (_, i) => (
-        <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
-      ))}
-    </div>
-  );
-};
-
-interface VideoCardRatingProps extends React.HTMLAttributes<HTMLDivElement> {
-  imageUrl: string;
-  rating: number;
-  views: number;
-  onPlay?: React.MouseEventHandler<HTMLDivElement>;
-  onAddToCalendar?: React.MouseEventHandler<HTMLButtonElement>;
-  onPlayButton?: React.MouseEventHandler<HTMLButtonElement>;
-  alt?: string;
+export interface VideoCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  imageUrl: string
+  category: string
+  tagVariant: VariantProps<typeof tagVariants>["variant"] & keyof typeof tagIcons
+  tagLabel: string
+  title: string
+  duration: string
+  description: string
+  isFavorited?: boolean
+  alt?: string
+  onPlay?: React.MouseEventHandler<HTMLDivElement>
+  onFavoriteToggle?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const VideoCardRating = React.forwardRef<HTMLDivElement, VideoCardRatingProps>(
+const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
   (
     {
       className,
       imageUrl,
-      rating,
-      
+      category,
+      tagVariant,
+      tagLabel,
+      title,
+      duration,
+      description,
+      isFavorited = false,
+      alt = "Video thumbnail",
+      onPlay,
+      onFavoriteToggle,
+      ...props
+    },
+    ref
+  ) => {
+    const TagIcon = tagIcons[tagVariant] || EyeIcon
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "group flex w-full max-w-[235px] flex-col gap-2.5 rounded-[10px] border bg-card p-2.5 shadow-sm",
+          className
+        )}
+        {...props}
+      >
+        <div
+          className="relative h-[158px] w-full cursor-pointer overflow-hidden rounded-md"
+          onClick={onPlay}
+        >
+          <Image
+            src={imageUrl}
+            alt={alt}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+            <PlayIcon className="size-12 text-white" />
+          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onFavoriteToggle?.(e)
+            }}
+            className="absolute right-2 top-2 z-10 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+            aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+          >
+            <HeartFilledIcon
+              className={cn(
+                "size-5",
+                isFavorited ? "text-destructive" : "text-white"
+              )}
+            />
+          </button>
+          <span className="absolute bottom-2 right-2 rounded-sm bg-black/50 px-1.5 py-0.5 text-xs text-white backdrop-blur-sm">
+            {duration}
+          </span>
+        </div>
+        <div className="flex flex-col gap-2 px-1">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-foreground">{category}</p>
+            {tagVariant && tagLabel && (
+              <Tag variant={tagVariant} className="gap-1">
+                <TagIcon className="size-3" />
+                {tagLabel}
+              </Tag>
+            )}
+          </div>
+          <h3 className="line-clamp-1 text-base font-semibold text-foreground">{title}</h3>
+          <p className="line-clamp-2 text-xs text-muted-foreground">{description}</p>
+        </div>
+      </div>
+    )
+  }
+)
+VideoCard.displayName = "VideoCard"
+
+export { VideoCard }
