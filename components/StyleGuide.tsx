@@ -102,6 +102,7 @@ import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
 import { VideoCardHorizontal } from "./ui/video-card-horizontal";
 import { VideoListItem } from "./ui/video-list-item";
 import { VideoCardHalf } from "./ui/video-card-half";
+import { VideoCardRating } from "./ui/video-card-rating";
 import { VerticalCategoryTag } from "./ui/vertical-category-tag";
 
 // Helper component for displaying a row in the typography scale
@@ -137,6 +138,14 @@ const ColorSwatch = ({
     <p className="text-sm text-muted-foreground text-center">{hex}</p>
   </div>
 );
+
+const horizontalCategoryMap: Record<string, { color: string; icon: React.ElementType; label: string }> = {
+  adorn: { color: "bg-[#F42495]", icon: StarIcon, label: "Adorn" },
+  technique: { color: "bg-[#F49524]", icon: Settings, label: "Technique" },
+  posture: { color: "bg-[#18C2CD]", icon: User, label: "Posture" },
+  lead: { color: "bg-[#1873CD]", icon: UsersIcon, label: "Lead" },
+  musicality: { color: "bg-[#9747FF]", icon: Music, label: "Musicality" },
+};
 
 export default function StyleGuide() {
   const [activeNav, setActiveNav] = React.useState("/dance");
@@ -462,26 +471,12 @@ export default function StyleGuide() {
           </div>
           <h3 className="text-lg font-semibold pt-4">Horizontal</h3>
           <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-2 rounded-lg border p-2">
-                  <StarIcon className="size-5" />
-                  <span className="text-body2">Adorn</span>
+            {Object.entries(horizontalCategoryMap).map(([key, { color, icon: Icon, label }]) => (
+              <div key={key} className={cn("flex items-center gap-2 rounded-lg p-2 text-white", color)}>
+                <Icon className="size-5" />
+                <span className="text-body2 font-medium">{label}</span>
               </div>
-              <div className="flex items-center gap-2 rounded-lg border p-2">
-                  <Settings className="size-5" />
-                  <span className="text-body2">Technique</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-lg border p-2">
-                  <User className="size-5" />
-                  <span className="text-body2">Posture</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-lg border p-2">
-                  <UsersIcon className="size-5" />
-                  <span className="text-body2">Lead</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-lg border p-2">
-                  <Music className="size-5" />
-                  <span className="text-body2">Musicality</span>
-              </div>
+            ))}
           </div>
         </section>
 
@@ -711,6 +706,36 @@ export default function StyleGuide() {
                 rating={3}
                 duration="02:15"
                 alt="Thumbnail for another tango video"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">
+            Video Cards (with Rating)
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Rating Card (4.5 stars)
+              </Label>
+              <VideoCardRating
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/ae53e7e36fa5a04736a8a4ef2d2ad1ff885e7d95?width=166"
+                rating={4.5}
+                views={1234}
+                alt="Thumbnail for a rated tango video"
+              />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Rating Card (2.1 stars)
+              </Label>
+              <VideoCardRating
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/b2bb27a822cc4367d067c283521d4afe2288b465?width=322"
+                rating={2.1}
+                views={567}
+                alt="Thumbnail for another rated tango video"
               />
             </div>
           </div>

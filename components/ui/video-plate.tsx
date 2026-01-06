@@ -43,6 +43,15 @@ const tagIconMap = {
   explanation: ChatIcon,
 };
 
+const categoryStyles: Record<string, { color: string }> = {
+  adorn: { color: "bg-[#F42495]" },
+  technique: { color: "bg-[#F49524]" },
+  posture: { color: "bg-[#18C2CD]" },
+  lead: { color: "bg-[#1873CD]" },
+  musicality: { color: "bg-[#9747FF]" },
+  connection: { color: "bg-purple-500" },
+};
+
 interface VideoPlateProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl: string;
   category: string;
@@ -71,6 +80,8 @@ const VideoPlate = React.forwardRef<HTMLDivElement, VideoPlateProps>(
     ref
   ) => {
     const TagIcon = tagIconMap[tagVariant];
+    const categoryStyle = categoryStyles[category.toLowerCase()];
+    const bgColorClass = categoryStyle ? categoryStyle.color : "bg-gray-500";
 
     return (
       <div
@@ -79,7 +90,7 @@ const VideoPlate = React.forwardRef<HTMLDivElement, VideoPlateProps>(
         {...props}
       >
         <Image src={imageUrl} alt={alt} fill className="object-cover" />
-        <div className="absolute top-0 left-0 w-full h-7 bg-[#F49524] flex items-center justify-center">
+        <div className={cn("absolute top-0 left-0 w-full h-7 flex items-center justify-center", bgColorClass)}>
           <p className="text-white text-base font-semibold tracking-[0.15px]">{category}</p>
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" onClick={onPlay} role="button" aria-label="Play video" >
