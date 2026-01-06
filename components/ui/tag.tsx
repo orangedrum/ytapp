@@ -4,17 +4,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const tagVariants = cva(
-  "inline-flex items-center justify-center gap-1.5 rounded-md border border-foreground/20 px-2 text-xs font-medium transition-colors",
+  "inline-flex items-center justify-center rounded-[10px] border-[0.5px] text-[11px] font-medium h-6 tracking-[0.5px]",
   {
     variants: {
       variant: {
-        watch: "bg-tag-watch text-tag-foreground",
-        dance: "bg-tag-dance text-tag-foreground",
-        explanation: "bg-tag-explanation text-tag-foreground",
+        watch: "border-black bg-[#DBFFFB] text-foreground",
+        dance: "border-blue-300 bg-blue-50 text-blue-800",
+        explanation: "border-yellow-300 bg-yellow-50 text-yellow-800",
       },
       size: {
-        default: "h-6",
-        condensed: "h-6 w-6 p-0",
+        default: "px-2.5",
+        condensed: "px-1.5",
       },
     },
     defaultVariants: {
@@ -28,13 +28,10 @@ export interface TagProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof tagVariants> {}
 
-const Tag = React.forwardRef<HTMLDivElement, TagProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    return (
-      <div className={cn(tagVariants({ variant, size, className }))} ref={ref} {...props} />
-    );
-  }
-);
-Tag.displayName = "Tag";
+function Tag({ className, variant, size, ...props }: TagProps) {
+  return (
+    <div className={cn(tagVariants({ variant, size, className }))} {...props} />
+  );
+}
 
 export { Tag, tagVariants };

@@ -95,6 +95,7 @@ import {
   PageHeaderTitle,
 } from "./ui/page-header";
 import { BottomNavigation } from "./ui/bottom-nav";
+import { VideoPlate } from "./ui/video-plate";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -564,6 +565,37 @@ export default function StyleGuide() {
             <div className="flex items-center gap-2"><LogOut /> Log Out</div>
             <div className="flex items-center gap-2"><PlusCircle /> Add New</div>
             <div className="flex items-center gap-2"><Music /> Music</div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">Video Plates</h2>
+          <div className="flex flex-wrap gap-8">
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Default
+              </Label>
+              <VideoPlate
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/58ed913be745f564fe4af5ac4e3ac8222bba1503?width=682"
+                category="Technique"
+                tagVariant="watch"
+                tagLabel="Watch & study"
+                alt="Video of a couple dancing tango"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                Favorited
+              </Label>
+              <VideoPlate
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/58ed913be745f564fe4af5ac4e3ac8222bba1503?width=682"
+                category="Technique"
+                tagVariant="watch"
+                tagLabel="Watch & study"
+                isFavorited={true}
+                alt="Video of a couple dancing tango"
+              />
+            </div>
           </div>
         </section>
 
