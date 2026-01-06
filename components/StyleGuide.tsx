@@ -100,6 +100,7 @@ import { VideoPlate } from "./ui/video-plate";
 import { VideoCard } from "./ui/video-card";
 import { VideoPlateSkeleton } from "./ui/video-plate-skeleton";
 import { VideoCardHorizontal } from "./ui/video-card-horizontal";
+import { VideoListItem } from "./ui/video-list-item";
 
 // Helper component for displaying a row in the typography scale
 const TextStyleRow = ({
@@ -673,6 +674,38 @@ export default function StyleGuide() {
                 rating={3}
                 duration="02:15"
                 alt="Thumbnail for another tango video"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold border-b pb-2">
+            Video List Items
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                List Item (Adorn)
+              </Label>
+              <VideoListItem
+                title="Tango Video Title"
+                duration="10:22"
+                category="adorn"
+                categoryLabel="Adorn"
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3fb8b3f36a4363081bfefe4ca601e0ba8c1f9e9b?width=112"
+              />
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <Label className="text-sm text-muted-foreground px-1">
+                List Item (Technique)
+              </Label>
+              <VideoListItem
+                title="Ochos Forward"
+                duration="05:15"
+                category="technique"
+                categoryLabel="Technique"
+                imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3fb8b3f36a4363081bfefe4ca601e0ba8c1f9e9b?width=112"
               />
             </div>
           </div>
