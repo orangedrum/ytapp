@@ -433,6 +433,22 @@ export const DiscountDuotoneIcon = ({ className, ...props }: React.SVGProps<SVGS
   </svg>
 );
 
+export const CircleIconPlay = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} {...props}>
+    <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 8L16 12L10 16V8Z" fill="currentColor"/>
+  </svg>
+);
+
+export const PlayCircleIconRating = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+  <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} {...props}>
+    <g opacity="0.8">
+      <path d="M16.5 30.25C24.0312 30.25 30.25 24.0312 30.25 16.5C30.25 8.96875 24.0312 2.75 16.5 2.75C8.96875 2.75 2.75 8.96875 2.75 16.5C2.75 24.0312 8.96875 30.25 16.5 30.25Z" fill="black"/>
+      <path d="M22 16.5L13.75 21.5625V11.4375L22 16.5Z" fill="white"/>
+    </g>
+  </svg>
+);
+
 export const PlayIcon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
