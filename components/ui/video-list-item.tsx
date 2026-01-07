@@ -49,11 +49,11 @@ const VideoListItem = React.forwardRef<HTMLDivElement, VideoListItemProps>(
             <Image src={imageUrl} alt={alt} fill className="object-cover object-top" />
           </div>
 
-          <div className="flex flex-col items-start justify-center px-2 sm:px-3 gap-0.5 sm:gap-1 overflow-hidden">
+          <div className="flex flex-col items-start justify-center px-2 sm:px-3 gap-0.5 sm:gap-1 overflow-hidden min-w-0">
             <h4 className="text-foreground text-sm sm:text-base font-semibold truncate w-full font-sans">
               {title}
             </h4>
-            <span className="text-muted-foreground text-[11px] sm:text-xs font-medium font-sans">
+            <span className="text-gray-2 text-[11px] sm:text-xs font-medium font-sans">
               {duration}
             </span>
           </div>

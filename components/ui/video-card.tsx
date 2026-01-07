@@ -6,7 +6,7 @@ import { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Tag, tagVariants } from "@/components/ui/tag"
-import { HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon } from "@/components/ui/icons"
+import { HeartIcon, HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon } from "@/components/ui/icons"
 import { getCategoryData } from "@/lib/categories"
 
 const tagIcons = {
@@ -55,7 +55,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
       <div
         ref={ref}
         className={cn(
-          "group flex w-full max-w-[235px] flex-col gap-2.5 rounded-[10px] border bg-card p-2.5 shadow-sm",
+          "group flex w-full max-w-[235px] h-[430px] flex-col gap-2.5 rounded-[10px] border bg-card p-2.5 shadow-sm",
           className
         )}
         {...props}
@@ -81,15 +81,14 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
               e.stopPropagation()
               onFavoriteToggle?.(e)
             }}
-            className="absolute right-2 top-2 z-10 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+            className="absolute right-2 top-[30px] z-10 rounded-full bg-white/30 p-1.5 backdrop-blur-sm transition-colors hover:bg-white/50"
             aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
           >
-            <HeartFilledIcon
-              className={cn(
-                "size-5",
-                isFavorited ? "text-destructive" : "text-white"
-              )}
-            />
+            {isFavorited ? (
+              <HeartFilledIcon className="size-5 text-destructive" />
+            ) : (
+              <HeartIcon className="size-5 text-black" />
+            )}
           </button>
           {tagVariant && tagLabel && (
             <div className="absolute bottom-2 right-2 z-10">
@@ -102,8 +101,8 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
         </div>
         <div className="flex flex-col gap-1 px-1">
           <h3 className="line-clamp-1 text-base font-semibold text-foreground">{title}</h3>
-          <p className="text-xs text-muted-foreground">{duration}</p>
-          <p className="line-clamp-2 text-xs text-muted-foreground">{description}</p>
+          <p className="text-body2Semibold text-gray-2">{duration}</p>
+          <p className="line-clamp-2 text-xs text-gray-2">{description}</p>
         </div>
       </div>
     )

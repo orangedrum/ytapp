@@ -14,7 +14,7 @@ const Rating: React.FC<RatingProps> = ({ rating, maxRating = 5, className }) => 
   return (
     <div className={cn("flex items-end justify-between w-[89px]", className)}>
       {Array.from({ length: maxRating }, (_, i) =>
-        i < rating ? (
+        i < Math.floor(rating) ? (
           <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
         ) : (
           <StarIcon key={i} className="size-3.5 text-[#FFA928]" />
@@ -63,8 +63,8 @@ const VideoCardRating = React.forwardRef<HTMLDivElement, VideoCardRatingProps>(
           {/* Rating Info */}
           <div className="flex w-full h-[28px] items-center gap-1.5 px-2 justify-center md:justify-start">
             <p className="text-2xl sm:text-xl font-semibold text-foreground leading-tight">{rating.toFixed(1)}</p>
-            <Rating rating={Math.round(rating)} />
-            <p className="text-sm sm:text-xs text-muted-foreground">{views} Views</p>
+            <Rating rating={rating} />
+            <p className="text-sm sm:text-xs text-gray-2">{views} Views</p>
           </div>
           {/* Button Group */}
           <div className="flex w-full items-start gap-2 flex-col sm:flex-row">

@@ -29,10 +29,10 @@ const Rating: React.FC<RatingProps> = ({ rating, maxRating = 5, className }) => 
   return (
     <div className={cn("flex items-center", className)}>
       {Array.from({ length: maxRating }, (_, i) =>
-        i < rating ? (
-          <StarFilledIcon key={i} className="size-3.5 text-gold" />
+        i < Math.floor(rating) ? (
+          <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
         ) : (
-          <StarIcon key={i} className="size-3.5 text-gold" />
+          <StarIcon key={i} className="size-3.5 text-[#FFA928]" />
         )
       )}
     </div>
@@ -91,7 +91,7 @@ const VideoCardHorizontal = React.forwardRef<HTMLDivElement, VideoCardHorizontal
             <div className="flex flex-col gap-px">
               <p className="text-body1Semibold text-foreground sm:text-sm line-clamp-2">{title}</p>
               <Rating rating={rating} className="gap-x-0.5" />
-              <p className="text-body3 text-muted-foreground sm:text-xs">{duration}</p>
+              <p className="text-body3 text-gray-2 sm:text-xs">{duration}</p>
             </div>
             <Button variant="ghost" size="icon" className="size-4 flex-shrink-0" onClick={onDelete} aria-label="Delete video" >
               <TrashIcon className="size-4 text-destructive" />
