@@ -747,7 +747,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
               </Label>
               <VideoCardRating
                 imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/91x70/e2e8f0/e2e8f0"}
-                rating={sampleVideo?.rating || 2.1}
+                rating={2.1}
                 views={sampleVideo?.views || 567}
                 alt={sampleVideo?.title || "Video thumbnail"}
               />

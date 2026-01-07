@@ -17,7 +17,7 @@ const Rating: React.FC<RatingProps> = ({ rating, maxRating = 5, className }) => 
         i < Math.floor(rating) ? (
           <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
         ) : (
-          <StarIcon key={i} className="size-3.5 text-[#FFA928]" />
+          <StarIcon key={i} className="size-3.5 text-black" />
         )
       )}
     </div>
