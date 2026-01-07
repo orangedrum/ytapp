@@ -55,13 +55,13 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
       <div
         ref={ref}
         className={cn(
-          "group flex w-full max-w-[235px] flex-col gap-2.5 rounded-[10px] border bg-card p-4 shadow-sm",
+          "group flex w-full h-[430px] flex-col gap-4 rounded-[10px] border bg-card p-4 shadow-sm",
           className
         )}
         {...props}
       >
         <div
-          className="relative h-[240px] w-full cursor-pointer overflow-hidden rounded-md"
+          className="relative aspect-[235/240] w-full cursor-pointer overflow-hidden rounded-md"
           onClick={onPlay}
         >
           <Image
@@ -99,9 +99,11 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-1 px-1">
-          <h3 className="line-clamp-1 text-base font-semibold text-foreground">{title}</h3>
-          <p className="text-body2Semibold text-gray-2">{duration}</p>
+        <div className="flex flex-col gap-4 px-1">
+          <div className="flex flex-col gap-1">
+            <h3 className="line-clamp-1 text-base font-semibold text-foreground">{title}</h3>
+            <p className="text-body2Semibold text-gray-2">{duration}</p>
+          </div>
           <p className="line-clamp-4 text-xs text-gray-2">{description}</p>
         </div>
       </div>

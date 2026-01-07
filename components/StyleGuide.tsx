@@ -713,7 +713,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
               <VideoCardHorizontal
                 imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/83x79/e2e8f0/e2e8f0"}
                 title={sampleVideo?.title || "Another Tango Video"}
-                rating={sampleVideo?.rating || 3}
+                rating={3}
                 duration={sampleVideo?.duration || "02:15"}
                 alt={sampleVideo?.title || "Video thumbnail"}
               />
@@ -808,7 +808,7 @@ export default function StyleGuide({ sampleVideo }: StyleGuideProps) {
               <VideoListItem
                 title={sampleVideo?.title || "Tango Video Title"}
                 duration={sampleVideo?.duration || "10:22"}
-                category={sampleVideo?.category || "adorn"}
+                category="adorn"
                 imageUrl={sampleVideo?.thumbnail_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
               />
             </div>
