@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { StarFilledIcon, CalendarIcon, CircleIconPlay, PlayCircleIconRating } from "@/components/ui/icons";
+import { StarFilledIcon, StarIcon, CalendarIcon, CircleIconPlay, PlayCircleIconRating } from "@/components/ui/icons";
 
 interface RatingProps {
   rating: number;
@@ -13,9 +13,13 @@ interface RatingProps {
 const Rating: React.FC<RatingProps> = ({ rating, maxRating = 5, className }) => {
   return (
     <div className={cn("flex items-end justify-between w-[89px]", className)}>
-      {Array.from({ length: maxRating }, (_, i) => (
-        <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
-      ))}
+      {Array.from({ length: maxRating }, (_, i) =>
+        i < rating ? (
+          <StarFilledIcon key={i} className="size-3.5 text-[#FFA928]" />
+        ) : (
+          <StarIcon key={i} className="size-3.5 text-[#FFA928]" />
+        )
+      )}
     </div>
   );
 };

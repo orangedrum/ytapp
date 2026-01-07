@@ -50,7 +50,7 @@ const VideoListItem = React.forwardRef<HTMLDivElement, VideoListItemProps>(
           </div>
 
           <div className="flex flex-col items-start justify-center px-2 sm:px-3 gap-0.5 sm:gap-1 overflow-hidden">
-            <h4 className="text-foreground text-sm sm:text-base font-semibold truncate w-full font-sans">
+            <h4 className="text-foreground text-sm sm:text-base font-semibold line-clamp-2 w-full font-sans">
               {title}
             </h4>
             <span className="text-muted-foreground text-[11px] sm:text-xs font-medium font-sans">

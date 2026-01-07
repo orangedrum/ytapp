@@ -89,7 +89,7 @@ const VideoCardHorizontal = React.forwardRef<HTMLDivElement, VideoCardHorizontal
         <div className="flex flex-col justify-between self-stretch flex-1">
           <div className="flex justify-between items-start w-full">
             <div className="flex flex-col gap-px">
-              <p className="text-body1Semibold text-foreground sm:text-sm">{title}</p>
+              <p className="text-body1Semibold text-foreground sm:text-sm line-clamp-2">{title}</p>
               <Rating rating={rating} className="gap-x-0.5" />
               <p className="text-body3 text-muted-foreground sm:text-xs">{duration}</p>
             </div>

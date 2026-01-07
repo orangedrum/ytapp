@@ -70,7 +70,7 @@ const VideoCardHalf = React.forwardRef<HTMLDivElement, VideoCardHalfProps>(
             {isFavorited ? (<HeartFilledIcon className="size-[18px] text-destructive" />) : (<HeartIcon className="size-[18px] text-foreground" />)}
           </Button>
 
-          <div className="absolute bottom-[-12px] right-1.5 sm:right-2 md:right-[5px]">
+          <div className="absolute bottom-2 right-1.5 sm:right-2 md:right-[5px]">
             <Tag variant="watch" className="w-[20px] h-[20px] md:w-6 md:h-6 p-0 border-black/50">
               <EyeIcon className="w-3.5 h-3.5 md:w-[18px] md:h-[18px]" />
             </Tag>
