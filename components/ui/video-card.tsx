@@ -7,6 +7,7 @@ import { VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Tag, tagVariants } from "@/components/ui/tag"
 import { HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon } from "@/components/ui/icons"
+import { getCategoryData } from "@/lib/categories"
 
 const tagIcons = {
   watch: EyeIcon,
@@ -48,6 +49,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
     ref
   ) => {
     const TagIcon = tagIcons[tagVariant] || EyeIcon
+    const { color: bgColorClass } = getCategoryData(category);
 
     return (
       <div
@@ -59,7 +61,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
         {...props}
       >
         <div
-          className="relative h-[158px] w-full cursor-pointer overflow-hidden rounded-md"
+          className="relative h-[180px] w-full cursor-pointer overflow-hidden rounded-md"
           onClick={onPlay}
         >
           <Image
@@ -68,6 +70,9 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
             fill
             className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
           />
+          <div className={cn("absolute top-0 left-0 w-full h-[22px] flex items-center justify-center z-10", bgColorClass)}>
+             <p className="text-white text-[10px] font-bold tracking-wider uppercase">{category}</p>
+          </div>
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
             <PlayIcon className="size-12 text-white" />
           </div>
@@ -86,21 +91,18 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
               )}
             />
           </button>
-          <span className="absolute bottom-2 right-2 rounded-sm bg-black/50 px-1.5 py-0.5 text-xs text-white backdrop-blur-sm">
-            {duration}
-          </span>
+          {tagVariant && tagLabel && (
+            <div className="absolute bottom-2 right-2 z-10">
+               <Tag variant={tagVariant} className="h-6 px-2 text-[10px] gap-1 border-white/20 backdrop-blur-sm shadow-sm">
+                 <TagIcon className="size-3" />
+                 {tagLabel}
+               </Tag>
+            </div>
+          )}
         </div>
-        <div className="flex flex-col gap-2 px-1">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold text-foreground">{category}</p>
-            {tagVariant && tagLabel && (
-              <Tag variant={tagVariant} className="gap-1">
-                <TagIcon className="size-3" />
-                {tagLabel}
-              </Tag>
-            )}
-          </div>
+        <div className="flex flex-col gap-1 px-1">
           <h3 className="line-clamp-1 text-base font-semibold text-foreground">{title}</h3>
+          <p className="text-xs text-muted-foreground">{duration}</p>
           <p className="line-clamp-2 text-xs text-muted-foreground">{description}</p>
         </div>
       </div>
