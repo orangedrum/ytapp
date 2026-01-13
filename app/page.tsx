@@ -39,12 +39,12 @@ export default async function DancePage() {
   return (
     <>
       <DancePageBackground />
-      <div className="absolute top-12 left-6 z-20 flex flex-col items-start">
-        <h2 className="text-h2 font-semibold leading-[0.85] tracking-tight text-foreground">
+      <div className="absolute top-4 left-6 z-20 flex flex-col items-start">
+        <h1 className="text-h1 font-semibold leading-[0.85] tracking-tight text-foreground">
           Yankee
           <br />
           Tango
-        </h2>
+        </h1>
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center w-full pt-32 pb-12 overflow-x-hidden">
         <div className="w-full max-w-full px-0 space-y-6">

@@ -110,7 +110,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                 transition: dragStart !== null ? 'none' : 'all 0.3s ease-out'
               }}
             >
-              <div className="w-full shadow-2xl rounded-[10px] overflow-hidden bg-card">
+              <div className="w-full aspect-[235/340] shadow-2xl rounded-[10px] overflow-hidden bg-card">
                 <VideoCard
                   imageUrl={video.thumbnail_url || (video.video_url ? getYouTubeThumbnail(video.video_url) || "" : "") || "https://placehold.co/235x240/e2e8f0/e2e8f0"}
                   category={video.category}
