@@ -48,4 +48,39 @@ const DancePageBackground = React.forwardRef<HTMLDivElement, DancePageBackground
               fillRule="evenodd"
               clipRule="evenodd"
               d="M20.1304 936.607C-50.584 890.248 -37.8142 784.31 -71.0104 706.544C-103.445 630.562 -191.563 567.043 -171.875 486.809C-152.137 406.373 -41.185 394.406 19.431 337.967C81.7038 279.986 105.42 179.344 186.399 153.227C271.902 125.65 376.581 142.487 444.999 200.712C510.951 256.837 490.356 361.815 524.849 441.25C558.831 519.508 652.822 575.435 644.59 660.354C636.293 745.951 554.801 804.869 484.762 854.769C421.001 900.197 345.01 915.148 267.908 928.729C184.485 943.422 90.9716 983.048 20.1304 936.607Z"
-              stroke="#E6E6E
+              stroke="#E6E6E6"
+              strokeWidth="2"
+            />
+            <ellipse
+              cx="285.5"
+              cy="571"
+              rx="285.5"
+              ry="392"
+              fill="url(#paint0_radial_2411_6795)"
+            />
+          </g>
+          <defs>
+            <radialGradient
+              id="paint0_radial_2411_6795"
+              cx="0"
+              cy="0"
+              r="1"
+              gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(285.5 571) rotate(90) scale(392 285.5)"
+            >
+              <stop stopColor="#757575" />
+              <stop offset="1" stopOpacity="0" />
+            </radialGradient>
+            <clipPath id="clip0_2411_6795">
+              <rect width="390" height="760" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    );
+  }
+);
+
+DancePageBackground.displayName = "DancePageBackground";
+
+export { DancePageBackground };
