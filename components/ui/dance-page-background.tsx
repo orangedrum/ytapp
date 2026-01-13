@@ -15,12 +15,13 @@ const DancePageBackground = React.forwardRef<HTMLDivElement, DancePageBackground
         {...props}
       >
         <svg
-          width="390"
-          height="760"
+          width="100%"
+          height="100%"
           viewBox="0 0 390 760"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute left-0 top-[14px] w-[390px] h-auto max-w-full"
+          className="absolute inset-0 w-full h-full"
+          preserveAspectRatio="xMidYMid slice"
         >
           <g clipPath="url(#clip0_2411_6795)">
             <path
