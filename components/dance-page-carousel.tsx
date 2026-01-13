@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { type UseEmblaCarouselType } from "embla-carousel-react";
 import { VideoCard } from "@/components/ui/video-card";
@@ -21,7 +21,6 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
     loop: true,
     align: "center",
     skipSnaps: false,
-    dragFree: false, // Ensure it snaps to slides
     ...options,
   });
   
@@ -34,7 +33,6 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
 
     const engine = api.internalEngine();
     const scrollProgress = api.scrollProgress();
-    const { scrollSnapList } = api;
 
     api.scrollSnapList().forEach((scrollSnap, index) => {
       const node = tweenNodes.current[index];
@@ -64,13 +62,13 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       const tweenValue = 1 - Math.abs(diffToTarget * slidesCount);
       const clampedTween = Math.max(0, Math.min(1, tweenValue));
       
-      const scale = 0.7 + (clampedTween * 0.3); // 0.7 at edges (30% smaller), 1.0 at center
-      const opacity = 0.4 + (clampedTween * 0.6); // 0.4 at edges, 1.0 at center
-      const zIndex = Math.round(clampedTween * 10);
-      const pointerEvents = clampedTween > 0.8 ? "auto" : "none"; // Only center item is clickable
+      const scale = 0.85 + (clampedTween * 0.15); // 0.85 at edges, 1.0 at center
+      const opacity = 0.5 + (clampedTween * 0.5); // 0.5 at edges, 1.0 at center
+      const zIndex = Math.round(clampedTween * 100);
+      const pointerEvents = clampedTween > 0.9 ? "auto" : "none"; // Only center item is clickable
       
       // Apply styles directly
-      node.style.transform = `scale(${scale})`;
+      node.style.transform = `scale(${scale}) translate3d(0,0,0)`; // translate3d for hardware acceleration
       node.style.opacity = `${opacity}`;
       node.style.zIndex = `${zIndex}`;
       node.style.pointerEvents = pointerEvents;
@@ -93,18 +91,18 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl mx-auto overflow-visible">
-      <div className="overflow-visible" ref={emblaRef}>
-        <div className="flex touch-pan-y -ml-4 items-center">
+    <div className="w-full max-w-5xl mx-auto px-4 md:px-12">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex touch-pan-y -ml-4 items-center py-8">
           {videos.map((video, index) => {
             return (
               <div
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_60%] min-w-0 pl-4 relative", // Reduced width to allow side cards to be more visible
-                  "sm:flex-[0_0_45%]" 
+                  "flex-[0_0_75%] min-w-0 pl-4 relative sm:flex-[0_0_45%]",
                 )}
+                style={{ transformStyle: "preserve-3d" }}
               >
                 <VideoCard
                   imageUrl={video.thumbnail_url || (video.video_url ? getYouTubeThumbnail(video.video_url) || "" : "") || "https://placehold.co/235x240/e2e8f0/e2e8f0"}
@@ -114,7 +112,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
-                  className="h-auto aspect-[235/340] w-full shadow-2xl transition-shadow duration-300 bg-card" // Ensure bg-card is set for visibility
+                  className="h-auto aspect-[235/340] w-full shadow-2xl bg-card select-none"
                 />
               </div>
             );

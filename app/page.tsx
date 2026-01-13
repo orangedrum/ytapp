@@ -38,8 +38,8 @@ export default async function DancePage() {
           Tango
         </h2>
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pb-20 pt-20 gap-4">
-        <div className="w-full max-w-4xl px-0 space-y-4">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pb-20 pt-32 gap-4 overflow-hidden">
+        <div className="w-full max-w-full px-0 space-y-4">
           <h4 className="text-h4 text-center font-semibold">Today&apos;s Suggested Videos</h4>
           <DancePageCarousel videos={(processedVideos as Video[])} />
         </div>
