@@ -36,7 +36,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <div className={cn("fixed bottom-0 left-0 right-0 z-50 md:hidden", isStyleGuide && "hidden")}>
+      <div className={cn("fixed bottom-0 left-0 right-0 z-50", isStyleGuide && "hidden")}>
         <BottomNavigation 
           activePath={activePath} 
           onNavigate={handleNavigate} 
