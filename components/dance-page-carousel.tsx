@@ -44,13 +44,15 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       const tweenValue = 1 - Math.abs(diffToTarget);
       const clampedTween = Math.max(0, Math.min(1, tweenValue));
       
-      const scale = 0.7 + (clampedTween * 0.3); // 0.7 at edges (30% smaller), 1.0 at center
-      const opacity = 0.4 + (clampedTween * 0.6); // 0.4 at edges, 1.0 at center
+      const scale = 0.7 + (clampedTween * 0.3); // 0.7 at edges, 1.0 at center
+      const opacity = 0.5 + (clampedTween * 0.5); 
       const zIndex = Math.round(clampedTween * 100);
       const pointerEvents = clampedTween > 0.9 ? "auto" : "none"; // Only center item is clickable
+      // Pull items closer to the center based on how far they are
+      const translateX = diffToTarget * 60; // Overlap factor
       
       // Apply styles directly
-      node.style.transform = `scale(${scale})`;
+      node.style.transform = `translateX(${translateX}%) scale(${scale})`; 
       node.style.opacity = `${opacity}`;
       node.style.zIndex = `${zIndex}`;
       node.style.pointerEvents = pointerEvents;
@@ -75,14 +77,14 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   return (
     <div className="w-full max-w-full mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y -ml-4 items-center py-8">
+        <div className="flex touch-pan-y items-center py-8 justify-center">
           {videos.map((video, index) => {
             return (
               <div
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_65%] min-w-0 pl-4 relative sm:flex-[0_0_40%] md:flex-[0_0_30%]",
+                  "flex-[0_0_50%] min-w-0 relative sm:flex-[0_0_35%] md:flex-[0_0_25%]",
                 )}
                 style={{ transformStyle: "preserve-3d" }}
               >
