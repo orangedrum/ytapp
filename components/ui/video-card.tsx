@@ -1,4 +1,5 @@
-// /Users/orangedrum/Dropbox/ProductShift/jobs/yankeetango/ytapp/components/ui/video-card.tsx
+"use client";
+
 import * as React from "react"
 import Image from "next/image"
 import { Music } from "lucide-react"
