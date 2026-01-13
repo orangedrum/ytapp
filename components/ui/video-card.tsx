@@ -56,7 +56,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
       <div
         ref={ref}
         className={cn(
-          "group flex w-full h-[430px] flex-col gap-4 rounded-[10px] border bg-card p-4 shadow-sm",
+          "group flex w-full h-full flex-col gap-4 rounded-[10px] border bg-card p-4 shadow-sm", // Changed h-[430px] to h-full to respect parent sizing
           className
         )}
         {...props}

@@ -64,14 +64,16 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       const tweenValue = 1 - Math.abs(diffToTarget * slidesCount);
       const clampedTween = Math.max(0, Math.min(1, tweenValue));
       
-      const scale = 0.8 + (clampedTween * 0.2); // 0.8 at edges, 1.0 at center
-      const opacity = 0.5 + (clampedTween * 0.5); // 0.5 at edges, 1.0 at center
+      const scale = 0.7 + (clampedTween * 0.3); // 0.7 at edges (30% smaller), 1.0 at center
+      const opacity = 0.4 + (clampedTween * 0.6); // 0.4 at edges, 1.0 at center
       const zIndex = Math.round(clampedTween * 10);
+      const pointerEvents = clampedTween > 0.8 ? "auto" : "none"; // Only center item is clickable
       
       // Apply styles directly
       node.style.transform = `scale(${scale})`;
       node.style.opacity = `${opacity}`;
       node.style.zIndex = `${zIndex}`;
+      node.style.pointerEvents = pointerEvents;
     });
   }, []);
 
@@ -100,7 +102,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_70%] min-w-0 pl-4 relative",
+                  "flex-[0_0_60%] min-w-0 pl-4 relative", // Reduced width to allow side cards to be more visible
                   "sm:flex-[0_0_45%]" 
                 )}
               >
@@ -112,7 +114,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
-                  className="h-auto aspect-[235/340] w-full shadow-2xl transition-shadow duration-300"
+                  className="h-auto aspect-[235/340] w-full shadow-2xl transition-shadow duration-300 bg-card" // Ensure bg-card is set for visibility
                 />
               </div>
             );
