@@ -1,5 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 import { VideoCard } from "@/components/ui/video-card";
 import { Video } from "@/lib/types";
 import { getYouTubeThumbnail } from "@/lib/youtube";
@@ -21,11 +20,8 @@ export default async function LibraryPage() {
   }
 
   try {
-    // Explicitly pass credentials to ensure the client initializes correctly
-    const supabase = createServerComponentClient({ cookies }, {
-      supabaseUrl,
-      supabaseKey
-    });
+    // Deductive Reasoning: Switch to standard client to bypass cookie/auth-helper issues
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { data: videos, error } = await supabase
       .from("videos")
