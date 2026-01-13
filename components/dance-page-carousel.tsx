@@ -33,7 +33,6 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
 
     const engine = api.internalEngine();
     const scrollProgress = api.scrollProgress();
-
     api.scrollSnapList().forEach((scrollSnap, index) => {
       const node = tweenNodes.current[index];
       if (!node) return;
@@ -42,7 +41,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       let diffToTarget = scrollSnap - scrollProgress;
       
       // Handle loop logic: if difference is too large, it means we wrapped around
-      const slidesCount = scrollSnapList.length;
+      const slidesCount = api.scrollSnapList().length;
       if (engine.options.loop) {
         engine.slideLooper.loopPoints.forEach((loopItem) => {
           const target = loopItem.target();
