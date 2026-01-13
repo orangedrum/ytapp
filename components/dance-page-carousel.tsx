@@ -1,97 +1,116 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { type UseEmblaCarouselType } from "embla-carousel-react";
+import React, { useState, useRef, useEffect } from "react";
 import { VideoCard } from "@/components/ui/video-card";
 import { Video } from "@/lib/types";
 import { getYouTubeThumbnail } from "@/lib/youtube";
 import { cn } from "@/lib/utils";
 
-type CarouselApi = UseEmblaCarouselType[1];
-type CarouselOptions = Parameters<typeof useEmblaCarousel>[0];
-
 type PropType = {
   videos: Video[];
-  options?: CarouselOptions;
 };
 
-export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "center",
-    skipSnaps: false,
-    ...options,
-  });
-  
-  // Use a ref to store the tween values to avoid re-renders on every scroll frame
-  // We will manipulate the DOM directly for performance in the scroll loop
-  const tweenNodes = useRef<HTMLElement[]>([]);
+export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
+  const [activeIndex, setActiveIndex] = useState(1); // Start at center (index 1 for 3 items)
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const onScroll = useCallback((api: CarouselApi) => {
-    if (!api) return;
+  const handleDragStart = (clientX: number) => {
+    setDragStart(clientX);
+  };
 
-    const scrollProgress = api.scrollProgress();
-    const snapList = api.scrollSnapList();
+  const handleDragMove = (clientX: number) => {
+    if (dragStart === null) return;
+    const offset = clientX - dragStart;
+    setDragOffset(offset);
+  };
 
-    snapList.forEach((scrollSnap, index) => {
-      const node = tweenNodes.current[index];
-      if (!node) return;
-
-      // Calculate distance from the current scroll position to this slide's snap point
-      // We use the engine's location to be precise
-      const diffToTarget = scrollSnap - (api.internalEngine().location.get());
-      const slidesInView = api.slidesInView();
-      const isVisible = slidesInView.indexOf(index) > -1;
-
-      if (isVisible) {
-        const tweenValue = 1 - Math.abs(diffToTarget * 1.5); // 1.5 factor to make the falloff faster
-        const clampedTween = Math.max(0, Math.min(1, tweenValue));
-        
-        const scale = 0.7 + (clampedTween * 0.35); // 0.7 at edges, 1.05 at center
-        const opacity = 0.4 + (clampedTween * 0.6);
-        const zIndex = Math.round(clampedTween * 100);
-        // Pull items closer to the center. 
-        const translateX = diffToTarget * 100 * 0.8; 
-        const pointerEvents = clampedTween > 0.9 ? "auto" : "none";
-
-        node.style.transform = `translate3d(${translateX}%, 0, 0) scale(${scale})`;
-        node.style.opacity = `${opacity.toFixed(2)}`;
-        node.style.zIndex = `${zIndex}`;
-        node.style.pointerEvents = pointerEvents;
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    onScroll(emblaApi);
-    emblaApi.on("reInit", onScroll);
-    emblaApi.on("scroll", onScroll);
-  }, [emblaApi, onScroll]);
-
-  // Initialize refs array
-  const setTweenNode = useCallback((node: HTMLElement | null, index: number) => {
-    if (node) {
-      tweenNodes.current[index] = node;
+  const handleDragEnd = () => {
+    if (dragStart === null) return;
+    
+    const threshold = 50; // Minimum drag distance to change slide
+    if (dragOffset > threshold && activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    } else if (dragOffset < -threshold && activeIndex < videos.length - 1) {
+      setActiveIndex((prev) => prev + 1);
     }
-  }, []);
+
+    setDragStart(null);
+    setDragOffset(0);
+  };
+
+  // Mouse events
+  const onMouseDown = (e: React.MouseEvent) => handleDragStart(e.clientX);
+  const onMouseMove = (e: React.MouseEvent) => handleDragMove(e.clientX);
+  const onMouseUp = () => handleDragEnd();
+  const onMouseLeave = () => { if (dragStart !== null) handleDragEnd(); };
+
+  // Touch events
+  const onTouchStart = (e: React.TouchEvent) => handleDragStart(e.touches[0].clientX);
+  const onTouchMove = (e: React.TouchEvent) => handleDragMove(e.touches[0].clientX);
+  const onTouchEnd = () => handleDragEnd();
 
   return (
-    <div className="w-full max-w-xs mx-auto" data-carousel-debug="true">
-      <div className="overflow-visible" ref={emblaRef} style={{ perspective: '1000px' }}>
-        <div className="flex touch-pan-y items-center py-8 justify-center">
-          {videos.map((video, index) => {
-            return (
-              <div
-                key={video.id}
-                ref={(node) => setTweenNode(node, index)}
-                className={cn(
-                  "flex-[0_0_70%] min-w-0 relative", 
-                )}
-                style={{ transformStyle: "preserve-3d" }}
-              >
+    <div 
+      className="w-full max-w-sm mx-auto relative h-[400px] flex items-center justify-center perspective-1000"
+      ref={containerRef}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseLeave}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      <div className="relative w-full h-full flex items-center justify-center">
+        {videos.map((video, index) => {
+          // Calculate position relative to active index
+          // We subtract dragOffset (normalized) to visualize the drag
+          const offset = index - activeIndex;
+          
+          // Add a small amount of drag offset for visual feedback
+          // 300 is roughly the width of a card, used to normalize drag pixels to index units
+          const dragFactor = dragOffset / 300; 
+          const effectiveOffset = offset + dragFactor;
+
+          const isActive = index === activeIndex;
+          
+          // 3D Transform Logic
+          // Center item (offset 0): scale 1, zIndex 10, x 0
+          // Side items (offset +/- 1): scale 0.7, zIndex 5, x +/- 150px
+          
+          const absOffset = Math.abs(effectiveOffset);
+          const isVisible = absOffset < 2.5; // Only render items close to center
+
+          if (!isVisible) return null;
+
+          const scale = Math.max(0.7, 1 - absOffset * 0.3); // 1 -> 0.7
+          const opacity = Math.max(0.5, 1 - absOffset * 0.5); // 1 -> 0.5
+          const zIndex = 10 - Math.round(absOffset * 5);
+          const translateX = effectiveOffset * 60; // 60% of container width spacing
+          
+          // Rotate slightly for 3D effect
+          const rotateY = effectiveOffset * -15; // -15deg to 15deg
+
+          return (
+            <div
+              key={video.id}
+              className={cn(
+                "absolute w-[70%] transition-transform duration-300 ease-out cursor-grab active:cursor-grabbing",
+                isActive ? "z-20" : "z-10"
+              )}
+              style={{
+                transform: `translateX(${translateX}%) scale(${scale}) perspective(1000px) rotateY(${rotateY}deg)`,
+                zIndex: zIndex,
+                opacity: opacity,
+                // Disable pointer events on non-active items to prevent accidental clicks
+                pointerEvents: isActive && Math.abs(dragOffset) < 5 ? 'auto' : 'none',
+                // If we are dragging, remove transition for instant feedback
+                transition: dragStart !== null ? 'none' : 'all 0.3s ease-out'
+              }}
+            >
+              <div className="w-full shadow-2xl rounded-[10px] overflow-hidden bg-card">
                 <VideoCard
                   imageUrl={video.thumbnail_url || (video.video_url ? getYouTubeThumbnail(video.video_url) || "" : "") || "https://placehold.co/235x240/e2e8f0/e2e8f0"}
                   category={video.category}
@@ -100,12 +119,12 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
-                  className="h-auto w-full shadow-2xl bg-card select-none"
+                  className="w-full h-auto aspect-[235/340] select-none pointer-events-none" // pointer-events-none on card content to let parent handle clicks if needed, or remove if buttons need to work
                 />
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
