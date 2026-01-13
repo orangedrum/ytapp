@@ -2,15 +2,18 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel-react";
+import { type UseEmblaCarouselType } from "embla-carousel-react";
 import { VideoCard } from "@/components/ui/video-card";
 import { Video } from "@/lib/types";
 import { getYouTubeThumbnail } from "@/lib/youtube";
 import { cn } from "@/lib/utils";
 
+type CarouselApi = UseEmblaCarouselType[1];
+type CarouselOptions = Parameters<typeof useEmblaCarousel>[0];
+
 type PropType = {
   videos: Video[];
-  options?: EmblaOptionsType;
+  options?: CarouselOptions;
 };
 
 export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
@@ -22,7 +25,8 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   });
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  const onScroll = useCallback((api: EmblaCarouselType) => {
+  const onScroll = useCallback((api: CarouselApi) => {
+    if (!api) return;
     const progress = Math.max(0, Math.min(1, api.scrollProgress()));
     setScrollProgress(progress * api.scrollSnapList().length);
   }, []);
