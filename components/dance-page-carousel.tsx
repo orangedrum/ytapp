@@ -38,22 +38,25 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       const node = tweenNodes.current[index];
       if (!node) return;
 
-      const diffToTarget = scrollSnap - scrollProgress;
+      // Calculate distance from the current scroll position to this slide's snap point
+      // We use the engine's location to be precise
+      const diffToTarget = scrollSnap - (api.internalEngine().location.get());
       const slidesInView = api.slidesInView();
       const isVisible = slidesInView.indexOf(index) > -1;
 
       if (isVisible) {
-        const tweenValue = 1 - Math.abs(diffToTarget * snapList.length);
+        const tweenValue = 1 - Math.abs(diffToTarget * 1.5); // 1.5 factor to make the falloff faster
         const clampedTween = Math.max(0, Math.min(1, tweenValue));
         
-        const scale = 0.8 + (clampedTween * 0.25); // 0.8 at edges, 1.05 at center
-        const opacity = 0.5 + (clampedTween * 0.5);
+        const scale = 0.7 + (clampedTween * 0.35); // 0.7 at edges, 1.05 at center
+        const opacity = 0.4 + (clampedTween * 0.6);
         const zIndex = Math.round(clampedTween * 100);
-        const translateX = diffToTarget * 100 * 2; // Pull closer
+        // Pull items closer to the center. 
+        const translateX = diffToTarget * 100 * 0.8; 
         const pointerEvents = clampedTween > 0.9 ? "auto" : "none";
 
-        node.style.transform = `translateX(${translateX}%) scale(${scale})`;
-        node.style.opacity = `${opacity}`;
+        node.style.transform = `translate3d(${translateX}%, 0, 0) scale(${scale})`;
+        node.style.opacity = `${opacity.toFixed(2)}`;
         node.style.zIndex = `${zIndex}`;
         node.style.pointerEvents = pointerEvents;
       }
@@ -76,8 +79,8 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   }, []);
 
   return (
-    <div className="w-full max-w-sm mx-auto">
-      <div className="overflow-visible" ref={emblaRef}>
+    <div className="w-full max-w-xs mx-auto" data-carousel-debug="true">
+      <div className="overflow-visible" ref={emblaRef} style={{ perspective: '1000px' }}>
         <div className="flex touch-pan-y items-center py-8 justify-center">
           {videos.map((video, index) => {
             return (
@@ -85,7 +88,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_65%] min-w-0 relative", 
+                  "flex-[0_0_70%] min-w-0 relative", 
                 )}
                 style={{ transformStyle: "preserve-3d" }}
               >
