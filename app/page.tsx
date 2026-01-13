@@ -12,9 +12,12 @@ export default async function DancePage() {
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
   const supabase = createClient(supabaseUrl, supabaseKey);
 
+  // Fetch a specific set of videos, including the one from the styleguide
   const { data: videos } = await supabase
     .from("videos")
     .select("*")
+    // Using .in() to fetch specific videos. The first ID is from the styleguide.
+    .in("id", ["303f6703-726f-4b36-b56b-9c7f68161501", "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d", "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"])
     .limit(3);
 
   // Process videos to ensure they have thumbnails
@@ -38,9 +41,9 @@ export default async function DancePage() {
           Tango
         </h2>
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pb-20 pt-32 gap-4 overflow-hidden">
-        <div className="w-full max-w-full px-0 space-y-4">
-          <h4 className="text-h4 text-center font-semibold">Today&apos;s Suggested Videos</h4>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full pt-48 sm:pt-56">
+        <div className="w-full max-w-full px-0 space-y-6">
+          <h4 className="text-body1Semibold text-center">Today&apos;s Suggested Videos</h4>
           <DancePageCarousel videos={(processedVideos as Video[])} />
         </div>
       </div>

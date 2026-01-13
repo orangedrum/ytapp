@@ -79,7 +79,7 @@ const VideoPlate = React.forwardRef<HTMLDivElement, VideoPlateProps>(
     return (
       <div
         ref={ref}
-        className={cn("relative w-full max-w-[341px] aspect-[341/369] rounded-[10px] overflow-hidden group", className)}
+        className={cn("relative w-full max-w-[270px] aspect-[341/369] rounded-[10px] overflow-hidden group", className)}
         {...props}
       >
         <Image src={imageUrl} alt={alt} fill className="object-cover object-top" />
