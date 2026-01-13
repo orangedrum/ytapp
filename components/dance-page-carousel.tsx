@@ -44,12 +44,12 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
       const tweenValue = 1 - Math.abs(diffToTarget);
       const clampedTween = Math.max(0, Math.min(1, tweenValue));
       
-      const scale = 0.7 + (clampedTween * 0.3); // 0.7 at edges, 1.0 at center
+      const scale = 0.7 + (clampedTween * 0.35); // 0.7 at edges, 1.05 at center (5% bigger)
       const opacity = 0.5 + (clampedTween * 0.5); 
       const zIndex = Math.round(clampedTween * 100);
       const pointerEvents = clampedTween > 0.9 ? "auto" : "none"; // Only center item is clickable
       // Pull items closer to the center based on how far they are
-      const translateX = diffToTarget * 60; // Overlap factor
+      const translateX = diffToTarget * 70; // Increased overlap factor (pulls them closer)
       
       // Apply styles directly
       node.style.transform = `translateX(${translateX}%) scale(${scale})`; 
@@ -75,7 +75,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   }, []);
 
   return (
-    <div className="w-full max-w-full mx-auto">
+    <div className="w-full max-w-sm mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y items-center py-8 justify-center">
           {videos.map((video, index) => {
@@ -84,7 +84,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_50%] min-w-0 relative sm:flex-[0_0_35%] md:flex-[0_0_25%]",
+                  "flex-[0_0_60%] min-w-0 relative", // Fixed width percentage relative to the constrained container
                 )}
                 style={{ transformStyle: "preserve-3d" }}
               >
