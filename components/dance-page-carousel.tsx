@@ -119,7 +119,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
-                  className="w-full h-auto aspect-[235/340] select-none pointer-events-none" // pointer-events-none on card content to let parent handle clicks if needed, or remove if buttons need to work
+                  className="w-full h-full max-w-none select-none pointer-events-none border-0 shadow-none" 
                 />
               </div>
             </div>

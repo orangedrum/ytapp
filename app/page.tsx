@@ -39,14 +39,14 @@ export default async function DancePage() {
   return (
     <>
       <DancePageBackground />
-      <div className="absolute top-4 left-6 z-20 flex flex-col items-start">
-        <h1 className="text-h1 font-semibold leading-[0.85] tracking-tight text-foreground">
+      <div className="absolute top-2 left-6 z-20 flex flex-col items-start">
+        <h1 className="text-h1 font-semibold leading-[0.8] tracking-tight text-foreground">
           Yankee
           <br />
           Tango
         </h1>
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center w-full pt-32 pb-12 overflow-x-hidden">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full pt-40 pb-20 overflow-x-hidden">
         <div className="w-full max-w-full px-0 space-y-6">
           <h4 className="text-body1Semibold text-center">Today&apos;s Suggested Videos</h4>
           <DancePageCarousel videos={(processedVideos as Video[])} />
