@@ -31,31 +31,32 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   const onScroll = useCallback((api: CarouselApi) => {
     if (!api) return;
 
-    const engine = api.internalEngine();
-    api.scrollSnapList().forEach((scrollSnap, index) => {
+    const scrollProgress = api.scrollProgress();
+    const snapList = api.scrollSnapList();
+
+    snapList.forEach((scrollSnap, index) => {
       const node = tweenNodes.current[index];
       if (!node) return;
 
-      // Calculate distance from the current scroll position to this slide's snap point
-      const diffToTarget = scrollSnap - engine.location.get();
-      
-      // Normalize diff to -1 to 1 range for the immediate neighbors
-      // We want the effect to be localized around the center
-      const tweenValue = 1 - Math.abs(diffToTarget);
-      const clampedTween = Math.max(0, Math.min(1, tweenValue));
-      
-      const scale = 0.7 + (clampedTween * 0.35); // 0.7 at edges, 1.05 at center (5% bigger)
-      const opacity = 0.5 + (clampedTween * 0.5); 
-      const zIndex = Math.round(clampedTween * 100);
-      const pointerEvents = clampedTween > 0.9 ? "auto" : "none"; // Only center item is clickable
-      // Pull items closer to the center based on how far they are
-      const translateX = diffToTarget * 70; // Increased overlap factor (pulls them closer)
-      
-      // Apply styles directly
-      node.style.transform = `translateX(${translateX}%) scale(${scale})`; 
-      node.style.opacity = `${opacity}`;
-      node.style.zIndex = `${zIndex}`;
-      node.style.pointerEvents = pointerEvents;
+      const diffToTarget = scrollSnap - scrollProgress;
+      const slidesInView = api.slidesInView();
+      const isVisible = slidesInView.indexOf(index) > -1;
+
+      if (isVisible) {
+        const tweenValue = 1 - Math.abs(diffToTarget * snapList.length);
+        const clampedTween = Math.max(0, Math.min(1, tweenValue));
+        
+        const scale = 0.8 + (clampedTween * 0.25); // 0.8 at edges, 1.05 at center
+        const opacity = 0.5 + (clampedTween * 0.5);
+        const zIndex = Math.round(clampedTween * 100);
+        const translateX = diffToTarget * 100 * 2; // Pull closer
+        const pointerEvents = clampedTween > 0.9 ? "auto" : "none";
+
+        node.style.transform = `translateX(${translateX}%) scale(${scale})`;
+        node.style.opacity = `${opacity}`;
+        node.style.zIndex = `${zIndex}`;
+        node.style.pointerEvents = pointerEvents;
+      }
     });
   }, []);
 
@@ -76,7 +77,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
 
   return (
     <div className="w-full max-w-sm mx-auto">
-      <div className="overflow-hidden" ref={emblaRef}>
+      <div className="overflow-visible" ref={emblaRef}>
         <div className="flex touch-pan-y items-center py-8 justify-center">
           {videos.map((video, index) => {
             return (
@@ -84,7 +85,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                 key={video.id}
                 ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_60%] min-w-0 relative", // Fixed width percentage relative to the constrained container
+                  "flex-[0_0_65%] min-w-0 relative", 
                 )}
                 style={{ transformStyle: "preserve-3d" }}
               >
