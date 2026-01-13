@@ -75,7 +75,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
   return (
     <div className="w-full max-w-full mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y -ml-4 items-center py-4">
+        <div className="flex touch-pan-y -ml-4 items-center py-8">
           {videos.map((video, index) => {
             return (
               <div
