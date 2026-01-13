@@ -20,7 +20,7 @@ export default async function DancePage() {
     <>
       <DancePageBackground />
       <div className="absolute top-12 left-6 z-20 flex flex-col items-start">
-        <h2 className="text-h1 font-semibold leading-[0.85] tracking-tight text-foreground">
+        <h2 className="text-h2 font-semibold leading-[0.85] tracking-tight text-foreground">
           Yankee
           <br />
           Tango

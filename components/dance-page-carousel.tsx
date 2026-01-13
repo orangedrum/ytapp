@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { type UseEmblaCarouselType } from "embla-carousel-react";
 import { VideoCard } from "@/components/ui/video-card";
@@ -21,14 +21,58 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
     loop: true,
     align: "center",
     skipSnaps: false,
+    dragFree: false, // Ensure it snaps to slides
     ...options,
   });
-  const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Use a ref to store the tween values to avoid re-renders on every scroll frame
+  // We will manipulate the DOM directly for performance in the scroll loop
+  const tweenNodes = useRef<HTMLElement[]>([]);
 
   const onScroll = useCallback((api: CarouselApi) => {
     if (!api) return;
-    const progress = Math.max(0, Math.min(1, api.scrollProgress()));
-    setScrollProgress(progress * api.scrollSnapList().length);
+
+    const engine = api.internalEngine();
+    const scrollProgress = api.scrollProgress();
+    const { scrollSnapList } = api;
+
+    api.scrollSnapList().forEach((scrollSnap, index) => {
+      const node = tweenNodes.current[index];
+      if (!node) return;
+
+      // Calculate distance from the current scroll position to this slide's snap point
+      let diffToTarget = scrollSnap - scrollProgress;
+      
+      // Handle loop logic: if difference is too large, it means we wrapped around
+      const slidesCount = scrollSnapList.length;
+      if (engine.options.loop) {
+        engine.slideLooper.loopPoints.forEach((loopItem) => {
+          const target = loopItem.target();
+          if (index === loopItem.index && target !== 0) {
+            const sign = Math.sign(target);
+            if (sign === 1) {
+              diffToTarget = (scrollSnap + 1) - scrollProgress;
+            } else {
+              diffToTarget = (scrollSnap - 1) - scrollProgress;
+            }
+          }
+        });
+      }
+      
+      // Normalize diff to -1 to 1 range for the immediate neighbors
+      // We want the effect to be localized around the center
+      const tweenValue = 1 - Math.abs(diffToTarget * slidesCount);
+      const clampedTween = Math.max(0, Math.min(1, tweenValue));
+      
+      const scale = 0.8 + (clampedTween * 0.2); // 0.8 at edges, 1.0 at center
+      const opacity = 0.5 + (clampedTween * 0.5); // 0.5 at edges, 1.0 at center
+      const zIndex = Math.round(clampedTween * 10);
+      
+      // Apply styles directly
+      node.style.transform = `scale(${scale})`;
+      node.style.opacity = `${opacity}`;
+      node.style.zIndex = `${zIndex}`;
+    });
   }, []);
 
   useEffect(() => {
@@ -39,54 +83,26 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
     emblaApi.on("scroll", onScroll);
   }, [emblaApi, onScroll]);
 
+  // Initialize refs array
+  const setTweenNode = useCallback((node: HTMLElement | null, index: number) => {
+    if (node) {
+      tweenNodes.current[index] = node;
+    }
+  }, []);
+
   return (
     <div className="w-full max-w-5xl mx-auto overflow-visible">
       <div className="overflow-visible" ref={emblaRef}>
-        <div className="flex touch-pan-y -ml-4">
+        <div className="flex touch-pan-y -ml-4 items-center">
           {videos.map((video, index) => {
-            // Calculate distance from the current scroll position
-            // We need to handle the loop logic for correct distance calculation if loop is true
-            // For simplicity in this visual effect, let's assume a basic distance check first
-            // In a looped carousel, the index might need adjustment relative to the scroll position
-            
-            // Simplified logic: The center item is the one closest to the scrollProgress
-            // We can use the emblaApi to get the selected index, but for smooth animation
-            // we want to use the scroll position.
-            
-            let distanceFromCenter = 0;
-            if (emblaApi) {
-               const snaps = emblaApi.scrollSnapList();
-               const scrollSnap = snaps[index];
-               const scrollProgress = emblaApi.scrollProgress();
-               
-               // This is a simplified distance for visual scaling. 
-               // For a perfect loop, Embla has internal engine details, but we can approximate
-               // by checking the selected index.
-               const selectedIndex = emblaApi.selectedScrollSnap();
-               distanceFromCenter = Math.abs(index - selectedIndex);
-               
-               // Handle wrap-around for loop (basic check for 3 items)
-               if (distanceFromCenter > 1) distanceFromCenter = 3 - distanceFromCenter;
-            }
-
-            const isCenter = distanceFromCenter < 0.5; // Threshold for being "center"
-            const scale = isCenter ? 1 : 0.7;
-            const zIndex = isCenter ? 10 : 0;
-            const opacity = isCenter ? 1 : 0.6;
-            const translateX = isCenter ? "0%" : index < (emblaApi?.selectedScrollSnap() || 0) ? "20%" : "-20%";
-
             return (
               <div
                 key={video.id}
+                ref={(node) => setTweenNode(node, index)}
                 className={cn(
-                  "flex-[0_0_70%] min-w-0 pl-4 transition-all duration-500 ease-out",
-                  "sm:flex-[0_0_40%]" 
+                  "flex-[0_0_70%] min-w-0 pl-4 relative",
+                  "sm:flex-[0_0_45%]" 
                 )}
-                style={{
-                  transform: `scale(${scale}) translateX(${translateX})`,
-                  zIndex: zIndex,
-                  opacity: opacity,
-                }}
               >
                 <VideoCard
                   imageUrl={video.thumbnail_url || (video.video_url ? getYouTubeThumbnail(video.video_url) || "" : "") || "https://placehold.co/235x240/e2e8f0/e2e8f0"}
@@ -96,7 +112,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos, options }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
-                  className="h-auto aspect-[235/340] w-full shadow-2xl"
+                  className="h-auto aspect-[235/340] w-full shadow-2xl transition-shadow duration-300"
                 />
               </div>
             );
