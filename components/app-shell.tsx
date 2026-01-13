@@ -40,7 +40,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <BottomNavigation 
           activePath={activePath} 
           onNavigate={handleNavigate} 
-          className="border-t bg-black/90 backdrop-blur supports-[backdrop-filter]:bg-black/60 text-white"
+          className="border-t bg-black text-white border-white/10"
         />
       </div>
     </div>

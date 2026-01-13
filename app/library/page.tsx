@@ -7,6 +7,19 @@ import { getYouTubeThumbnail } from "@/lib/youtube";
 export const revalidate = 0;
 
 export default async function LibraryPage() {
+  // Deductive Reasoning: Check for missing environment variables to prevent server crash
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center">
+        <h1 className="text-2xl font-bold text-destructive">Configuration Error</h1>
+        <p className="text-muted-foreground mt-2">Supabase environment variables are missing in Vercel.</p>
+      </div>
+    );
+  }
+
   const supabase = createServerComponentClient({ cookies });
 
   const { data: videos, error } = await supabase
