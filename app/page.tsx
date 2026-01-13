@@ -1,15 +1,10 @@
-export default function HomePage() {
+import React from "react";
+
+export default function DancePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight lg:text-6xl">
-          Welcome to Tango App
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          This is your new, locally-controlled homepage. You can navigate to{" "}
-          <a href="/styleguide" className="text-primary underline">/styleguide</a> to see the design system.
-        </p>
-      </div>
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center">
+      <h1 className="text-3xl font-bold">Dance</h1>
+      <p className="text-muted-foreground mt-2">Your daily recommended videos will appear here.</p>
+    </div>
   );
 }

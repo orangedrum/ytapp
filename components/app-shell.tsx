@@ -3,6 +3,7 @@
 import * as React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { BottomNavigation } from "@/components/ui/bottom-nav";
+import { cn } from "@/lib/utils";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,18 +22,21 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   // If we are at root, highlight the 'Dance' tab
   const activePath = pathname === "/" ? "/dance" : pathname;
 
+  // Hide navigation on the style guide to keep it separate
+  const isStyleGuide = pathname.startsWith("/styleguide");
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* 
         Main Content Area 
         Added padding-bottom to prevent content from being hidden behind the fixed bottom nav on mobile
       */}
-      <main className="flex-1 pb-[84px] md:pb-0">
+      <main className={cn("flex-1", !isStyleGuide && "pb-[84px] md:pb-0")}>
         {children}
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+      <div className={cn("fixed bottom-0 left-0 right-0 z-50 md:hidden", isStyleGuide && "hidden")}>
         <BottomNavigation 
           activePath={activePath} 
           onNavigate={handleNavigate} 
