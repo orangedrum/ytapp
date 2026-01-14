@@ -12,17 +12,50 @@ export default async function DancePage() {
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  // Try to fetch specific videos first
-  let { data: videos } = await supabase
+  const styleGuideId = "303f6703-726f-4b36-b56b-9c7f68161501";
+
+  // 1. Fetch the specific styleguide video
+  const { data: styleGuideVideo } = await supabase
     .from("videos")
     .select("*")
-    .in("id", ["303f6703-726f-4b36-b56b-9c7f68161501", "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d", "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"])
-    .limit(3);
+    .eq("id", styleGuideId)
+    .maybeSingle();
 
-  // Fallback: if we don't have 3 videos, just fetch the latest 3
-  if (!videos || videos.length < 3) {
-    const { data: fallbackVideos } = await supabase.from("videos").select("*").limit(3);
-    videos = fallbackVideos;
+  // 2. Fetch up to 2 other videos to fill the carousel (excluding the styleguide one)
+  const { data: otherVideos } = await supabase
+    .from("videos")
+    .select("*")
+    .neq("id", styleGuideId)
+    .limit(2);
+
+  let videos: Video[] = [];
+
+  if (styleGuideVideo) videos.push(styleGuideVideo);
+  if (otherVideos) videos.push(...otherVideos);
+
+  // Fallback: If we have 0 videos, try to fetch any 3
+  if (videos.length === 0) {
+     const { data: fallbackVideos } = await supabase.from("videos").select("*").limit(3);
+     if (fallbackVideos) videos = fallbackVideos;
+  }
+
+  // Ensure we have at least 3 items by duplicating if necessary (carousel needs 3 to function well)
+  if (videos.length > 0 && videos.length < 3) {
+    while (videos.length < 3) {
+      // Duplicate the first video to fill slots if DB is sparse
+      videos.push({ ...videos[0], id: `${videos[0].id}-dup-${videos.length}` });
+    }
+  }
+
+  // If we have the styleguide video and enough videos, place it in the center (index 1)
+  if (videos.length >= 3 && styleGuideVideo && videos.some(v => v.id === styleGuideId)) {
+      const idx = videos.findIndex(v => v.id === styleGuideId);
+      if (idx !== 1) {
+          // Swap to index 1 so it appears in the center initially
+          const temp = videos[1];
+          videos[1] = videos[idx];
+          videos[idx] = temp;
+      }
   }
 
   // Process videos to ensure they have thumbnails
