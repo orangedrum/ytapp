@@ -59,17 +59,16 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
         <Link href="/">
           <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center">
-            <ChevronIcon className="w-6 h-6 rotate-90" />
+            <ChevronIcon className="w-8 h-8 rotate-90" />
           </Button>
         </Link>
         <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
         <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center">
-          <PlusIcon className="w-6 h-6" />
+          <PlusIcon className="w-8 h-8" />
         </Button>
       </div>
 
       {/* Video Plate - Centered and Constrained */}
-      {/* We use max-w-[341px] to match the design JSON width, preventing it from stretching too wide */}
       <div className="w-full px-6 flex justify-center">
         <div 
           className="w-full max-w-[341px] relative shadow-sm mx-auto"
@@ -80,24 +79,14 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
             tagVariant={video.tag_variant || "watch"}
             tagLabel={video.tag_label || "Watch"}
             alt={video.title || "Video"}
-            // We assume VideoPlate might not expose onPlay directly for the icon only, 
-            // so we overlay a button for the play action if needed, or rely on the component's internal play button.
-            // However, the request is "only the play icon... is what triggers the video".
-            // If VideoPlate doesn't support this prop, we might need to overlay a transparent div over the center.
-            // For now, let's assume we can wrap it or overlay a click handler in the center.
-            // Since we can't easily modify VideoPlate here without seeing it, let's overlay a hit area.
           />
           <div 
-            className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
-            onClick={() => setIsPlaying(true)}
+            className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
           >
-            {/* This invisible overlay ensures the center area triggers play. 
-                We rely on the VideoPlate's visual play icon. 
-                If we need to be more specific (only the icon), we'd need to modify VideoPlate.
-                But usually a center tap is expected. 
-                To be safe and follow "only the play icon", let's make this hit area smaller and centered.
-            */}
-            <div className="w-20 h-20 bg-transparent" /> 
+            <div 
+              className="w-20 h-20 bg-transparent cursor-pointer pointer-events-auto"
+              onClick={() => setIsPlaying(true)}
+            /> 
           </div>
         </div>
       </div>
