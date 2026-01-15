@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, ArrowRight, X, Play } from "lucide-react";
+import { ChevronDown, ArrowRight, X } from "lucide-react";
 import { VideoPlate } from "@/components/ui/video-plate";
 import { StarFilledIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,6 @@ interface VideoDetailViewProps {
 }
 
 export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
-  console.log("VideoDetailView rendering", video.id); // Debug log
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Helper to extract YouTube ID from various URL formats
@@ -60,9 +59,9 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       <TitleBar title="Video Details" />
 
       {/* Video Plate - Centered and Constrained */}
-      <div className="w-full px-6 flex flex-col items-center justify-center">
+      <div className="w-full px-6 flex justify-center">
         <div 
-          className="w-full max-w-[341px] relative shadow-sm"
+          className="w-full max-w-[341px] relative shadow-sm mx-auto"
         >
            <VideoPlate
             imageUrl={imageUrl}
@@ -86,7 +85,8 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 pt-2 pb-[35px] gap-4 w-full max-w-md mx-auto">
+      {/* Reduced bottom padding to tighten layout above fixed footer */}
+      <div className="flex flex-col px-6 pt-2 pb-4 gap-4 w-full max-w-md mx-auto">
         
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
