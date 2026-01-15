@@ -58,13 +58,13 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
         <Link href="/">
-          <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent !h-11 !w-11 !p-0 flex items-center justify-center">
-            <ChevronIcon className="!w-8 !h-8 rotate-90" />
+          <Button variant="ghost" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center rounded-full">
+            <ChevronIcon className="w-8 h-8 rotate-90" />
           </Button>
         </Link>
         <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
-        <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent !h-11 !w-11 !p-0 flex items-center justify-center">
-          <PlusIcon className="!w-8 !h-8" />
+        <Button variant="ghost" className="-mr-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center rounded-full">
+          <PlusIcon className="w-8 h-8" />
         </Button>
       </div>
 
@@ -93,7 +93,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 pt-2 pb-[18px] gap-4 w-full max-w-md mx-auto">
+      <div className="flex flex-col px-6 pt-2 pb-4 gap-4 w-full max-w-md mx-auto">
         
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
