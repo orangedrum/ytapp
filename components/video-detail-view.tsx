@@ -59,9 +59,9 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       <TitleBar title="Video Details" />
 
       {/* Video Plate - Centered and Constrained */}
-      <div className="w-full px-6 flex justify-center">
+      <div className="w-full px-6 flex flex-col items-center">
         <div 
-          className="w-full max-w-[341px] relative shadow-sm mx-auto"
+          className="w-full max-w-[341px] relative shadow-sm"
         >
            <VideoPlate
             imageUrl={imageUrl}
@@ -86,7 +86,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
 
       {/* Video Info Section */}
       {/* Reduced bottom padding to tighten layout above fixed footer */}
-      <div className="flex flex-col px-6 pt-2 pb-4 gap-4 w-full max-w-md mx-auto">
+      <div className="flex flex-col px-6 pt-2 pb-0 gap-4 w-full max-w-md mx-auto">
         
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
