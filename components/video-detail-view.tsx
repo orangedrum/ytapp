@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { ChevronDown, ArrowRight, X } from "lucide-react";
+import { ChevronDown, ArrowRight, X, Play } from "lucide-react";
 import { VideoPlate } from "@/components/ui/video-plate";
-import { StarFilledIcon, ChevronIcon, PlusIcon } from "@/components/ui/icons";
+import { StarFilledIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
+import { TitleBar } from "@/components/ui/title-bar";
 import { Video } from "@/lib/types";
 
 interface VideoDetailViewProps {
@@ -14,6 +14,7 @@ interface VideoDetailViewProps {
 }
 
 export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
+  console.log("VideoDetailView rendering", video.id); // Debug log
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Helper to extract YouTube ID from various URL formats
@@ -56,23 +57,12 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
   return (
     <div className="flex flex-col min-h-screen bg-background relative">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
-        <Link href="/">
-          <Button variant="ghost" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center rounded-full">
-            <ChevronIcon className="w-8 h-8 rotate-90" />
-          </Button>
-        </Link>
-        <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
-        <Button variant="ghost" className="-mr-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center rounded-full">
-          <PlusIcon className="w-8 h-8" />
-        </Button>
-      </div>
+      <TitleBar title="Video Details" />
 
       {/* Video Plate - Centered and Constrained */}
-      {/* We use max-w-[341px] to match the design JSON width, preventing it from stretching too wide */}
-      <div className="w-full px-6 flex justify-center">
+      <div className="w-full px-6 flex flex-col items-center justify-center">
         <div 
-          className="w-full max-w-[341px] relative shadow-sm flex justify-center"
+          className="w-full max-w-[341px] relative shadow-sm"
         >
            <VideoPlate
             imageUrl={imageUrl}
@@ -81,19 +71,22 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
             tagLabel={video.tag_label || "Watch"}
             alt={video.title || "Video"}
           />
+          {/* Play Trigger Overlay - Only covers the center area */}
           <div 
-            className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
+            className="absolute inset-0 flex items-center justify-center z-20"
+            style={{ pointerEvents: 'none' }}
           >
             <div 
-              className="w-20 h-20 bg-transparent cursor-pointer pointer-events-auto"
+              className="w-24 h-24 bg-transparent cursor-pointer flex items-center justify-center"
+              style={{ pointerEvents: 'auto' }}
               onClick={() => setIsPlaying(true)}
-            /> 
+            />
           </div>
         </div>
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 pt-2 pb-4 gap-4 w-full max-w-md mx-auto">
+      <div className="flex flex-col px-6 pt-2 pb-[35px] gap-4 w-full max-w-md mx-auto">
         
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
