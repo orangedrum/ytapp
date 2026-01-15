@@ -47,6 +47,8 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
         autoplay: 1,
         controls: 1, // Show player controls
         rel: 0, // Show related videos from the same channel (best we can do, but onEnd will fire first)
+        modestbranding: 1, // Minimize YouTube branding
+        iv_load_policy: 3, // Hide video annotations
       },
     };
 

@@ -24,6 +24,12 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
   const time = typeof searchParams.time === 'string' ? searchParams.time : "04:37";
   const category = typeof searchParams.category === 'string' ? searchParams.category : "adornos";
 
+  // Determine stats to show. If category is 'technique', ensure it's included.
+  // We'll replace the first card with the practiced category if it's not already there.
+  const defaultStats = ["Musicality", "Balance", "Posture"];
+  const displayCategory = category.charAt(0).toUpperCase() + category.slice(1);
+  const stats = defaultStats.includes(displayCategory) ? defaultStats : [displayCategory, "Balance", "Posture"];
+
   return (
     <div className="flex flex-col min-h-screen bg-background relative overflow-hidden">
       
@@ -53,16 +59,16 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
             You Just Improved Your:
           </h3>
           <div className="flex items-center justify-center gap-4 w-full">
-            <StatCard label="Musicality" />
-            <StatCard label="Balance" />
-            <StatCard label="Posture" />
+            {stats.map((stat) => (
+              <StatCard key={stat} label={stat} />
+            ))}
           </div>
         </div>
 
       </div>
 
       {/* Sticky Footer Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-6 bg-background border-t border-border/5">
+      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px] flex items-center px-6">
         <div className="w-full max-w-md mx-auto">
           <Link href="/" className="w-full">
             <Button className="w-full h-[54px] text-base font-medium rounded-[10px]">
