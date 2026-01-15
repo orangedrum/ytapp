@@ -9,6 +9,7 @@ import { VideoDetailView } from "@/components/video-detail-view";
 // Force dynamic rendering since we are fetching data based on params
 export const revalidate = 0;
 
+// Video Detail Page Server Component
 export default async function VideoDetailPage({ params }: { params: { id: string } }) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";

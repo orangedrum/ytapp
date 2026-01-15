@@ -14,6 +14,7 @@ interface VideoDetailViewProps {
 }
 
 export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
+  console.log("VideoDetailView rendering", video.id); // Debug log
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Helper to extract YouTube ID from various URL formats
@@ -56,7 +57,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
   return (
     <div className="flex flex-col min-h-screen bg-background relative">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
+      <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-yellow-400 border-b border-border/5">
         <Link href="/">
           <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11 p-0 flex items-center justify-center">
             <ChevronIcon className="w-8 h-8 rotate-90" />
