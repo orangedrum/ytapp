@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, Plus, ChevronDown, ArrowRight, X } from "lucide-react";
+import { ChevronDown, ArrowRight, X } from "lucide-react";
 import { VideoPlate } from "@/components/ui/video-plate";
-import { StarFilledIcon } from "@/components/ui/icons";
+import { StarFilledIcon, ChevronIcon, PlusIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Video } from "@/lib/types";
 
@@ -59,12 +59,12 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
         <Link href="/">
           <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11">
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronIcon className="w-6 h-6 rotate-90" />
           </Button>
         </Link>
         <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
         <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent h-11 w-11">
-          <Plus className="w-6 h-6" />
+          <PlusIcon className="w-6 h-6" />
         </Button>
       </div>
 
@@ -86,10 +86,10 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 pt-4 pb-[100px] gap-6 w-full max-w-md mx-auto">
+      <div className="flex flex-col px-6 pt-2 pb-[90px] gap-4 w-full max-w-md mx-auto">
         
         {/* Title and Rating Row */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           <h3 className="text-h4 text-foreground leading-[120%] tracking-tight">
             {video.title || "Untitled Video"}
           </h3>
@@ -110,7 +110,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
 
         {/* Description */}
         <div className="w-full">
-          <p className="text-base font-normal text-muted-foreground leading-[140%]">
+          <p className="text-base font-normal text-muted-foreground leading-snug">
             {video.description || "The name says it all, the right size slightly snugs the body leaving enough room for comfort in the sleeves and waist."}
           </p>
         </div>
