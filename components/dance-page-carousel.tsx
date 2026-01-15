@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { VideoCard } from "@/components/ui/video-card";
 import { Video } from "@/lib/types";
 import { getYouTubeThumbnail } from "@/lib/youtube";
@@ -110,7 +111,8 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                 transition: dragStart !== null ? 'none' : 'all 0.3s ease-out'
               }}
             >
-              <div className="w-full aspect-[235/340] shadow-2xl rounded-[10px] overflow-hidden bg-card">
+              <div className="w-full aspect-[235/340] shadow-2xl rounded-[10px] overflow-hidden">
+                <Link href={`/video/${video.id}`} className="block w-full h-full" draggable={false}>
                 <VideoCard
                   imageUrl={video.thumbnail_url || (video.video_url ? getYouTubeThumbnail(video.video_url) || "" : "") || "https://placehold.co/235x240/e2e8f0/e2e8f0"}
                   category={video.category}
@@ -121,6 +123,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                   description={video.description}
                   className="w-full h-full max-w-none select-none pointer-events-none border-0 shadow-none" 
                 />
+                </Link>
               </div>
             </div>
           );
