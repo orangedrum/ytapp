@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
-import { ChevronLeft, Plus, ChevronDown } from "lucide-react"; // Added ChevronDown
+import { ChevronLeft, Plus, ChevronDown, ArrowRight } from "lucide-react"; // Added ArrowRight
 import { VideoPlate } from "@/components/ui/video-plate";
 import { StarFilledIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,7 @@ export default async function VideoDetailPage({ params }: { params: { id: string
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background relative">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
         <Link href="/">
@@ -85,7 +85,8 @@ export default async function VideoDetailPage({ params }: { params: { id: string
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto">
+      {/* Added extra padding bottom (pb-48) to ensure content isn't hidden behind the fixed footer */}
+      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto pb-48">
         
         {/* Title and Rating Row */}
         <div className="flex flex-col gap-3">
@@ -118,24 +119,18 @@ export default async function VideoDetailPage({ params }: { params: { id: string
         </div>
 
         {/* Schedule for a different day Section */}
-        {/* Based on JSON: maxWidth 264px, gap 12px */}
         <div className="flex flex-col items-start gap-3 w-full max-w-[264px]">
-          {/* Header: 20px (text-xl), 600 weight */}
           <h4 className="text-xl font-semibold text-foreground leading-[120%]">
             Schedule for a different day
           </h4>
           
-          {/* Field Container: 162px width in JSON, but usually better to be full width of container on mobile */}
           <div className="flex flex-col items-start gap-1 w-full">
-            {/* The Field: height 52px, border #E6E6E6, radius 10px */}
             <button className="flex w-full h-[52px] px-5 justify-between items-center bg-white border border-[#E6E6E6] rounded-[10px] hover:bg-gray-50 transition-colors">
               <div className="flex items-center gap-3">
-                {/* Placeholder Text: 16px, 400 weight */}
                 <span className="text-base font-normal text-foreground leading-[140%]">
                   tomorrow
                 </span>
               </div>
-              {/* Chevron Icon */}
               <ChevronDown className="w-6 h-6 text-foreground" />
             </button>
           </div>
@@ -143,9 +138,30 @@ export default async function VideoDetailPage({ params }: { params: { id: string
 
       </div>
 
-      {/* Placeholder for Future Section 2 */}
-      <div className="px-6 py-4 w-full max-w-md mx-auto pb-12">
-        {/* Future content goes here */}
+      {/* Play Video Fixed Footer */}
+      {/* Positioned fixed at bottom. On mobile (default), it sits at bottom-[81px] to clear the nav. On desktop (md), it sits at bottom-0. */}
+      <div className="fixed bottom-[81px] md:bottom-0 left-0 right-0 bg-white border-t border-[#E6E6E6] z-40 h-[105px]">
+        <div className="w-full h-full max-w-md mx-auto px-6 flex items-start pt-5 justify-between relative">
+          
+          {/* Length Info */}
+          <div className="flex flex-col gap-0">
+            <span className="text-base font-normal text-[#808080] leading-[140%]">
+              Length
+            </span>
+            <span className="text-2xl font-semibold text-[#1A1A1A] leading-[120%]">
+              {video.duration || "00:00"}
+            </span>
+          </div>
+
+          {/* Play Button */}
+          <Button 
+            className="flex w-[240px] h-[54px] px-6 justify-center items-center gap-2.5 rounded-[10px] bg-[#1A1A1A] hover:bg-black/90 text-white text-base font-medium leading-[140%]"
+          >
+            Play Video
+            <ArrowRight className="w-6 h-6 text-white" />
+          </Button>
+
+        </div>
       </div>
 
     </div>
