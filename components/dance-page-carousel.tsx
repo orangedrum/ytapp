@@ -137,7 +137,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                   duration={video.duration}
                   description={video.description}
                   isCompleted={isCompleted}
-                  className="w-full h-full max-w-none select-none pointer-events-none border-0 shadow-none" 
+                  className={cn("w-full h-full max-w-none select-none pointer-events-none shadow-none", !isCompleted && "border-0")}
                 />
                 </Link>
               </div>
