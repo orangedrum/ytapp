@@ -71,7 +71,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       {/* Video Plate - Centered and Constrained */}
       {/* We use max-w-[341px] to match the design JSON width, preventing it from stretching too wide */}
       <div className="w-full px-6 pt-6 flex justify-center">
-        <div className="w-full max-w-[341px] aspect-[341/369] relative shadow-sm">
+        <div className="w-full max-w-[341px] relative shadow-sm">
            <VideoPlate
             imageUrl={imageUrl}
             category={video.category || "General"}
@@ -133,7 +133,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Play Video Fixed Footer */}
-      <div className="fixed bottom-[81px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[105px]">
+      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[105px]">
         <div className="w-full h-full max-w-md mx-auto px-6 flex items-start pt-5 justify-between relative">
           
           {/* Length Info */}
