@@ -7,7 +7,7 @@ import { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Tag, tagVariants } from "@/components/ui/tag"
-import { HeartIcon, HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon } from "@/components/ui/icons"
+import { HeartIcon, HeartFilledIcon, PlayIcon, EyeIcon, ChatIcon, CheckDuotoneIcon } from "@/components/ui/icons"
 import { getCategoryData } from "@/lib/categories"
 
 const tagIcons = {
@@ -25,6 +25,7 @@ export interface VideoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   duration: string
   description: string
   isFavorited?: boolean
+  isCompleted?: boolean
   alt?: string
   onPlay?: React.MouseEventHandler<HTMLDivElement>
   onFavoriteToggle?: React.MouseEventHandler<HTMLButtonElement>
@@ -42,6 +43,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
       duration,
       description,
       isFavorited = false,
+      isCompleted = false,
       alt = "Video thumbnail",
       onPlay,
       onFavoriteToggle,
@@ -57,6 +59,7 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
         ref={ref}
         className={cn(
           "group flex w-full max-w-[210px] mx-auto flex-col gap-0 rounded-[10px] bg-card shadow-sm overflow-hidden",
+          isCompleted && "border-[3px] border-success",
           className
         )}
         {...props}
@@ -74,9 +77,17 @@ const VideoCard = React.forwardRef<HTMLDivElement, VideoCardProps>(
           <div className={cn("absolute top-0 left-0 w-full h-[22px] flex items-center justify-center z-10", bgColorClass)}>
              <p className="text-white text-[10px] font-bold tracking-wider uppercase">{category}</p>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
-            <PlayIcon className="size-12 text-white" />
-          </div>
+          
+          {isCompleted ? (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <CheckDuotoneIcon className="size-12 text-success" />
+            </div>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+              <PlayIcon className="size-12 text-white" />
+            </div>
+          )}
+
           <button
             onClick={(e) => {
               e.stopPropagation()

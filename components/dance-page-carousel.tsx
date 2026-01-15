@@ -15,7 +15,21 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
   const [activeIndex, setActiveIndex] = useState(1); // Start at center (index 1 for 3 items)
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState(0);
+  const [completedVideoIds, setCompletedVideoIds] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Check localStorage for completed videos
+    // We'll assume a simple array of IDs stored under 'completedVideos'
+    try {
+      const stored = localStorage.getItem('completedVideos');
+      if (stored) {
+        setCompletedVideoIds(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error("Failed to parse completed videos", e);
+    }
+  }, []);
 
   const handleDragStart = (clientX: number) => {
     setDragStart(clientX);
@@ -76,6 +90,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
           const effectiveOffset = offset + dragFactor;
 
           const isActive = index === activeIndex;
+          const isCompleted = completedVideoIds.includes(video.id);
           
           // 3D Transform Logic
           // Center item (offset 0): scale 1, zIndex 10, x 0
@@ -121,6 +136,7 @@ export const DancePageCarousel: React.FC<PropType> = ({ videos }) => {
                   title={video.title}
                   duration={video.duration}
                   description={video.description}
+                  isCompleted={isCompleted}
                   className="w-full h-full max-w-none select-none pointer-events-none border-0 shadow-none" 
                 />
                 </Link>

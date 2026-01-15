@@ -33,6 +33,21 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
 
   const calendarUrl = videoId ? `/practice/calendar?videoId=${videoId}` : '/practice/calendar';
 
+  useEffect(() => {
+    if (videoId) {
+      try {
+        const stored = localStorage.getItem('completedVideos');
+        const completedVideos = stored ? JSON.parse(stored) : [];
+        if (!completedVideos.includes(videoId)) {
+          completedVideos.push(videoId);
+          localStorage.setItem('completedVideos', JSON.stringify(completedVideos));
+        }
+      } catch (e) {
+        console.error("Failed to save completed video", e);
+      }
+    }
+  }, [videoId]);
+
   return (
     <div className="flex flex-col min-h-screen bg-background relative overflow-hidden">
       
