@@ -58,20 +58,23 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
         <Link href="/">
-          <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent">
+          <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent h-11 w-11">
             <ChevronLeft className="w-6 h-6" />
           </Button>
         </Link>
         <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
-        <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent">
+        <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent h-11 w-11">
           <Plus className="w-6 h-6" />
         </Button>
       </div>
 
       {/* Video Plate - Centered and Constrained */}
       {/* We use max-w-[341px] to match the design JSON width, preventing it from stretching too wide */}
-      <div className="w-full px-6 pt-6 flex justify-center">
-        <div className="w-full max-w-[341px] relative shadow-sm">
+      <div className="w-full px-6 flex justify-center">
+        <div 
+          className="w-full max-w-[341px] relative shadow-sm cursor-pointer"
+          onClick={() => setIsPlaying(true)}
+        >
            <VideoPlate
             imageUrl={imageUrl}
             category={video.category || "General"}
@@ -87,7 +90,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
         
         {/* Title and Rating Row */}
         <div className="flex flex-col gap-3">
-          <h3 className="text-body1Semibold text-foreground leading-[120%] tracking-tight">
+          <h3 className="text-h4 text-foreground leading-[120%] tracking-tight">
             {video.title || "Untitled Video"}
           </h3>
           
@@ -114,7 +117,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
 
         {/* Schedule for a different day Section */}
         <div className="flex flex-col items-start gap-3 w-full max-w-[264px]">
-          <h4 className="text-xl font-semibold text-foreground leading-[120%]">
+          <h4 className="text-body1Semibold text-foreground leading-[120%]">
             Schedule for a different day
           </h4>
           
@@ -141,7 +144,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
             <span className="text-base font-normal text-muted-foreground leading-[140%]">
               Length
             </span>
-            <span className="text-h2 font-semibold text-foreground leading-[120%]">
+            <span className="text-h4 text-foreground leading-[120%]">
               {video.duration || "00:00"}
             </span>
           </div>
