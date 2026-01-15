@@ -70,8 +70,8 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
       {/* Sticky Footer Button */}
       <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px] flex items-center px-6">
         <div className="w-full max-w-md mx-auto">
-          <Link href="/" className="w-full">
-            <Button className="w-full h-[54px] text-base font-medium rounded-[10px]">
+          <Link href="/practice/calendar" className="w-full">
+            <Button className="w-full h-[54px] text-base font-medium rounded-[10px] bg-foreground text-background hover:bg-foreground/90">
               Continue
             </Button>
           </Link>
