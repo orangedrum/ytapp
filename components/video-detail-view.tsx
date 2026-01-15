@@ -83,11 +83,11 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto pb-48">
+      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto pb-[120px]">
         
         {/* Title and Rating Row */}
         <div className="flex flex-col gap-3">
-          <h3 className="text-2xl font-semibold text-foreground leading-[120%] tracking-tight">
+          <h3 className="text-body1Semibold text-foreground leading-[120%] tracking-tight">
             {video.title || "Untitled Video"}
           </h3>
           
@@ -141,7 +141,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
             <span className="text-base font-normal text-muted-foreground leading-[140%]">
               Length
             </span>
-            <span className="text-2xl font-semibold text-foreground leading-[120%]">
+            <span className="text-h2 font-semibold text-foreground leading-[120%]">
               {video.duration || "00:00"}
             </span>
           </div>
