@@ -176,12 +176,12 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background relative">
+    <div className="flex flex-col h-screen bg-background relative overflow-hidden">
       {/* Header */}
       <TitleBar title="Video Details" />
 
       {/* Main Content Container - Video Plate + Info Section */}
-      <div className="flex flex-col px-6 pt-4 pb-16 gap-4 w-full max-w-md mx-auto">
+      <div className="flex-1 flex flex-col px-6 pt-4 pb-24 gap-4 w-full max-w-md mx-auto overflow-y-auto">
         
         {/* Video Plate - Constrained to max-w-md via parent */}
         <div className="w-full relative">
@@ -258,7 +258,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Play Video Fixed Footer */}
-      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px]">
+      <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px]">
         <div className="w-full h-full max-w-md mx-auto px-6 flex items-center justify-between relative">
           
           {/* Length Info */}

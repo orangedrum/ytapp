@@ -51,7 +51,7 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
   }, [videoId]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background relative overflow-hidden">
+    <div className="flex flex-col h-screen bg-background relative overflow-hidden">
       
       {/* Main Content - Centered Vertically */}
       <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md mx-auto px-6 pb-24 gap-8">
@@ -88,7 +88,7 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
       </div>
 
       {/* Sticky Footer Button */}
-      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px] flex items-center px-6">
+      <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px] flex items-center px-6">
         <div className="w-full max-w-md mx-auto">
           <Link href={calendarUrl} className="w-full">
             <Button className="w-full h-[54px] text-base font-medium rounded-[10px] bg-foreground text-background hover:bg-foreground/90">

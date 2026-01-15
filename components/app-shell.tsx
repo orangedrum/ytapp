@@ -24,6 +24,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   // Hide navigation on the style guide to keep it separate
   const isStyleGuide = pathname.startsWith("/styleguide");
+  
+  // Hide navigation on specific flow pages to keep them immersive
+  const isImmersivePage = pathname.startsWith("/video/") || 
+                          pathname.startsWith("/practice/celebration") || 
+                          pathname.startsWith("/practice/calendar");
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -31,12 +36,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         Main Content Area 
         Added padding-bottom to prevent content from being hidden behind the fixed bottom nav on mobile
       */}
-      <main className={cn("flex-1", !isStyleGuide && "pb-[84px] md:pb-0")}>
+      <main className={cn("flex-1", !isStyleGuide && !isImmersivePage && "pb-[84px] md:pb-0")}>
         {children}
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <div className={cn("fixed bottom-0 left-0 right-0 z-50 dark", isStyleGuide && "hidden")}>
+      <div className={cn("fixed bottom-0 left-0 right-0 z-50 dark", (isStyleGuide || isImmersivePage) && "hidden")}>
         <BottomNavigation 
           activePath={activePath} 
           onNavigate={handleNavigate} 
