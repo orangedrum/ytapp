@@ -58,10 +58,10 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       {/* Header */}
       <TitleBar title="Video Details" />
 
-      {/* Video Plate - Centered and Constrained */}
-      <div className="w-full px-6 flex flex-col items-center">
+      {/* Video Plate - Full Width */}
+      <div className="w-full relative">
         <div 
-          className="w-full max-w-[341px] relative shadow-sm"
+          className="w-full aspect-[341/369] relative shadow-sm"
         >
            <VideoPlate
             imageUrl={imageUrl}
@@ -69,6 +69,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
             tagVariant={video.tag_variant || "watch"}
             tagLabel={video.tag_label || "Watch"}
             alt={video.title || "Video"}
+            className="w-full h-full max-w-none rounded-none"
           />
           {/* Play Trigger Overlay - Only covers the center area */}
           <div 
@@ -85,8 +86,8 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      {/* Reduced bottom padding to tighten layout above fixed footer */}
-      <div className="flex flex-col px-6 pt-2 pb-0 gap-4 w-full max-w-md mx-auto">
+      {/* Removed bottom padding to eliminate gap above fixed footer */}
+      <div className="flex flex-col px-6 pt-4 pb-24 gap-4 w-full max-w-md mx-auto">
         
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
