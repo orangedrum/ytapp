@@ -58,37 +58,37 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       {/* Header */}
       <TitleBar title="Video Details" />
 
-      {/* Video Plate - Full Width */}
-      <div className="w-full relative">
-        <div 
-          className="w-full aspect-[341/369] relative shadow-sm"
-        >
-           <VideoPlate
-            imageUrl={imageUrl}
-            category={video.category || "General"}
-            tagVariant={video.tag_variant || "watch"}
-            tagLabel={video.tag_label || "Watch"}
-            alt={video.title || "Video"}
-            className="w-full h-full max-w-none rounded-none"
-          />
-          {/* Play Trigger Overlay - Only covers the center area */}
+      {/* Main Content Container - Video Plate + Info Section */}
+      {/* Reduced bottom padding from pb-24 (6rem) to pb-16 (4rem) to fix the gap */}
+      <div className="flex flex-col px-6 pt-4 pb-16 gap-4 w-full max-w-md mx-auto">
+        
+        {/* Video Plate - Constrained to max-w-md via parent */}
+        <div className="w-full relative">
           <div 
-            className="absolute inset-0 flex items-center justify-center z-20"
-            style={{ pointerEvents: 'none' }}
+            className="w-full aspect-[341/369] relative shadow-sm rounded-[10px] overflow-hidden"
           >
-            <div 
-              className="w-24 h-24 bg-transparent cursor-pointer flex items-center justify-center"
-              style={{ pointerEvents: 'auto' }}
-              onClick={() => setIsPlaying(true)}
+             <VideoPlate
+              imageUrl={imageUrl}
+              category={video.category || "General"}
+              tagVariant={video.tag_variant || "watch"}
+              tagLabel={video.tag_label || "Watch"}
+              alt={video.title || "Video"}
+              className="w-full h-full max-w-none rounded-none"
             />
+            {/* Play Trigger Overlay - Only covers the center area */}
+            <div 
+              className="absolute inset-0 flex items-center justify-center z-20"
+              style={{ pointerEvents: 'none' }}
+            >
+              <div 
+                className="w-24 h-24 bg-transparent cursor-pointer flex items-center justify-center"
+                style={{ pointerEvents: 'auto' }}
+                onClick={() => setIsPlaying(true)}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Video Info Section */}
-      {/* Removed bottom padding to eliminate gap above fixed footer */}
-      <div className="flex flex-col px-6 pt-4 pb-24 gap-4 w-full max-w-md mx-auto">
-        
         {/* Title, Rating, and Description Group */}
         <div className="flex flex-col gap-0">
           {/* Title and Rating Row */}
