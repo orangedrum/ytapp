@@ -20,9 +20,14 @@ const ScoreCard = () => (
 const DayItem = ({ day, status, animate }: { day: string, status: 'checked' | 'unchecked', animate?: boolean }) => (
   <div className="flex flex-col items-center gap-2">
     <span className="text-xs font-medium text-gray-2">{day}</span>
-    <div className={cn("relative flex items-center justify-center w-6 h-6", animate && "animate-in zoom-in duration-500")}>
+    <div className={cn(
+      "relative flex items-center justify-center w-6 h-6 rounded-full", 
+      animate && "animate-in zoom-in-0 duration-700 ease-out fill-mode-forwards delay-100"
+    )}>
       {status === 'checked' ? (
-        <CheckDuotoneIcon className="w-6 h-6 text-success" />
+        <div className={cn("relative flex items-center justify-center", animate && "drop-shadow-[0_0_8px_rgba(12,148,9,0.8)]")}>
+           <CheckDuotoneIcon className="w-6 h-6 text-success" />
+        </div>
       ) : (
         <CircleIcon className="w-6 h-6 text-foreground" />
       )}
@@ -30,7 +35,15 @@ const DayItem = ({ day, status, animate }: { day: string, status: 'checked' | 'u
   </div>
 );
 
-export default function PracticeCalendarPage() {
+interface PracticeCalendarPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function PracticeCalendarPage({ searchParams }: PracticeCalendarPageProps) {
+  const videoId = typeof searchParams.videoId === 'string' ? searchParams.videoId : null;
+  // If we have a videoId, go back to the video with feedback modal trigger, otherwise go home
+  const nextUrl = videoId ? `/video/${videoId}?feedback=true` : '/';
+
   return (
     <div className="flex flex-col min-h-screen bg-background relative overflow-hidden">
       
@@ -68,8 +81,8 @@ export default function PracticeCalendarPage() {
       {/* Sticky Footer Button */}
       <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px] flex items-center px-6">
         <div className="w-full max-w-md mx-auto">
-          <Link href="/" className="w-full">
-            <Button className="w-full h-[54px] text-base font-medium rounded-[10px]">
+          <Link href={nextUrl} className="w-full">
+            <Button className="w-full h-[54px] text-base font-medium rounded-[10px] bg-foreground text-background hover:bg-foreground/90">
               I'll Keep Practicing!
             </Button>
           </Link>
