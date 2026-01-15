@@ -1,22 +1,77 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { StarFilledIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { PageTransition } from "@/components/ui/page-transition";
 
 // Reusing the card style from SelectableCard but for display only
-const StatCard = ({ label }: { label: string }) => (
-  <div className="flex flex-col items-center justify-center w-[75px] h-[57px] rounded-[10px] border-2 border-foreground bg-foreground p-1">
+const StatCard = ({ label, index }: { label: string; index: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay: 0.2 + index * 0.1, duration: 0.4, type: "spring" }}
+    className="flex flex-col items-center justify-center w-[75px] h-[57px] rounded-[10px] border-2 border-foreground bg-foreground p-1"
+  >
     <div className="h-8 w-8 flex items-center justify-center">
       <StarFilledIcon className="w-7 h-7 text-background" />
     </div>
     <p className="text-[11px] font-medium text-center text-background leading-tight">
       {label}
     </p>
-  </div>
+  </motion.div>
 );
+
+const ConfettiParticle = ({ delay }: { delay: number }) => {
+  // Randomize start/end positions for a more natural explosion
+  const [randomX, setRandomX] = useState(0);
+  const [randomY, setRandomY] = useState(0);
+  const [randomRotate, setRandomRotate] = useState(0);
+  const [color, setColor] = useState("#FFC700");
+
+  useEffect(() => {
+    setRandomX(Math.random() * 100 - 50); // -50% to 50%
+    setRandomY(Math.random() * -100 - 50); // -150% to -50%
+    setRandomRotate(Math.random() * 360);
+    const colors = ["#FFC700", "#FF0000", "#2E81FF", "#00C792", "#FF0099"];
+    setColor(colors[Math.floor(Math.random() * colors.length)]);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 0 }}
+      animate={{
+        opacity: [1, 1, 0],
+        x: randomX * 5, // Spread out
+        y: [0, randomY, randomY + 200], // Go up then fall down
+        rotate: randomRotate + 720,
+        scale: [0, 1, 0.5],
+      }}
+      transition={{ duration: 2.5, delay: delay, ease: "circOut" }}
+      style={{ backgroundColor: color }}
+      className="absolute w-3 h-3 rounded-sm top-1/2 left-1/2 pointer-events-none"
+    />
+  );
+};
+
+const ConfettiExplosion = () => {
+  const [particles, setParticles] = useState<number[]>([]);
+
+  useEffect(() => {
+    setParticles(Array.from({ length: 50 }, (_, i) => i));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {particles.map((i) => (
+        <ConfettiParticle key={i} delay={Math.random() * 0.5} />
+      ))}
+    </div>
+  );
+};
 
 interface CelebrationPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -34,9 +89,6 @@ export default function CelebrationPage({ searchParams }: CelebrationPageProps) 
   const stats = defaultStats.includes(displayCategory) ? defaultStats : [displayCategory, "Balance", "Posture"];
 
   const calendarUrl = videoId ? `/practice/calendar?videoId=${videoId}` : '/practice/calendar';
-
-  useEffect(() => {
-  }, []);
 
   useEffect(() => {
     if (videoId) {
