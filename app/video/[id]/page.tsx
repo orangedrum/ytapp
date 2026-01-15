@@ -1,12 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
-import { ChevronLeft, Plus, ChevronDown, ArrowRight } from "lucide-react"; // Added ArrowRight
-import { VideoPlate } from "@/components/ui/video-plate";
-import { StarFilledIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Video } from "@/lib/types";
 import { getYouTubeThumbnail } from "@/lib/youtube";
+import { VideoDetailView } from "@/components/video-detail-view";
 
 // Force dynamic rendering since we are fetching data based on params
 export const revalidate = 0;
@@ -58,112 +56,5 @@ export default async function VideoDetailPage({ params }: { params: { id: string
     );
   }
 
-  return (
-    <div className="flex flex-col min-h-screen bg-background relative">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/5">
-        <Link href="/">
-          <Button variant="ghost" size="icon" className="-ml-2 text-foreground hover:bg-transparent">
-            <ChevronLeft className="w-6 h-6" />
-          </Button>
-        </Link>
-        <h1 className="text-lg font-semibold text-foreground">Video Details</h1>
-        <Button variant="ghost" size="icon" className="-mr-2 text-foreground hover:bg-transparent">
-          <Plus className="w-6 h-6" />
-        </Button>
-      </div>
-
-      {/* Video Plate - Full Width */}
-      <div className="w-full aspect-[341/369] relative">
-        <VideoPlate
-          imageUrl={imageUrl}
-          category={video.category || "General"}
-          tagVariant={video.tag_variant || "watch"}
-          tagLabel={video.tag_label || "Watch"}
-          alt={video.title || "Video"}
-        />
-      </div>
-
-      {/* Video Info Section */}
-      {/* Added extra padding bottom (pb-48) to ensure content isn't hidden behind the fixed footer */}
-      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto pb-48">
-        
-        {/* Title and Rating Row */}
-        <div className="flex flex-col gap-3">
-          <h3 className="text-2xl font-semibold text-foreground leading-[120%] tracking-tight">
-            {video.title || "Untitled Video"}
-          </h3>
-          
-          <div className="flex items-center gap-1.5">
-            {/* Star Icon - #FFA928 */}
-            <StarFilledIcon className="w-[19px] h-[18px] text-[#FFA928]" />
-            
-            <div className="flex items-center gap-1 text-base font-medium">
-              {/* Rating Score */}
-              <span className="text-foreground underline decoration-solid underline-offset-auto">
-                4.0/5
-              </span>
-              {/* Review Count */}
-              <span className="text-[#808080]">
-                (45 reviews)
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Description */}
-        <div className="w-full">
-          <p className="text-base font-normal text-[#808080] leading-[140%]">
-            {video.description || "The name says it all, the right size slightly snugs the body leaving enough room for comfort in the sleeves and waist."}
-          </p>
-        </div>
-
-        {/* Schedule for a different day Section */}
-        <div className="flex flex-col items-start gap-3 w-full max-w-[264px]">
-          <h4 className="text-xl font-semibold text-foreground leading-[120%]">
-            Schedule for a different day
-          </h4>
-          
-          <div className="flex flex-col items-start gap-1 w-full">
-            <button className="flex w-full h-[52px] px-5 justify-between items-center bg-white border border-[#E6E6E6] rounded-[10px] hover:bg-gray-50 transition-colors">
-              <div className="flex items-center gap-3">
-                <span className="text-base font-normal text-foreground leading-[140%]">
-                  tomorrow
-                </span>
-              </div>
-              <ChevronDown className="w-6 h-6 text-foreground" />
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Play Video Fixed Footer */}
-      {/* Positioned fixed at bottom. On mobile (default), it sits at bottom-[81px] to clear the nav. On desktop (md), it sits at bottom-0. */}
-      <div className="fixed bottom-[81px] md:bottom-0 left-0 right-0 bg-white border-t border-[#E6E6E6] z-40 h-[105px]">
-        <div className="w-full h-full max-w-md mx-auto px-6 flex items-start pt-5 justify-between relative">
-          
-          {/* Length Info */}
-          <div className="flex flex-col gap-0">
-            <span className="text-base font-normal text-[#808080] leading-[140%]">
-              Length
-            </span>
-            <span className="text-2xl font-semibold text-[#1A1A1A] leading-[120%]">
-              {video.duration || "00:00"}
-            </span>
-          </div>
-
-          {/* Play Button */}
-          <Button 
-            className="flex w-[240px] h-[54px] px-6 justify-center items-center gap-2.5 rounded-[10px] bg-[#1A1A1A] hover:bg-black/90 text-white text-base font-medium leading-[140%]"
-          >
-            Play Video
-            <ArrowRight className="w-6 h-6 text-white" />
-          </Button>
-
-        </div>
-      </div>
-
-    </div>
-  );
+  return <VideoDetailView video={video} imageUrl={imageUrl} />;
 }
