@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import YouTube from "react-youtube";
 import { ChevronDown, ArrowRight, X } from "lucide-react";
 import { VideoPlate } from "@/components/ui/video-plate";
 import { StarFilledIcon } from "@/components/ui/icons";
@@ -15,6 +17,7 @@ interface VideoDetailViewProps {
 
 export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const router = useRouter();
 
   // Helper to extract YouTube ID from various URL formats
   const getYouTubeId = (url: string) => {
@@ -26,8 +29,27 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
 
   const videoId = video.video_url ? getYouTubeId(video.video_url) : null;
 
+  // This function will be called when the video finishes playing
+  const handleVideoEnd = () => {
+    const params = new URLSearchParams({
+      time: video.duration || '0:00',
+      category: video.category || 'Practice',
+    });
+    router.push(`/practice/celebration?${params.toString()}`);
+  };
+
   // Full Screen Video Player Overlay
   if (isPlaying && videoId) {
+    const opts = {
+      height: '100%',
+      width: '100%',
+      playerVars: {
+        autoplay: 1,
+        controls: 1, // Show player controls
+        rel: 0, // Show related videos from the same channel (best we can do, but onEnd will fire first)
+      },
+    };
+
     return (
       <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center animate-in fade-in duration-200">
         <button 
@@ -38,15 +60,12 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
           <X className="w-8 h-8" />
         </button>
         <div className="w-full h-full max-w-5xl max-h-screen aspect-video p-4 md:p-10">
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-            title={video.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full rounded-lg shadow-2xl"
+          <YouTube
+            videoId={videoId}
+            opts={opts}
+            onEnd={handleVideoEnd}
+            className="w-full h-full"
+            iframeClassName="w-full h-full rounded-lg shadow-2xl"
           />
         </div>
       </div>
@@ -59,7 +78,6 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       <TitleBar title="Video Details" />
 
       {/* Main Content Container - Video Plate + Info Section */}
-      {/* Reduced bottom padding from pb-24 (6rem) to pb-16 (4rem) to fix the gap */}
       <div className="flex flex-col px-6 pt-4 pb-16 gap-4 w-full max-w-md mx-auto">
         
         {/* Video Plate - Constrained to max-w-md via parent */}
