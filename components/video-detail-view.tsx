@@ -86,7 +86,7 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Video Info Section */}
-      <div className="flex flex-col px-6 py-6 gap-6 w-full max-w-md mx-auto pb-[120px]">
+      <div className="flex flex-col px-6 pt-4 pb-[100px] gap-6 w-full max-w-md mx-auto">
         
         {/* Title and Rating Row */}
         <div className="flex flex-col gap-3">
@@ -136,8 +136,8 @@ export function VideoDetailView({ video, imageUrl }: VideoDetailViewProps) {
       </div>
 
       {/* Play Video Fixed Footer */}
-      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[105px]">
-        <div className="w-full h-full max-w-md mx-auto px-6 flex items-start pt-5 justify-between relative">
+      <div className="fixed bottom-[60px] md:bottom-0 left-0 right-0 bg-background border-t border-border z-40 h-[80px]">
+        <div className="w-full h-full max-w-md mx-auto px-6 flex items-center justify-between relative">
           
           {/* Length Info */}
           <div className="flex flex-col gap-0">
