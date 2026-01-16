@@ -4,8 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SearchIcon, FilterIcon, CartIcon } from "@/components/ui/icons";
-import { Mic } from "lucide-react";
+import { SearchIcon, FilterIcon } from "@/components/ui/icons";
+import { Mic, Bookmark } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function LibraryHeader() {
@@ -14,16 +14,14 @@ export function LibraryHeader() {
       
       {/* Top Row: Title and Actions */}
       <div className="flex items-end justify-between px-6 pt-12 pb-4">
-        <h2 className="text-h2 font-semibold text-foreground">
-          Library
-        </h2>
+        <div className="flex items-baseline gap-3">
+          <h2 className="text-h2 font-semibold text-foreground">Library</h2>
+          <Link href="#" className="text-xs underline text-foreground">show suggested order</Link>
+        </div>
         <div className="flex flex-col items-end gap-1">
           <div className="relative">
-            <CartIcon className="w-6 h-6 text-foreground" />
+            <Bookmark className="w-6 h-6 text-foreground" />
           </div>
-          <Link href="#" className="text-xs underline text-foreground">
-            show suggested order
-          </Link>
         </div>
       </div>
 
@@ -56,6 +54,12 @@ export function LibraryHeader() {
           className="h-[36px] px-5 rounded-[10px] border border-[#E6E6E6] bg-transparent text-[#1A1A1A] font-medium whitespace-nowrap hover:bg-gray-100"
         >
           All
+        </Button>
+        <Button 
+          variant="secondary" 
+          className="h-[36px] px-5 rounded-[10px] border border-[#E6E6E6] bg-transparent text-[#1A1A1A] font-medium whitespace-nowrap hover:bg-gray-100"
+        >
+          Suggested Order
         </Button>
         <Button 
           variant="default" 
