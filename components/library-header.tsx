@@ -17,13 +17,7 @@ export function LibraryHeader() {
   return (
     <>
       <div className="sticky top-0 z-40 flex flex-col w-full bg-background border-b border-border pb-4">
-      
-          onClick={() => setIsFilterModalOpen(true)}
-        >
-          <FilterIcon className="w-6 h-6 text-white" />
-        </Button>
-      </div>
-
+        
         {/* Top Row: Title and Actions */}
         <div className="flex items-end justify-between px-6 pt-4 pb-4">
           <div className="flex items-baseline gap-3">
