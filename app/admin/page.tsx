@@ -50,12 +50,15 @@ const VideoRow = ({ video, onUpdate, onDelete }: { video: Video; onUpdate: (id: 
           <h3 className="font-semibold truncate">{video.title}</h3>
           <p className="text-sm text-gray-500 truncate">{video.description}</p>
         </div>
-        <div className="flex gap-2">
-          <Button onClick={handleSave} disabled={!isDirty || isSaving} size="sm">
-            {isSaving ? "Saving..." : "Update"}
-          </Button>
-          <Button onClick={() => onDelete(video.id)} variant="destructive" size="sm">
+        <div className="flex gap-4 items-center">
+          <button
+            onClick={() => onDelete(video.id)}
+            className="text-red-500 hover:text-red-700 text-sm underline"
+          >
             Delete
+          </button>
+          <Button onClick={handleSave} disabled={!isDirty || isSaving} size="sm">
+            {isSaving ? "Saving..." : "Save"}
           </Button>
         </div>
       </div>

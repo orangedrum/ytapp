@@ -14,7 +14,7 @@ export async function updateVideoAction(id: string, updates: any) {
   // Invalidate caches so changes show up immediately in the app
   revalidatePath('/library');
   revalidatePath('/admin');
-  revalidatePath('/');
+  revalidatePath('/', 'layout');
 }
 
 export async function deleteVideoAction(id: string) {
@@ -23,7 +23,7 @@ export async function deleteVideoAction(id: string) {
   
   revalidatePath('/library');
   revalidatePath('/admin');
-  revalidatePath('/');
+  revalidatePath('/', 'layout');
 }
 
 export async function createVideoAction(video: any) {
@@ -32,6 +32,6 @@ export async function createVideoAction(video: any) {
   
   revalidatePath('/library');
   revalidatePath('/admin');
-  revalidatePath('/');
+  revalidatePath('/', 'layout');
   return data?.[0];
 }
