@@ -1,4 +1,4 @@
-\import React from "react";
+import React from "react";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { LibraryHeader } from "@/components/library-header";
