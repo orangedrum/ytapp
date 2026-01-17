@@ -44,13 +44,13 @@ const CheckboxOption = ({ label, checked, onClick }: { label: string; checked?: 
 
 export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }: FilterModalProps) {
   // Local state for filters
-  const [role, setRole] = useState("Follower");
+  const [role, setRole] = useState("Both");
   const [level, setLevel] = useState("Foundamentals");
-  const [length, setLength] = useState("> 5 min");
-  const [sessionType, setSessionType] = useState("Instructional Class");
+  const [length, setLength] = useState<string[]>([]);
+  const [sessionType, setSessionType] = useState("All");
   
   // Focuses state - mapping "Technique" to the category prop
-  const [focuses, setFocuses] = useState<string[]>(["Posture", "Walk", "Balance", "Strength"]);
+  const [focuses, setFocuses] = useState<string[]>([]);
 
   // Sync local state with incoming props when modal opens
   useEffect(() => {
@@ -63,11 +63,11 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
     }
   }, [isOpen, currentCategory]);
 
-  const toggleFocus = (focus: string) => {
-    setFocuses(prev => 
-      prev.includes(focus) 
-        ? prev.filter(f => f !== focus)
-        : [...prev, focus]
+  const toggleCheckbox = (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>, value: string) => {
+    setState(prev => 
+      prev.includes(value) 
+        ? prev.filter(f => f !== value)
+        : [...prev, value]
     );
   };
 
@@ -144,28 +144,29 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
         </FilterSection>
 
         <FilterSection title="Length of Time">
-          <CheckboxOption label="> 5 min" checked={length === "> 5 min"} onClick={() => setLength("> 5 min")} />
-          <CheckboxOption label="> 15 min" checked={length === "> 15 min"} onClick={() => setLength("> 15 min")} />
-          <CheckboxOption label="> 30 min" checked={length === "> 30 min"} onClick={() => setLength("> 30 min")} />
+          <CheckboxOption label="> 5 min" checked={length.includes("> 5 min")} onClick={() => toggleCheckbox(length, setLength, "> 5 min")} />
+          <CheckboxOption label="> 15 min" checked={length.includes("> 15 min")} onClick={() => toggleCheckbox(length, setLength, "> 15 min")} />
+          <CheckboxOption label="> 30 min" checked={length.includes("> 30 min")} onClick={() => toggleCheckbox(length, setLength, "> 30 min")} />
         </FilterSection>
 
         <FilterSection title="Session Type">
           <RadioOption label="Practice Along" checked={sessionType === "Practice Along"} onClick={() => setSessionType("Practice Along")} />
           <RadioOption label="Instructional Class" checked={sessionType === "Instructional Class"} onClick={() => setSessionType("Instructional Class")} />
           <RadioOption label="Both" checked={sessionType === "Both"} onClick={() => setSessionType("Both")} />
+          <RadioOption label="All" checked={sessionType === "All"} onClick={() => setSessionType("All")} />
         </FilterSection>
 
         <FilterSection title="Focuses">
-          <CheckboxOption label="Posture" checked={focuses.includes("Posture")} onClick={() => toggleFocus("Posture")} />
-          <CheckboxOption label="Walk" checked={focuses.includes("Walk")} onClick={() => toggleFocus("Walk")} />
-          <CheckboxOption label="Balance" checked={focuses.includes("Balance")} onClick={() => toggleFocus("Balance")} />
-          <CheckboxOption label="Musicality" checked={focuses.includes("Musicality")} onClick={() => toggleFocus("Musicality")} />
-          <CheckboxOption label="Strength" checked={focuses.includes("Strength")} onClick={() => toggleFocus("Strength")} />
-          <CheckboxOption label="Sequences" checked={focuses.includes("Sequences")} onClick={() => toggleFocus("Sequences")} />
-          <CheckboxOption label="Adornos (boleos, gonchos)" checked={focuses.includes("Adornos (boleos, gonchos)")} onClick={() => toggleFocus("Adornos (boleos, gonchos)")} />
-          <CheckboxOption label="Technique" checked={focuses.includes("Technique")} onClick={() => toggleFocus("Technique")} />
-          <CheckboxOption label="Disassociation" checked={focuses.includes("Disassociation")} onClick={() => toggleFocus("Disassociation")} />
-          <CheckboxOption label="Embrace" checked={focuses.includes("Embrace")} onClick={() => toggleFocus("Embrace")} />
+          <CheckboxOption label="Posture" checked={focuses.includes("Posture")} onClick={() => toggleCheckbox(focuses, setFocuses, "Posture")} />
+          <CheckboxOption label="Walk" checked={focuses.includes("Walk")} onClick={() => toggleCheckbox(focuses, setFocuses, "Walk")} />
+          <CheckboxOption label="Balance" checked={focuses.includes("Balance")} onClick={() => toggleCheckbox(focuses, setFocuses, "Balance")} />
+          <CheckboxOption label="Musicality" checked={focuses.includes("Musicality")} onClick={() => toggleCheckbox(focuses, setFocuses, "Musicality")} />
+          <CheckboxOption label="Strength" checked={focuses.includes("Strength")} onClick={() => toggleCheckbox(focuses, setFocuses, "Strength")} />
+          <CheckboxOption label="Sequences" checked={focuses.includes("Sequences")} onClick={() => toggleCheckbox(focuses, setFocuses, "Sequences")} />
+          <CheckboxOption label="Adornos (boleos, gonchos)" checked={focuses.includes("Adornos (boleos, gonchos)")} onClick={() => toggleCheckbox(focuses, setFocuses, "Adornos (boleos, gonchos)")} />
+          <CheckboxOption label="Technique" checked={focuses.includes("Technique")} onClick={() => toggleCheckbox(focuses, setFocuses, "Technique")} />
+          <CheckboxOption label="Disassociation" checked={focuses.includes("Disassociation")} onClick={() => toggleCheckbox(focuses, setFocuses, "Disassociation")} />
+          <CheckboxOption label="Embrace" checked={focuses.includes("Embrace")} onClick={() => toggleCheckbox(focuses, setFocuses, "Embrace")} />
         </FilterSection>
 
       </div>
