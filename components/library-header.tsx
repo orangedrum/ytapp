@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SearchIcon, FilterIcon } from "@/components/ui/icons";
@@ -13,6 +13,7 @@ import { FilterModal } from "@/components/filter-modal";
 
 export function LibraryHeader() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -21,13 +22,14 @@ export function LibraryHeader() {
   const activeFilter = (searchParams.get("category") ?? "all").toLowerCase();
 
   const handleFilterChange = (filter: string) => {
+    console.log("LibraryHeader: Handling filter change to:", filter);
     const params = new URLSearchParams(searchParams.toString());
     if (filter === "all") {
       params.delete("category");
     } else {
       params.set("category", filter);
     }
-    router.push(`/library?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (

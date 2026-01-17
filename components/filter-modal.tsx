@@ -55,6 +55,7 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
   // Sync local state with incoming props when modal opens
   useEffect(() => {
     if (isOpen) {
+      console.log("FilterModal opened. Current Category:", currentCategory);
       // Normalize comparison to handle potential case mismatches
       if (currentCategory.toLowerCase() === 'technique') {
         setFocuses(['Technique']);
@@ -75,12 +76,15 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
   };
 
   const handleApply = () => {
+    console.log("FilterModal: Applying filters. Focuses:", focuses);
     // If "Technique" is selected in focuses, apply that category
     if (focuses.includes("Technique")) {
+      console.log("FilterModal: Selected Technique");
       onApplyFilter("technique");
     } else {
       // If Technique is NOT selected, we default to 'all' (or whatever logic implies "no specific focus filter")
       // This ensures that unchecking "Technique" and hitting apply clears the filter.
+      console.log("FilterModal: Selected All (Technique unchecked)");
       onApplyFilter("all");
     }
     onClose();
