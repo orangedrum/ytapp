@@ -55,8 +55,8 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
   // Sync local state with incoming props when modal opens
   useEffect(() => {
     if (isOpen) {
-      // Reset focuses if opening, or sync with current category if it matches a focus
-      if (currentCategory === 'technique') {
+      // Normalize comparison to handle potential case mismatches
+      if (currentCategory.toLowerCase() === 'technique') {
         setFocuses(prev => prev.includes('Technique') ? prev : [...prev, 'Technique']);
       } else {
         // If current category is NOT technique (e.g. 'all' or something else), 

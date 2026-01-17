@@ -17,7 +17,8 @@ export function LibraryHeader() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   // Read active filter from URL, default to 'all'
-  const activeFilter = searchParams.get("category") || "all";
+  // Ensure we handle null or empty string as 'all'
+  const activeFilter = (searchParams.get("category") || "all").toLowerCase();
 
   const handleFilterChange = (filter: string) => {
     const params = new URLSearchParams(searchParams.toString());
