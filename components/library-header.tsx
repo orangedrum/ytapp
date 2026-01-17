@@ -30,6 +30,7 @@ export function LibraryHeader() {
       params.set("category", filter);
     }
     router.push(`${pathname}?${params.toString()}`);
+    router.refresh();
   };
 
   return (

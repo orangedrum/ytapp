@@ -4,23 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.builder.io',
+        hostname: 'placehold.co',
       },
       {
-        protocol: "https",
-        hostname: "**.supabase.co",
-      },
-      {
-        protocol: "https",
-        hostname: "placehold.co",
-      },
-      {
-        protocol: "https",
-        hostname: "api.builder.io",
-      },
-      {
-        protocol: "https",
-        hostname: "img.youtube.com",
+        protocol: 'https',
+        hostname: 'img.youtube.com',
       },
     ],
   },
