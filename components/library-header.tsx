@@ -1,108 +1,72 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { SearchIcon, FilterIcon } from "@/components/ui/icons";
-import { Mic, Bookmark } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { CATEGORIES } from "@/lib/categories";
-import { FilterModal } from "@/components/filter-modal";
+import { createClient } from "@supabase/supabase-js";
+import { LibraryHeader } from "@/components/library-header";
+import { PageTransition } from "@/components/ui/page-transition";
+import { VideoListItem } from "@/components/ui/video-list-item";
+import { Video } from "@/lib/types";
+import { getYouTubeThumbnail } from "@/lib/youtube";
 
-export function LibraryHeader() {
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+export const revalidate = 0;
+
+interface LibraryPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function LibraryPage({ searchParams }: LibraryPageProps) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const { data: videos } = await supabase.from("videos").select("*");
+
+  // Filter videos based on searchParams
+  const categoryFilter = typeof searchParams.category === 'string' ? searchParams.category.toLowerCase() : 'all';
+  
+  const filteredVideos = videos?.filter((video: Video) => {
+    if (categoryFilter === 'all' || categoryFilter === 'suggested') return true;
+    // Simple case-insensitive match for category
+    return video.category?.toLowerCase() === categoryFilter;
+  }) || [];
+
+  // Process videos to ensure they have thumbnails
+  const processedVideos = filteredVideos.map((video: Video) => {
+    if (!video.thumbnail_url && video.video_url) {
+      const thumbnail = getYouTubeThumbnail(video.video_url);
+      if (thumbnail) {
+        return { ...video, thumbnail_url: thumbnail };
+      }
+    }
+    return video;
+  });
 
   return (
-    <>
-      <div className="sticky top-0 z-40 flex flex-col w-full bg-background border-b border-border pb-4">
-        
-        {/* Top Row: Title and Actions */}
-        <div className="flex items-end justify-between px-6 pt-4 pb-4">
-          <div className="flex items-baseline gap-3">
-            <h2 className="text-h2 font-semibold text-foreground">Library</h2>
-            <Link href="#" className="text-xs underline text-foreground">show suggested order</Link>
-          </div>
-          <div className="flex flex-col items-end gap-1">
-            <div className="relative">
-              <Bookmark className="w-6 h-6 text-foreground" />
-            </div>
-          </div>
-        </div>
-
-        {/* Search Row */}
-        <div className="flex items-center gap-2 px-6 mb-4">
-          <div className="relative flex-1">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2">
-              <SearchIcon className="w-6 h-6 text-[#B3B3B3]" />
-            </div>
-            <Input 
-              className="pl-11 pr-10 h-[52px] rounded-[10px] border-[#E6E6E6] text-base" 
-              placeholder="Search for classes..." 
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <Mic className="w-6 h-6 text-[#B3B3B3]" />
-            </div>
-          </div>
-          <Button 
-            variant="default" 
-            className="w-[52px] h-[52px] p-0 rounded-[10px] bg-[#1A1A1A] flex items-center justify-center shrink-0"
-            onClick={() => setIsFilterModalOpen(true)}
-          >
-            <FilterIcon className="w-6 h-6 text-white" />
-          </Button>
-        </div>
-
-        {/* Filter Row (Scrollable) */}
-        <div className="flex items-center gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
-          <Button 
-            variant={activeFilter === "all" ? "default" : "secondary"}
-            className={cn(
-              "h-[36px] px-5 rounded-[10px] font-medium whitespace-nowrap",
-              activeFilter === "all" 
-                ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
-                : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
+    <PageTransition>
+      <div className="flex flex-col min-h-screen bg-background">
+        <LibraryHeader />
+        {/* Updated padding-bottom from pb-20 to pb-4 as requested */}
+        <div className="flex-1 px-6 pt-2 pb-4">
+          <div className="flex flex-col gap-4">
+            {processedVideos.length > 0 ? (
+              processedVideos.map((video: Video) => (
+                <Link href={`/video/${video.id}`} key={video.id} className="block">
+                  <VideoListItem
+                    imageUrl={video.thumbnail_url || "https://placehold.co/56x53/e2e8f0/e2e8f0"}
+                    category={video.category || "General"}
+                    title={video.title || "Untitled"}
+                    duration={video.duration || "00:00"}
+                    className="w-full"
+                  />
+                </Link>
+              ))
+            ) : (
+              <div className="text-center text-muted-foreground py-10">
+                No videos found for this category.
+              </div>
             )}
-            onClick={() => setActiveFilter("all")}
-          >
-            All
-          </Button>
-          <Button 
-            variant={activeFilter === "suggested" ? "default" : "secondary"}
-            className={cn(
-              "h-[36px] px-5 rounded-[10px] font-medium whitespace-nowrap",
-              activeFilter === "suggested" 
-                ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
-                : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
-            )}
-            onClick={() => setActiveFilter("suggested")}
-          >
-            Suggested Order
-          </Button>
-          
-          {/* Category Filters */}
-          {Object.entries(CATEGORIES).map(([key, { label }]) => (
-            <Button 
-              key={key}
-              variant={activeFilter === key ? "default" : "secondary"}
-              className={cn(
-                "h-[36px] px-5 rounded-[10px] font-medium whitespace-nowrap",
-                activeFilter === key 
-                  ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
-                  : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
-              )}
-              onClick={() => setActiveFilter(key)}
-            >
-              {label}
-            </Button>
-          ))}
+          </div>
         </div>
-
       </div>
-
-      {/* Filter Modal */}
-      <FilterModal isOpen={isFilterModalOpen} onClose={() => setIsFilterModalOpen(false)} />
-    </>
+    </PageTransition>
   );
 }

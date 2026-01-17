@@ -1,13 +1,15 @@
-"use client";
+\"use client";
 
-import React from "react";
-import { XIcon, CheckIcon, ArrowRight } from "lucide-react"; // Using Lucide icons as requested for consistency
+import React, { useState, useEffect } from "react";
+import { XIcon, CheckIcon, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 interface FilterModalProps {
   isOpen: boolean;
   onClose: () => void;
+  currentCategory: string;
+  onApplyFilter: (category: string) => void;
 }
 
 const FilterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -19,8 +21,8 @@ const FilterSection = ({ title, children }: { title: string; children: React.Rea
   </div>
 );
 
-const RadioOption = ({ label, checked }: { label: string; checked?: boolean }) => (
-  <div className="flex min-w-[120px] items-center gap-3 w-full">
+const RadioOption = ({ label, checked, onClick }: { label: string; checked?: boolean; onClick: () => void }) => (
+  <div className="flex min-w-[120px] items-center gap-3 w-full cursor-pointer" onClick={onClick}>
     <div className="w-4 h-4 rounded-full border border-[#757575] flex items-center justify-center flex-shrink-0">
       {checked && <div className="w-2.5 h-2.5 rounded-full bg-[#1E1E1E]" />}
     </div>
@@ -28,8 +30,8 @@ const RadioOption = ({ label, checked }: { label: string; checked?: boolean }) =
   </div>
 );
 
-const CheckboxOption = ({ label, checked }: { label: string; checked?: boolean }) => (
-  <div className="flex min-w-[120px] items-center gap-3 w-full">
+const CheckboxOption = ({ label, checked, onClick }: { label: string; checked?: boolean; onClick: () => void }) => (
+  <div className="flex min-w-[120px] items-center gap-3 w-full cursor-pointer" onClick={onClick}>
     <div className={cn(
       "w-4 h-4 rounded flex items-center justify-center flex-shrink-0",
       checked ? "bg-[#2C2C2C]" : "border border-[#757575] bg-white"
@@ -40,14 +42,56 @@ const CheckboxOption = ({ label, checked }: { label: string; checked?: boolean }
   </div>
 );
 
-export function FilterModal({ isOpen, onClose }: FilterModalProps) {
+export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }: FilterModalProps) {
+  // Local state for filters
+  const [role, setRole] = useState("Follower");
+  const [level, setLevel] = useState("Foundamentals");
+  const [length, setLength] = useState("> 5 min");
+  const [sessionType, setSessionType] = useState("Instructional Class");
+  
+  // Focuses state - mapping "Technique" to the category prop
+  const [focuses, setFocuses] = useState<string[]>(["Posture", "Walk", "Balance", "Strength"]);
+
+  // Sync local state with incoming props when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      if (currentCategory === 'technique' && !focuses.includes('Technique')) {
+        setFocuses(prev => [...prev, 'Technique']);
+      } else if (currentCategory !== 'technique' && focuses.includes('Technique')) {
+        setFocuses(prev => prev.filter(f => f !== 'Technique'));
+      }
+    }
+  }, [isOpen, currentCategory]);
+
+  const toggleFocus = (focus: string) => {
+    setFocuses(prev => 
+      prev.includes(focus) 
+        ? prev.filter(f => f !== focus)
+        : [...prev, focus]
+    );
+  };
+
+  const handleApply = () => {
+    // If "Technique" is selected in focuses, apply that category
+    if (focuses.includes("Technique")) {
+      onApplyFilter("technique");
+    } else {
+      // Default fallback or logic for other filters
+      // For now, if Technique is unchecked, we might go back to 'all' or keep current if it wasn't technique
+      if (currentCategory === 'technique') {
+        onApplyFilter("all");
+      }
+    }
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[100] bg-white flex flex-col overflow-y-auto font-sans">
       {/* Header */}
       <div className="relative w-full h-[172px] flex-shrink-0 border-b border-[#CCC] bg-white">
-        {/* Back Arrow (using onClose to simulate back) */}
+        {/* Back Arrow */}
         <button 
           onClick={onClose}
           className="absolute left-6 top-[61px] w-6 h-6 cursor-pointer"
@@ -75,6 +119,7 @@ export function FilterModal({ isOpen, onClose }: FilterModalProps) {
           <Button 
             variant="outline" 
             className="w-full h-[54px] flex justify-center items-center gap-2.5 rounded-[10px] border-[#CCC] text-base font-medium text-[#1A1A1A]"
+            onClick={handleApply}
           >
             Go to Sort
             <ArrowRight className="w-6 h-6" />
@@ -86,41 +131,41 @@ export function FilterModal({ isOpen, onClose }: FilterModalProps) {
       <div className="flex flex-col items-start gap-4 mt-8 pb-8 w-full max-w-md mx-auto">
         
         <FilterSection title="Role">
-          <RadioOption label="Follower" checked />
-          <RadioOption label="Leader" />
-          <RadioOption label="Both" />
+          <RadioOption label="Follower" checked={role === "Follower"} onClick={() => setRole("Follower")} />
+          <RadioOption label="Leader" checked={role === "Leader"} onClick={() => setRole("Leader")} />
+          <RadioOption label="Both" checked={role === "Both"} onClick={() => setRole("Both")} />
         </FilterSection>
 
         <FilterSection title="Level">
-          <RadioOption label="Foundamentals" checked />
-          <RadioOption label="Level 1" />
-          <RadioOption label="Level 2" />
-          <RadioOption label="Level 3" />
+          <RadioOption label="Foundamentals" checked={level === "Foundamentals"} onClick={() => setLevel("Foundamentals")} />
+          <RadioOption label="Level 1" checked={level === "Level 1"} onClick={() => setLevel("Level 1")} />
+          <RadioOption label="Level 2" checked={level === "Level 2"} onClick={() => setLevel("Level 2")} />
+          <RadioOption label="Level 3" checked={level === "Level 3"} onClick={() => setLevel("Level 3")} />
         </FilterSection>
 
         <FilterSection title="Length of Time">
-          <CheckboxOption label="> 5 min" checked />
-          <CheckboxOption label="> 15 min" />
-          <CheckboxOption label="> 30 min" />
+          <CheckboxOption label="> 5 min" checked={length === "> 5 min"} onClick={() => setLength("> 5 min")} />
+          <CheckboxOption label="> 15 min" checked={length === "> 15 min"} onClick={() => setLength("> 15 min")} />
+          <CheckboxOption label="> 30 min" checked={length === "> 30 min"} onClick={() => setLength("> 30 min")} />
         </FilterSection>
 
         <FilterSection title="Session Type">
-          <RadioOption label="Practice Along" />
-          <RadioOption label="Instructional Class" checked />
-          <RadioOption label="Both" />
+          <RadioOption label="Practice Along" checked={sessionType === "Practice Along"} onClick={() => setSessionType("Practice Along")} />
+          <RadioOption label="Instructional Class" checked={sessionType === "Instructional Class"} onClick={() => setSessionType("Instructional Class")} />
+          <RadioOption label="Both" checked={sessionType === "Both"} onClick={() => setSessionType("Both")} />
         </FilterSection>
 
         <FilterSection title="Focuses">
-          <CheckboxOption label="Posture" checked />
-          <CheckboxOption label="Walk" checked />
-          <CheckboxOption label="Balance" checked />
-          <CheckboxOption label="Musicality" />
-          <CheckboxOption label="Strength" checked />
-          <CheckboxOption label="Sequences" />
-          <CheckboxOption label="Adornos (boleos, gonchos)" />
-          <CheckboxOption label="Technique" />
-          <CheckboxOption label="Disassociation" />
-          <CheckboxOption label="Embrace" />
+          <CheckboxOption label="Posture" checked={focuses.includes("Posture")} onClick={() => toggleFocus("Posture")} />
+          <CheckboxOption label="Walk" checked={focuses.includes("Walk")} onClick={() => toggleFocus("Walk")} />
+          <CheckboxOption label="Balance" checked={focuses.includes("Balance")} onClick={() => toggleFocus("Balance")} />
+          <CheckboxOption label="Musicality" checked={focuses.includes("Musicality")} onClick={() => toggleFocus("Musicality")} />
+          <CheckboxOption label="Strength" checked={focuses.includes("Strength")} onClick={() => toggleFocus("Strength")} />
+          <CheckboxOption label="Sequences" checked={focuses.includes("Sequences")} onClick={() => toggleFocus("Sequences")} />
+          <CheckboxOption label="Adornos (boleos, gonchos)" checked={focuses.includes("Adornos (boleos, gonchos)")} onClick={() => toggleFocus("Adornos (boleos, gonchos)")} />
+          <CheckboxOption label="Technique" checked={focuses.includes("Technique")} onClick={() => toggleFocus("Technique")} />
+          <CheckboxOption label="Disassociation" checked={focuses.includes("Disassociation")} onClick={() => toggleFocus("Disassociation")} />
+          <CheckboxOption label="Embrace" checked={focuses.includes("Embrace")} onClick={() => toggleFocus("Embrace")} />
         </FilterSection>
 
       </div>
