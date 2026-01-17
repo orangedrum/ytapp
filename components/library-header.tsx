@@ -31,7 +31,7 @@ export function LibraryHeader() {
       params.set("category", filter);
     }
     router.push(`${pathname}?${params.toString()}`);
-    // router.refresh(); // Commenting out to test if push works alone
+    // router.refresh();
   };
 
   return (
@@ -84,7 +84,7 @@ export function LibraryHeader() {
                 ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                 : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
             )}
-            // onClick={() => handleFilterChange("all")}
+            // onClick={() => handleFilterChange("all")} // Disabled for debugging
           >
             All
           </Button>
@@ -96,7 +96,7 @@ export function LibraryHeader() {
                 ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                 : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
             )}
-            // onClick={() => handleFilterChange("suggested")}
+            // onClick={() => handleFilterChange("suggested")} // Disabled for debugging
           >
             Suggested Order
           </Button>
@@ -112,7 +112,7 @@ export function LibraryHeader() {
                   ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                   : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
               )}
-              // onClick={() => handleFilterChange(key)}
+              // onClick={() => handleFilterChange(key)} // Disabled for debugging
             >
               {label}
             </Button>

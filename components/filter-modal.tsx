@@ -69,26 +69,20 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
 
   const toggleCheckbox = (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>, value: string) => {
     console.log("Toggling checkbox:", value);
-    setState(prev => 
-      prev.includes(value) 
-        ? prev.filter(f => f !== value)
-        : [...prev, value]
-    );
-  };
-
-  const handleApply = () => {
-    console.log("FilterModal: Applying filters. Focuses:", focuses);
-    // If "Technique" is selected in focuses, apply that category
-    if (focuses.includes("Technique")) {
-      console.log("FilterModal: Selected Technique");
-      onApplyFilter("technique");
-    } else {
-      // If Technique is NOT selected, we default to 'all' (or whatever logic implies "no specific focus filter")
-      // This ensures that unchecking "Technique" and hitting apply clears the filter.
-      console.log("FilterModal: Selected All (Technique unchecked)");
-      onApplyFilter("all");
+    
+    // Immediate update logic for "Technique"
+    if (value === "Technique") {
+      const isCurrentlySelected = state.includes(value);
+      if (isCurrentlySelected) {
+        // Deselecting
+        onApplyFilter("all");
+        setState(prev => prev.filter(f => f !== value));
+      } else {
+        // Selecting
+        onApplyFilter("technique");
+        setState(prev => [...prev, value]);
+      }
     }
-    onClose();
   };
 
   if (!isOpen) return null;
@@ -123,9 +117,13 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
         {/* Go to Sort Button */}
         <div className="absolute left-6 right-6 top-[102px]">
           <Button 
+            type="button"
             variant="outline" 
             className="w-full h-[54px] flex justify-center items-center gap-2.5 rounded-[10px] border-[#CCC] text-base font-medium text-[#1A1A1A]"
-            onClick={handleApply}
+            onClick={() => {
+              // Placeholder for Sort Page navigation
+              console.log("Go to Sort clicked");
+            }}
           >
             Go to Sort
             <ArrowRight className="w-6 h-6" />
