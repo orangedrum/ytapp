@@ -57,7 +57,7 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
     if (isOpen) {
       console.log("FilterModal opened. Current Category:", currentCategory);
       // Normalize comparison to handle potential case mismatches
-      if (currentCategory.toLowerCase() === 'technique') {
+      if (currentCategory && currentCategory.toLowerCase() === 'technique') {
         setFocuses(['Technique']);
       } else {
         // If current category is NOT technique (e.g. 'all' or something else), 
