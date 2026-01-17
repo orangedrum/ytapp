@@ -55,9 +55,12 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
   // Sync local state with incoming props when modal opens
   useEffect(() => {
     if (isOpen) {
-      if (currentCategory === 'technique' && !focuses.includes('Technique')) {
-        setFocuses(prev => [...prev, 'Technique']);
-      } else if (currentCategory !== 'technique' && focuses.includes('Technique')) {
+      // Reset focuses if opening, or sync with current category if it matches a focus
+      if (currentCategory === 'technique') {
+        setFocuses(prev => prev.includes('Technique') ? prev : [...prev, 'Technique']);
+      } else {
+        // If current category is NOT technique (e.g. 'all' or something else), 
+        // ensure Technique is NOT checked in the modal unless user checked it previously in this session (which resets on close/open usually, but here we want to reflect URL)
         setFocuses(prev => prev.filter(f => f !== 'Technique'));
       }
     }
@@ -75,12 +78,12 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
     // If "Technique" is selected in focuses, apply that category
     if (focuses.includes("Technique")) {
       onApplyFilter("technique");
+    } else if (currentCategory === 'technique') {
+      // If "Technique" was unchecked and it was the current category, reset to 'all'
+      onApplyFilter("all");
     } else {
-      // Default fallback or logic for other filters
-      // For now, if Technique is unchecked, we might go back to 'all' or keep current if it wasn't technique
-      if (currentCategory === 'technique') {
-        onApplyFilter("all");
-      }
+      // For other cases, we might want to keep current category or apply other logic
+      // For now, just close if no change to technique status relative to category
     }
     onClose();
   };
