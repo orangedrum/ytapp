@@ -188,7 +188,7 @@ export default function AdminPage() {
                   <Label className="text-xs">Category</Label>
                   <select 
                     value={video.category || "technique"} 
-                    onChange={(e) => handleUpdateVideo(video.id, { category: e.target.value })}
+                    onChange={(e) => handleUpdateVideo(video.id, { category: e.target.value as any })}
                     className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
                   >
                     {Object.entries(CATEGORIES).map(([key, { label }]) => (
@@ -201,7 +201,7 @@ export default function AdminPage() {
                   <Label className="text-xs">Tag Type</Label>
                   <select 
                     value={video.tag_variant || "watch"} 
-                    onChange={(e) => handleUpdateVideo(video.id, { tag_variant: e.target.value })}
+                    onChange={(e) => handleUpdateVideo(video.id, { tag_variant: e.target.value as any })}
                     className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
                   >
                     <option value="watch">Watch</option>
