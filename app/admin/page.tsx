@@ -9,10 +9,92 @@ import { CATEGORIES } from "@/lib/categories";
 import { PageTransition } from "@/components/ui/page-transition";
 import { Video } from "@/lib/types";
 
-export default function AdminPage() {
-  // Sanity check log
-  console.log("Admin Page Rendering");
+const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, updates: Partial<Video>) => Promise<void> }) => {
+  const [localVideo, setLocalVideo] = useState<Video>(video);
+  const [isDirty, setIsDirty] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
+  // Sync local state if prop changes (e.g. after refetch)
+  React.useEffect(() => {
+    setLocalVideo(video);
+    setIsDirty(false);
+  }, [video]);
+
+  const handleChange = (field: keyof Video, value: any) => {
+    setLocalVideo((prev) => {
+      const updates: any = { [field]: value };
+      // Auto-update label based on variant
+      if (field === "tag_variant") {
+        if (value === "watch") updates.tag_label = "Watch";
+        if (value === "dance") updates.tag_label = "Dance";
+        if (value === "explanation") updates.tag_label = "Explanation";
+      }
+      return { ...prev, ...updates };
+    });
+    setIsDirty(true);
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    await onUpdate(video.id, localVideo);
+    setIsSaving(false);
+  };
+
+  return (
+    <div className="border rounded-lg p-4 flex flex-col gap-4 bg-white shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="flex-1 min-w-0">
+          <h3 className="font-semibold truncate">{video.title}</h3>
+          <p className="text-sm text-gray-500 truncate">{video.description}</p>
+        </div>
+        <Button onClick={handleSave} disabled={!isDirty || isSaving} size="sm">
+          {isSaving ? "Saving..." : "Update"}
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+        <div className="flex flex-col gap-1">
+          <Label className="text-xs">Category</Label>
+          <select
+            value={localVideo.category || "technique"}
+            onChange={(e) => handleChange("category", e.target.value)}
+            className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
+          >
+            {Object.entries(CATEGORIES).map(([key, { label }]) => (
+              <option key={key} value={key}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <Label className="text-xs">Type</Label>
+          <select
+            value={localVideo.tag_variant || "watch"}
+            onChange={(e) => handleChange("tag_variant", e.target.value)}
+            className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
+          >
+            <option value="watch">Watch</option>
+            <option value="dance">Dance</option>
+            <option value="explanation">Explanation</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <Label className="text-xs">Label</Label>
+          <Input
+            value={localVideo.tag_label || ""}
+            onChange={(e) => handleChange("tag_label", e.target.value)}
+            className="h-9"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function AdminPage() {
   const [accessKey, setAccessKey] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -177,55 +259,7 @@ export default function AdminPage() {
       ) : (
         <div className="space-y-4 max-w-4xl mx-auto w-full">
           {videos.map((video) => (
-            <div key={video.id} className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 items-start md:items-center bg-white shadow-sm">
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold truncate">{video.title}</h3>
-                <p className="text-sm text-gray-500 truncate">{video.description}</p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
-                <div className="flex flex-col gap-1">
-                  <Label className="text-xs">Category</Label>
-                  <select 
-                    value={video.category || "technique"} 
-                    onChange={(e) => handleUpdateVideo(video.id, { category: e.target.value as any })}
-                    className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
-                  >
-                    {Object.entries(CATEGORIES).map(([key, { label }]) => (
-                      <option key={key} value={key}>{label}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label className="text-xs">Tag Type</Label>
-                  <select 
-                    value={video.tag_variant || "watch"} 
-                    onChange={(e) => handleUpdateVideo(video.id, { tag_variant: e.target.value as any })}
-                    className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
-                  >
-                    <option value="watch">Watch</option>
-                    <option value="dance">Dance</option>
-                    <option value="explanation">Explanation</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label className="text-xs">Tag Label</Label>
-                  <Input 
-                    value={video.tag_label || ""} 
-                    onChange={(e) => {
-                      // Just update local state for input, would need a separate save or debounce for text input to be smooth
-                      // For simplicity, let's just update on blur or enter, but here we'll just use onBlur for the actual save
-                      const newVideos = videos.map(v => v.id === video.id ? { ...v, tag_label: e.target.value } : v);
-                      setVideos(newVideos);
-                    }}
-                    onBlur={(e) => handleUpdateVideo(video.id, { tag_label: e.target.value })}
-                    className="h-9 w-32"
-                  />
-                </div>
-              </div>
-            </div>
+            <VideoRow key={video.id} video={video} onUpdate={handleUpdateVideo} />
           ))}
         </div>
       )}
