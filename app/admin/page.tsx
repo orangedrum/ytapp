@@ -9,7 +9,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { PageTransition } from "@/components/ui/page-transition";
 import { Video } from "@/lib/types";
 
-const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, updates: Partial<Video>) => Promise<void> }) => {
+const VideoRow = ({ video, onUpdate, onDelete }: { video: Video; onUpdate: (id: string, updates: Partial<Video>) => Promise<void>; onDelete: (id: string) => Promise<void> }) => {
   const [localVideo, setLocalVideo] = useState<Video>(video);
   const [isDirty, setIsDirty] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -25,8 +25,8 @@ const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, up
       const updates: any = { [field]: value };
       // Auto-update label based on variant
       if (field === "tag_variant") {
-        if (value === "watch") updates.tag_label = "Watch";
-        if (value === "dance") updates.tag_label = "Dance";
+        if (value === "watch") updates.tag_label = "Watch & Study";
+        if (value === "dance") updates.tag_label = "Dance Along";
         if (value === "explanation") updates.tag_label = "Explanation";
       }
       return { ...prev, ...updates };
@@ -36,7 +36,9 @@ const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, up
 
   const handleSave = async () => {
     setIsSaving(true);
-    await onUpdate(video.id, localVideo);
+    // Exclude id and created_at from updates
+    const { id, created_at, ...updates } = localVideo as any;
+    await onUpdate(video.id, updates);
     setIsSaving(false);
   };
 
@@ -47,12 +49,17 @@ const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, up
           <h3 className="font-semibold truncate">{video.title}</h3>
           <p className="text-sm text-gray-500 truncate">{video.description}</p>
         </div>
-        <Button onClick={handleSave} disabled={!isDirty || isSaving} size="sm">
-          {isSaving ? "Saving..." : "Update"}
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={handleSave} disabled={!isDirty || isSaving} size="sm">
+            {isSaving ? "Saving..." : "Update"}
+          </Button>
+          <Button onClick={() => onDelete(video.id)} variant="destructive" size="sm">
+            Delete
+          </Button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         <div className="flex flex-col gap-1">
           <Label className="text-xs">Category</Label>
           <select
@@ -79,15 +86,6 @@ const VideoRow = ({ video, onUpdate }: { video: Video; onUpdate: (id: string, up
             <option value="dance">Dance</option>
             <option value="explanation">Explanation</option>
           </select>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <Label className="text-xs">Label</Label>
-          <Input
-            value={localVideo.tag_label || ""}
-            onChange={(e) => handleChange("tag_label", e.target.value)}
-            className="h-9"
-          />
         </div>
       </div>
     </div>
@@ -189,6 +187,26 @@ export default function AdminPage() {
     }
   };
 
+  const handleDeleteVideo = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this video?")) return;
+    setLoading(true);
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const { error } = await supabase.from("videos").delete().eq("id", id);
+      if (error) throw error;
+
+      setMessage("Video deleted successfully!");
+      await fetchVideos();
+    } catch (error: any) {
+      setMessage("Error deleting video: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -259,7 +277,7 @@ export default function AdminPage() {
       ) : (
         <div className="space-y-4 max-w-4xl mx-auto w-full">
           {videos.map((video) => (
-            <VideoRow key={video.id} video={video} onUpdate={handleUpdateVideo} />
+            <VideoRow key={video.id} video={video} onUpdate={handleUpdateVideo} onDelete={handleDeleteVideo} />
           ))}
         </div>
       )}
