@@ -20,6 +20,7 @@ export function LibraryHeader() {
   // Read active filter from URL, default to 'all'
   // Ensure we handle null or empty string as 'all'
   const activeFilter = (searchParams.get("category") ?? "all").toLowerCase();
+  console.log("LibraryHeader Rendered. Active Filter:", activeFilter);
 
   const handleFilterChange = (filter: string) => {
     console.log("LibraryHeader: Handling filter change to:", filter);
@@ -30,7 +31,7 @@ export function LibraryHeader() {
       params.set("category", filter);
     }
     router.push(`${pathname}?${params.toString()}`);
-    router.refresh();
+    // router.refresh(); // Commenting out to test if push works alone
   };
 
   return (

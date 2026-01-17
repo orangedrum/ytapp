@@ -68,6 +68,7 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
   }, [isOpen, currentCategory]);
 
   const toggleCheckbox = (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>, value: string) => {
+    console.log("Toggling checkbox:", value);
     setState(prev => 
       prev.includes(value) 
         ? prev.filter(f => f !== value)
