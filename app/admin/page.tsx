@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { CATEGORIES } from "@/lib/categories";
 import { PageTransition } from "@/components/ui/page-transition";
 import { Video } from "@/lib/types";
+import { createVideoAction, deleteVideoAction, updateVideoAction } from "./actions";
 
 const VideoRow = ({ video, onUpdate, onDelete }: { video: Video; onUpdate: (id: string, updates: Partial<Video>) => Promise<void>; onDelete: (id: string) => Promise<void> }) => {
   const [localVideo, setLocalVideo] = useState<Video>(video);
@@ -135,23 +136,18 @@ export default function AdminPage() {
     setMessage("");
 
     try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-      const supabase = createClient(supabaseUrl, supabaseKey);
+      const newVideo = {
+        title,
+        description,
+        video_url: videoUrl,
+        duration,
+        category,
+        tag_variant: "watch", // Default
+        tag_label: "Watch & Study", // Default
+      };
 
-      const { error } = await supabase.from("videos").insert([
-        {
-          title,
-          description,
-          video_url: videoUrl,
-          duration,
-          category,
-          tag_variant: "watch", // Default
-          tag_label: "Watch & Study", // Default
-        },
-      ]);
-
-      if (error) throw error;
+      const createdVideo = await createVideoAction(newVideo);
+      if (createdVideo) setVideos([createdVideo, ...videos]);
 
       setMessage("Video uploaded successfully!");
       // Reset form
@@ -160,7 +156,6 @@ export default function AdminPage() {
       setVideoUrl("");
       setDuration("");
       setView("list");
-      await fetchVideos();
     } catch (error: any) {
       setMessage("Error uploading video: " + error.message);
     } finally {
@@ -171,15 +166,13 @@ export default function AdminPage() {
   const handleUpdateVideo = async (id: string, updates: Partial<Video>) => {
     setLoading(true);
     try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      const { error } = await supabase.from("videos").update(updates).eq("id", id);
-      if (error) throw error;
+      await updateVideoAction(id, updates);
       
+      // Update local state immediately to prevent UI reversion
+      setVideos((prev) => prev.map((v) => (v.id === id ? { ...v, ...updates } : v)));
+
       setMessage("Video updated successfully!");
-      await fetchVideos();
+      // We do NOT call fetchVideos() here to avoid stale data overwriting our update
     } catch (error: any) {
       setMessage("Error uploading video: " + error.message);
     } finally {
@@ -191,15 +184,12 @@ export default function AdminPage() {
     if (!confirm("Are you sure you want to delete this video?")) return;
     setLoading(true);
     try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      const { error } = await supabase.from("videos").delete().eq("id", id);
-      if (error) throw error;
+      await deleteVideoAction(id);
+      
+      // Update local state immediately
+      setVideos((prev) => prev.filter((v) => v.id !== id));
 
       setMessage("Video deleted successfully!");
-      await fetchVideos();
     } catch (error: any) {
       setMessage("Error deleting video: " + error.message);
     } finally {
