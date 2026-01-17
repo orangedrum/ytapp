@@ -84,7 +84,7 @@ export function LibraryHeader() {
                 ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                 : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
             )}
-            // onClick={() => handleFilterChange("all")} // Disabled for debugging
+            onClick={() => handleFilterChange("all")}
           >
             All
           </Button>
@@ -96,7 +96,7 @@ export function LibraryHeader() {
                 ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                 : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
             )}
-            // onClick={() => handleFilterChange("suggested")} // Disabled for debugging
+            onClick={() => handleFilterChange("suggested")}
           >
             Suggested Order
           </Button>
@@ -112,7 +112,7 @@ export function LibraryHeader() {
                   ? "bg-[#1A1A1A] text-white hover:bg-black/90" 
                   : "border border-[#E6E6E6] bg-transparent text-[#1A1A1A] hover:bg-gray-100"
               )}
-              // onClick={() => handleFilterChange(key)} // Disabled for debugging
+              onClick={() => handleFilterChange(key)}
             >
               {label}
             </Button>
