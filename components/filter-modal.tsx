@@ -57,11 +57,11 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
     if (isOpen) {
       // Normalize comparison to handle potential case mismatches
       if (currentCategory.toLowerCase() === 'technique') {
-        setFocuses(prev => prev.includes('Technique') ? prev : [...prev, 'Technique']);
+        setFocuses(['Technique']);
       } else {
         // If current category is NOT technique (e.g. 'all' or something else), 
         // ensure Technique is NOT checked in the modal unless user checked it previously in this session (which resets on close/open usually, but here we want to reflect URL)
-        setFocuses(prev => prev.filter(f => f !== 'Technique'));
+        setFocuses([]);
       }
     }
   }, [isOpen, currentCategory]);
@@ -78,12 +78,10 @@ export function FilterModal({ isOpen, onClose, currentCategory, onApplyFilter }:
     // If "Technique" is selected in focuses, apply that category
     if (focuses.includes("Technique")) {
       onApplyFilter("technique");
-    } else if (currentCategory === 'technique') {
-      // If "Technique" was unchecked and it was the current category, reset to 'all'
-      onApplyFilter("all");
     } else {
-      // For other cases, we might want to keep current category or apply other logic
-      // For now, just close if no change to technique status relative to category
+      // If Technique is NOT selected, we default to 'all' (or whatever logic implies "no specific focus filter")
+      // This ensures that unchecking "Technique" and hitting apply clears the filter.
+      onApplyFilter("all");
     }
     onClose();
   };
